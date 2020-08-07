@@ -1,3 +1,21 @@
+App Tasks:
+[] pass a string to the DB
+[] find best API for food information
+[] finish design drawings
+[] design/draw intended DB structure based off anticipated app needs
+[] implement DB structure (collection/documents)
+[] brainstorm basic services required for app, focusing on reads first
+[] get sabio files into repo
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
