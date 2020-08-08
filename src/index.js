@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import NavBar from './components/navBar'
+import UserBar from './components/userBar'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
+
+    <UserBar />
+
     <App />
-  </React.StrictMode>,
+
+    <NavBar />
+
+  </React.Fragment>,
   document.getElementById('root')
 );
 

@@ -1,10 +1,13 @@
 App Tasks:
-[] pass a string to the DB
-[] find best API for food information
-[] finish design drawings
+[x] pass a string to the DB (basic CRUD)
+[x] find best API for food information --> FoodData Central API Guide
+[\] finish design drawings
+[] Implement basic app
 [] design/draw intended DB structure based off anticipated app needs
 [] implement DB structure (collection/documents)
 [] brainstorm basic services required for app, focusing on reads first
+
+TODOs:
 [] get sabio files into repo
 
 
