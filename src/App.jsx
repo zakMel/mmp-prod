@@ -13,9 +13,9 @@ class App extends React.Component {
   
   componentDidMount(){
     const db = firestore;
-    const ingredients = db.collection("ingredients");
+    // const ingredients = db.collection("ingredients");
     // const food = db.collection("food");
-    const lettus = ingredients.doc("lettus");
+    // const lettus = ingredients.doc("lettus");
 
     // dbServices.get(lettus);
     // dbServices.set(lettus, {name: 'lettus', amount: 'one head'});
