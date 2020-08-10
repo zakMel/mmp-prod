@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import NavBar from './components/navBar'
 import UserBar from './components/userBar'
+import ShoppingList from './components/shoppingList'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -11,7 +12,7 @@ ReactDOM.render(
 
     <UserBar />
 
-    <App />
+    <ShoppingList />
 
     <NavBar />
 
