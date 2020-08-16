@@ -1,17 +1,36 @@
-#shoppingList {
-    margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 10%;
+/* #page {
+    height: 100%;
+    width: 100%;
+    position: static;
+
+} */
+
+.listContainer {
+    margin-top: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    /* margin-bottom: 10vh; */
+    position: relative;
+    height: 70vh;
 }
 
-input {
-    margin-right: 5%;
-    
 
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-#submitButton {
-  
-  
+.itemCheck {
+    margin-right: 5vw;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.submitButton {
+    position: absolute;
+    bottom: 0px;
 }

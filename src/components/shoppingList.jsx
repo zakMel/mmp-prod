@@ -7,46 +7,83 @@ export default function shoppingList (props) {
 
     return (
         <React.Fragment>
-            <div className="h2 text-center">shoppingList</div>     
 
-            <div className="text-center" id="shoppingList">
-                <ListGroup>
-                    <ListGroup.Item>
-                        <div>
-                            <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                            <span>Lettuce</span>
-                        </div>
-                    </ListGroup.Item>
+            <div id="page"> 
 
-                    <ListGroup.Item>
-                        <div>
-                            <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                            <span>tommato</span>
-                        </div>
-                    </ListGroup.Item>
+                <h2 className="text-center" style={{color: "red"}}>shoppingList</h2>     
 
-                    <ListGroup.Item>
-                        <div>
-                            <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                            <span>onion</span>
-                        </div>
-                    </ListGroup.Item>
+                    <div className="text-center listContainer">
+                        <ListGroup>
 
-                    <ListGroup.Item>
-                        <div>
-                            <input type="checkbox" aria-label="Checkbox for following text input"></input>
-                            <span>pepper</span>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item >
+                                <div className="container">
+                                    <input className="itemCheck" type="checkbox" aria-label="Checkbox for following text input"></input>
+                                    <span>Lettuce</span>
+                                </div>
+                            </ListGroup.Item>
+
+                        
+                        </ListGroup>
+
+                    
+                        <div className="buttonContainer">
+                            <Button className="submitButton" variant="primary" size="lg">
+                                SUBMIT
+                            </Button>
                         </div>
-                    </ListGroup.Item>
-                   
-                </ListGroup>
+
+                    </div>
+
             </div>
 
-            <div className="mb-2 text-center justify-content-flex-end">
-                <Button variant="primary" size="lg" id="submitButton">
-                    SUBMIT
-                </Button>
-            </div>
         </React.Fragment>
 
     )
