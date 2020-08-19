@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
-import NavBar from './components/navBar'
-import UserBar from './components/userBar'
-import ShoppingList from './components/shoppingList'
+import NavBar from './components/NavBar'
+import UserBar from './components/UserBar'
+import ShoppingList from './components/ShoppingList'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.Fragment>
 
-    <UserBar />
-
-    <ShoppingList />
-
-    <NavBar />
+    <BrowserRouter> 
+        <UserBar />
+          <App />
+        <NavBar />
+    </BrowserRouter>
 
   </React.Fragment>,
   document.getElementById('root')
