@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
 import NavBar from './components/NavBar'
@@ -14,7 +14,7 @@ ReactDOM.render(
     <BrowserRouter> 
         <UserBar />
           <App />
-        <NavBar />
+        {/* <NavBar /> */}
     </BrowserRouter>
 
   </React.Fragment>,
