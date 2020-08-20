@@ -11,15 +11,17 @@ class Landing extends React.Component {
   }
   
   componentDidMount(){
+    
+  }
+  
+  dbChange() {
     const db = firestore;
-    // const ingredients = db.collection("ingredients");
-    // const food = db.collection("food");
-    // const lettus = ingredients.doc("lettus");
-
-    // dbServices.get(lettus);
-    // dbServices.set(lettus, {name: 'lettus', amount: 'one head'});
-    // dbServices.delete(vegetables);
-
+    const ingredients = db.collection("ingredients");
+    const lettus = ingredients.doc("lettus");
+  
+    dbServices.get(lettus);
+    dbServices.set(lettus, {name: 'lettus', amount: 'one head'});
+    dbServices.delete(lettus);
   }
 
   render(){

@@ -11,46 +11,58 @@ class App extends React.Component {
   constructor(props){
     super(props);
     
-    this.state = {};
+    this.state = {
+      searchInput: '',
+    };
   }
-  
-  componentDidMount(){
+
+  handleIngredientSearch = (ingredient) => {
+    this.setState( (state, props) => {
+      return {
+        searchInput : ingredient
+      }
+    });
+
   }
 
   render(){
+
     return (
     <React.Fragment>
 
         <Route
           path="/"
-          exact='true'
+          exact={true}
           render={(props) => (
             <Landing />
           )}
         />
         <Route
           path="/shoppingList"
-          exact='true'
+          exact={true}
           render={(props) => (
             <ShoppingList />
           )}
         />
         <Route
           path="/meal"
-          exact='true'
+          exact={true}
           render={(props) => (
             <Meal />
           )}
         />
         <Route
           path="/search"
-          exact='true'
+          exact={true}
           render={(props) => (
-            <Search />
+            <Search 
+              passIngredient={this.handleIngredientSearch}
+            />
           )}
         />
     </React.Fragment>
     );
+
   }  
 
 

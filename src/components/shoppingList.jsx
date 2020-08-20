@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
 
-import css from "../style/shoppingList.css"
+import "../style/shoppingList.css"
 
 export default function shoppingList (props) {
 

@@ -7,18 +7,31 @@ class Search extends React.Component {
         super(props);
 
         this.state={
-            imput:[],
+            input:"",
         }
     }
 
+    handleInput = (e) => {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+    
+        this.setState( (state, props) => {
+            return {
+                [name]: value
+            }
+        });
+    
+    }
 
+    
     render() {
 
         return (
             
             <div id="searchForm">
-                <input type="search" className="form-control searchInput"></input>
-                <Button type="submit" className="searchButton">Search</Button>
+                <input onChange={ this.handleInput } type="search" className="form-control searchInput"></input>
+                <Button  type="submit" className="searchButton">Search</Button>
             </div>
         )
 
