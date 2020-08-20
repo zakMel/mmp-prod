@@ -1,0 +1,22 @@
+#searchForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+    width: 100vw;
+    bottom: 17vh;
+    position: fixed;
+
+}
+
+.searchInput {
+    width: 50vw;
+
+}
+
+.searchButton {
+    margin-left: 3vw;
+    width: 20vw;
+
+}

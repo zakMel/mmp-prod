@@ -1,6 +1,8 @@
 import React from 'react';
-import Landing from './components/Landing'
-import ShoppingList from './components/ShoppingList'
+import Landing from './components/Landing';
+import ShoppingList from './components/ShoppingList';
+import Meal from './components/MealGenerator/MealGenerator';
+import Search from './components/Search/Search';
 import { Route } from "react-router-dom";
 import './App.css';
 
@@ -33,20 +35,20 @@ class App extends React.Component {
             <ShoppingList />
           )}
         />
-        {/* <Route
-          path="/calendar"
+        <Route
+          path="/meal"
           exact='true'
           render={(props) => (
-            <Calendar />
+            <Meal />
           )}
-        /> */}
-        {/* <Route
-          path="/"
+        />
+        <Route
+          path="/search"
           exact='true'
           render={(props) => (
-            <SavedMeals />
+            <Search />
           )}
-        /> */}
+        />
     </React.Fragment>
     );
   }  
