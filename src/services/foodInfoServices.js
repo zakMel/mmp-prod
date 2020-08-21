@@ -1,14 +1,15 @@
 import axios from "axios";
+const apiKey = 'k1bwOsN1KAIweQ9FQC5WezWjZpX6vNvldgsqlSLD'
 
 var ingredientServices = {
-  endpoint: `https://ndb.nal.usda.gov/fdc-app.html#`
+     endpoint: `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${apiKey}`
 };
 
 
-ingredientServices.getList = (ingredient) => {
+ingredientServices.getList = (ingredient, pageSize, pageNumber) => {
   const config = {
     method: "GET",
-    url: `${ingredientServices.endpoint}/?query=${ingredient}`,
+    url: `${ingredientServices.endpoint}&dataType=Foundation, SR Legacy&pageSize=${pageSize}&pageNumber=${pageNumber}&query=${ingredient}`,
     withCredentials: true,
     crossdomain: true,
     headers: { "Content-Type": "application/json" }
@@ -17,7 +18,7 @@ ingredientServices.getList = (ingredient) => {
   return axios(config);
 }
 
-ingredientServices.getList = (id) => {
+ingredientServices.getDetails = (id) => {
     const config = {
       method: "GET",
       url: `${ingredientServices.endpoint}/food-details/${id}/nutrients`,
@@ -27,6 +28,10 @@ ingredientServices.getList = (id) => {
     };
   
     return axios(config);
+}
+
+ingredientServices.error = (response) => {
+    console.log(response);
 }
 
 export default ingredientServices

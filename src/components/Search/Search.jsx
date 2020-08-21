@@ -1,5 +1,5 @@
 import React from "react"
-import {Button} from 'react-bootstrap';
+import services from '../../services/foodInfoServices'
 import "./search.css";
 
 class Search extends React.Component {
@@ -14,25 +14,32 @@ class Search extends React.Component {
     handleInput = (e) => {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
-    
-        this.setState( (state, props) => {
-            return {
-                [name]: value
-            }
+
+        this.setState({
+            input: value
         });
-    
+    }
+
+    getList = (ingredient) => {
+        services.getList(ingredient, 10, 0)
+        .then(this.getListSuccess)
+        .catch(services.error)
+    }
+
+getListSuccess = (response) => {
+        console.log(response);
     }
 
     
     render() {
 
         return (
-            
-            <div id="searchForm">
-                <input onChange={ this.handleInput } type="search" className="form-control searchInput"></input>
-                <Button  type="submit" className="searchButton">Search</Button>
-            </div>
+            <React.Fragment>
+                <div id="searchForm">
+                    <input onChange={ this.handleInput } type="text" className="form-control searchInput border-primary"></input>
+                    <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
+                </div>
+            </React.Fragment>
         )
 
     }
