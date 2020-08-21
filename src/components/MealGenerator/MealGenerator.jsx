@@ -12,13 +12,13 @@ class Search extends React.Component {
     }
 
      changeBackground = (e) => {
-      if(e.target.style.background = 'white') {
+      if(e.target.style.background === 'white') {
         e.target.style.background = 'grey';
       } 
     }
   
      changeBackgrounds = (e) => {
-      if(e.target.style.background = 'blue') {
+      if(e.target.style.background === 'blue') {
         e.target.style.background = 'white';
       }
     }
