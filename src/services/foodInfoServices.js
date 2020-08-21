@@ -2,7 +2,7 @@ import axios from "axios";
 const apiKey = 'k1bwOsN1KAIweQ9FQC5WezWjZpX6vNvldgsqlSLD'
 
 var ingredientServices = {
-     endpoint: `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${apiKey}`
+     endpoint: `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}`
 };
 
 
