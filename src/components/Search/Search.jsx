@@ -4,6 +4,7 @@ import services from '../../services/foodInfoServices'
 import Pagination from '../Pagination/SearchPagination'
 import SearchItem from './SearchItem'
 import "../../style/search.css";
+import "../../style/pagination.css";
 
 class Search extends React.Component {
     constructor (props) {
@@ -12,7 +13,8 @@ class Search extends React.Component {
         this.state={
             input:"",
             totalPages: 0,
-            currentTabs: []
+            currentTabs: [],
+            mappedIngredients: []
 
         }
     }
@@ -27,7 +29,7 @@ class Search extends React.Component {
     }
 
     getList = (ingredient) => {
-        services.getList(ingredient, 10, 0)
+        services.getList(ingredient, 11, 1)
         .then(this.getListSuccess)
         .catch(services.error)
     }
@@ -46,7 +48,10 @@ class Search extends React.Component {
 
             return {
                 totalPages : response.data.totalPages,
-                currentTabs: tabs
+                currentTabs: tabs,
+                mappedIngredients: response.data.foods.map((ingredient) => {
+                    return this.renderIngredients(ingredient);
+                  }),
             }
         })
     }
@@ -59,43 +64,50 @@ class Search extends React.Component {
         console.log(target, index, ingredient)
 
         services
-        .getList(ingredient, 10, index)
+        .getList(ingredient, 11, index)
         .then(this.getListSuccess)
         .catch(services.error)
     
     }
 
     handleUpdatePage = (newTabs) => {
-    this.setState(() => {
-        return {
-        currentTabs: newTabs
-        }
-    })
+        this.setState(() => {
+            return {
+            currentTabs: newTabs
+            }
+        })
 
     }
     
 
     renderIngredients = (ingredient) => {
-    
-
         return (
             <SearchItem
-                key={ingredient.id}
+                key={ingredient.fdcId}
                 ingredient={ingredient}
+                description={ingredient.description}
+                nutrients={ingredient.foodNutrients}
             />
         );
+
     };
 
     render() {
 
         return (
             <React.Fragment>
-                <Pagination 
+
+                <div className="ingredientList">
+                    {this.state.mappedIngredients}
+                </div>
+                
+                <Pagination  
                     currentTabs={this.state.currentTabs}
                     totalPages={this.state.totalPages}
                     handleUpdatePage={this.handleUpdatePage}
                     handlePagination={this.handlePagination}
                 />
+                
                 <div id="searchForm">
                     <input onChange={ this.handleInput } type="text" className="form-control searchInput border-primary"></input>
                     <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>

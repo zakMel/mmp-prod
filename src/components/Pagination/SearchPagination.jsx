@@ -48,7 +48,7 @@ class Pagination extends React.Component {
 
     return (
 
-      <div className="arrows react-bootstrap-table-pagination-list col-md-6 col-xs-6 col-sm-6 col-lg-6">
+      <div className="arrows react-bootstrap-table-pagination-list col-md-12 col-xs-12 col-sm-12 col-lg-12">
         <ul className="pagination react-bootstrap-table-page-btns-ul">
           <li className="page-item pl-1">
             <button onClick={this.handleShiftLeft} className="btn btn-primary">
