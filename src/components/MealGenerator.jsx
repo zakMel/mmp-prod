@@ -1,6 +1,6 @@
 import React from "react"
 import { NavLink } from "react-router-dom";
-import "./meal.css";
+import "../style/meal.css";
 
 class Search extends React.Component {
     constructor (props) {

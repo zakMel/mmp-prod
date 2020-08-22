@@ -2,7 +2,8 @@ import React from "react"
 import $ from "jquery"
 import services from '../../services/foodInfoServices'
 import Pagination from '../Pagination/SearchPagination'
-import "./search.css";
+import SearchItem from './SearchItem'
+import "../../style/search.css";
 
 class Search extends React.Component {
     constructor (props) {
@@ -64,15 +65,27 @@ class Search extends React.Component {
     
     }
 
-      handleUpdatePage = (newTabs) => {
-        this.setState(() => {
-          return {
-            currentTabs: newTabs
-          }
-        })
+    handleUpdatePage = (newTabs) => {
+    this.setState(() => {
+        return {
+        currentTabs: newTabs
+        }
+    })
+
+    }
     
-      }
+
+    renderIngredients = (ingredient) => {
     
+
+        return (
+            <SearchItem
+                key={ingredient.id}
+                ingredient={ingredient}
+            />
+        );
+    };
+
     render() {
 
         return (

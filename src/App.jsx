@@ -1,7 +1,7 @@
 import React from 'react';
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
-import Meal from './components/MealGenerator/MealGenerator';
+import Meal from './components/MealGenerator';
 import Search from './components/Search/Search';
 import { Route } from "react-router-dom";
 import './App.css';
