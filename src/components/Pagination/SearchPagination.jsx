@@ -1,6 +1,6 @@
 import React from 'react';
 import Item from "./SearchPageItem"
-import "./pagination.css";
+import "../../style/pagination.css";
 
 class Pagination extends React.Component {
   constructor(props) {
