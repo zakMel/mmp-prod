@@ -31,7 +31,7 @@ class Search extends React.Component {
           to="/search"
           className="nav-link searchLink"
           >
-            <svg className="mt-5 h1" stroke="currentColor" fill="currentColor" stroke-width="0" version="1" viewBox="0 0 48 48" enable-background="new 0 0 48 48" height="1em" width="1em">
+            <svg className="mt-5 h1" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enable-background="new 0 0 48 48" height="1em" width="1em">
               <g fill="#616161">
                 <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17"></rect>
                 <circle cx="20" cy="20" r="16"></circle>
