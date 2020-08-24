@@ -36,15 +36,16 @@ class Search extends React.Component {
 
     getListSuccess = (response) => {
         console.log(response);
+
+        let tabs = []
+        for (let i = 1; i < response.data.totalPages; i++) {
+            if (i <= 4) {
+                tabs.push(i);
+            }
+        }
         
         this.setState((state)=>{
 
-            let tabs = []
-            for (let i = 1; i < response.data.totalPages; i++) {
-                if (i <= 4) {
-                    tabs.push(i);
-                }
-            }
 
             return {
                 totalPages : response.data.totalPages,
@@ -73,7 +74,7 @@ class Search extends React.Component {
     handleUpdatePage = (newTabs) => {
         this.setState(() => {
             return {
-            currentTabs: newTabs
+                currentTabs: newTabs
             }
         })
 
@@ -87,6 +88,7 @@ class Search extends React.Component {
                 ingredient={ingredient}
                 description={ingredient.description}
                 nutrients={ingredient.foodNutrients}
+                addIngredient={this.props.addIngredient}
             />
         );
 
@@ -112,6 +114,7 @@ class Search extends React.Component {
                     <input onChange={ this.handleInput } type="text" className="form-control searchInput border-primary"></input>
                     <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
                 </div>
+                
             </React.Fragment>
         )
 
