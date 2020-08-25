@@ -1,8 +1,7 @@
 import React from "react"
-import ingredient from './Ingredient'
+import Ingredient from './Ingredient'
 import { NavLink } from "react-router-dom";
 import "../../style/meal.css";
-import Ingredient from "./Ingredient";
 
 class Search extends React.Component {
     constructor (props) {
@@ -17,20 +16,28 @@ class Search extends React.Component {
       //need to render ingredients using function
 
       this.setState(() => {
+        let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+        // console.log(mappedList);
+
         return {
-          mealIngredients : this.props.list
+          mealIngredients : mappedList
         }
       })
+
     }
     
     renderIngredients = (ingredient) => {
       return (
           <Ingredient
-            ingredient={ingredient} 
+          key={ingredient.fdcId}
+            ingredient={ingredient}
+            description={ingredient.description}
+            nutrients={ingredient.foodNutrients} 
           />
       );
 
    };
+
     addIngredient = (ingredient) => {
       this.setState((state)=>{
         let addedIngredient = state.ingredients;
@@ -50,7 +57,7 @@ class Search extends React.Component {
           <React.Fragment>
             
             <div className="list">
-              {this.state.ingredients}
+              {this.state.mealIngredients}
             </div>
             
             <NavLink 
