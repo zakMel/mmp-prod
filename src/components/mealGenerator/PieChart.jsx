@@ -5,7 +5,7 @@ export default function PieChart (props) {
 
 
     return (
-        <div className="pieChart col-md-6">
+        <div className="pieChart">
             <Pie
                 data={{
                     labels: ['protein', 'carbs', 'fats'],
@@ -14,7 +14,7 @@ export default function PieChart (props) {
                         backgroundColor: ['brown', 'red', 'tan']
                     }]
                 }}
-                height={100}
+                height={200}
 
             />
 
