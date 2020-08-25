@@ -1,7 +1,8 @@
 import React from "react"
 import Ingredient from './Ingredient'
+import PieChart from './PieChart'
 import { NavLink } from "react-router-dom";
-import "../../style/meal.css";
+import "../../style/mealGenerator.css";
 
 class Search extends React.Component {
     constructor (props) {
@@ -13,11 +14,8 @@ class Search extends React.Component {
     }
 
     componentDidMount(){
-      //need to render ingredients using function
-
       this.setState(() => {
         let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-        // console.log(mappedList);
 
         return {
           mealIngredients : mappedList
@@ -29,7 +27,7 @@ class Search extends React.Component {
     renderIngredients = (ingredient) => {
       return (
           <Ingredient
-          key={ingredient.fdcId}
+            key={ingredient.fdcId}
             ingredient={ingredient}
             description={ingredient.description}
             nutrients={ingredient.foodNutrients} 
@@ -56,10 +54,8 @@ class Search extends React.Component {
         return (
           <React.Fragment>
             
-            <div className="list">
-              {this.state.mealIngredients}
-            </div>
-            
+            <PieChart />
+
             <NavLink 
             to="/search"
             className="nav-link searchLink"
@@ -74,6 +70,15 @@ class Search extends React.Component {
               </svg>
             </NavLink>
             
+            <div className="list">
+              {this.state.mealIngredients}
+            </div>
+
+            <div className="submitMeal">
+                
+                <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Save</button>
+            </div>
+
           </React.Fragment>
         )
 
