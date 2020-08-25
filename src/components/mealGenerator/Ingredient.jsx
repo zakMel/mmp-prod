@@ -8,8 +8,8 @@ export default function Ingredient (props) {
             <div 
             className="border border-dark bg-light text-body list-group-item list-group-item-action"
             >
-                 { props.description.length > 95 ?
-                    `${props.description.slice(0,90)}...` : props.description
+                 { props.description.length > 85 ?
+                    `${props.description.slice(0,85)}...` : props.description
                  } 
 
             </div>  

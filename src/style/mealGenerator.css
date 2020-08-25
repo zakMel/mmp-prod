@@ -1,0 +1,34 @@
+.mealContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chartSearchBar {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: rows;
+}
+
+.pieChart {
+    position: relative;
+    right: 15vw;
+}
+
+.searchGlass {
+    position: relative;
+    left: 7vw;
+    bottom: 2vh;
+}
+
+.list {
+    margin-top: 5vh;
+    width: 75vw;
+}
+
+.submitMealButton {
+    margin-top: 5vh;
+    justify-content: center;
+}
+
+
