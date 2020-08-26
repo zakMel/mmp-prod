@@ -19,6 +19,17 @@
     position: relative;
     left: 7vw;
     bottom: 2vh;
+    top: 3vh;
+    border: 3px solid black;
+    height: 15vh;
+    border-radius: 3em;
+    width: 20vw;
+    background-color: lightblue;
+}
+
+.eyeGlass  {
+    margin-left: 2.5vw;
+    margin-top: .5vh;
 }
 
 .list {

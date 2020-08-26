@@ -65,7 +65,7 @@ class MealGenerator extends React.Component {
               to="/search"
               className="nav-link searchGlass"
               >
-                <svg className="mt-5 h1" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
+                <svg className="eyeGlass" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
                   <g fill="#616161">
                     <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17"></rect>
                     <circle cx="20" cy="20" r="16"></circle>
