@@ -5,6 +5,9 @@ import Meal from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search';
 import { Route } from "react-router-dom";
 import './App.css';
+// import Ingredient from './components/mealGenerator/Ingredient';
+
+const Big = require('big.js')
 
 
 class App extends React.Component {
@@ -15,10 +18,50 @@ class App extends React.Component {
       ingredients:[],
     };
   }
+  
+  getMacros = (ingredient) => {
+    let nutrients = ingredient.foodNutrients;
+
+    let protein = 0;
+    let fat = 0;
+    let carbs = 0;
+    let x = 100
+
+    nutrients.forEach(element => {
+      if(element.nutrientName && element.nutrientName === 'Protein'){
+        var p = new Big(element.value);
+        protein = p / x ; 
+      }
+
+      else if(element.nutrientName && element.nutrientName === 'Total lipid (fat)'){
+        var f = new Big(element.value);
+        fat = f / x ;
+      }
+
+      else if(element.nutrientName && element.nutrientName === 'Carbohydrate, by difference'){
+        var c = new Big(element.value);
+        carbs = c / x ; 
+      }
+
+    })
+    
+    return {
+      proteinPerGram : protein,
+      fatPerGram: fat,
+      carbPerGram: carbs
+    }
+
+  }
 
   addIngredient = (ingredient) => {
+
+    let macros = this.getMacros(ingredient);
+    
+    console.log(macros);
+
     this.setState((state)=>{
       let addedIngredient = state.ingredients;
+      // let itemAndMacros = { item: ingredient, itemMacro: macros }
       addedIngredient.push(ingredient)
       
       return {
