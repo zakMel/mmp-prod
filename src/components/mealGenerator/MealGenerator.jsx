@@ -14,7 +14,8 @@ class MealGenerator extends React.Component {
             protein: 0,
             fat: 0,
             carbs: 0
-          }
+          },
+          mealName: '',
       }
   }
 
@@ -27,6 +28,15 @@ class MealGenerator extends React.Component {
     })
   }
   
+  handleNameInput = (e) => {
+    const target = e.target;
+    const value = target.value;
+
+    this.setState({
+      mealName: value
+    });
+}
+
   renderIngredients = (ingredient) => {
     this.setState((state) => {
       
@@ -106,6 +116,10 @@ class MealGenerator extends React.Component {
 
             <div className="list">
               {this.state.mealIngredients}
+            </div>
+
+            <div className="mealName">
+              <input onChange={ this.handleNameInput } type="text" className="form-control searchInput border-primary"></input>
             </div>
 
             <div className="submitMealButton">
