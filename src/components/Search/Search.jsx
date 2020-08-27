@@ -29,7 +29,8 @@ class Search extends React.Component {
     }
 
     getList = (ingredient) => {
-        services.getList(ingredient, 11, 1)
+        services
+        .getFoodInfo(ingredient, 11, 1)
         .then(this.getListSuccess)
         .catch(services.error)
     }
@@ -65,7 +66,7 @@ class Search extends React.Component {
         console.log(target, index, ingredient)
 
         services
-        .getList(ingredient, 11, index)
+        .getFoodInfo(ingredient, 11, index)
         .then(this.getListSuccess)
         .catch(services.error)
     
