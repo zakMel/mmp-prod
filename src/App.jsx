@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 import './App.css';
 // import Ingredient from './components/mealGenerator/Ingredient';
 
-const Big = require('big.js')
+const Big = require('big.js') //probably want to remove the use of this.
 
 
 class App extends React.Component {
@@ -48,7 +48,7 @@ class App extends React.Component {
     return {
       proteinPerGram : protein,
       fatPerGram: fat,
-      carbPerGram: carbs
+      carbsPerGram: carbs
     }
 
   }
@@ -61,8 +61,8 @@ class App extends React.Component {
 
     this.setState((state)=>{
       let addedIngredient = state.ingredients;
-      // let itemAndMacros = { item: ingredient, itemMacro: macros }
-      addedIngredient.push(ingredient)
+      let itemAndMacros = { ingre: ingredient, itemMacro: macros }
+      addedIngredient.push(itemAndMacros)
       
       return {
         ingredients : addedIngredient

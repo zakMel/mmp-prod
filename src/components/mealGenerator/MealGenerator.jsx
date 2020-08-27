@@ -10,28 +10,53 @@ class MealGenerator extends React.Component {
 
       this.state={
           mealIngredients:[],
+          mealMacros: {
+            protein: 0,
+            fat: 0,
+            carbs: 0
+          }
       }
   }
 
   componentDidMount(){
     this.setState(() => {
       let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-
-      return {
-        mealIngredients : mappedList
-      }
+        return {
+          mealIngredients : mappedList
+        }
     })
-
   }
   
   renderIngredients = (ingredient) => {
+    this.setState((state) => {
+      
+      let macros = ingredient.itemMacro; 
+      let stateMacros = state.mealMacros; 
+      
+      let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+      let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+      let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
+      
+      return {
+        
+        mealMacros: {
+          protein: newProtein,
+          fat: newFat,
+          carbs: newCarbs
+        },
+      }
+      
+    })
+    
+    //! ingredient.ingre required with this render
     return (
-        <Ingredient
-          key={ingredient.fdcId}
-          ingredient={ingredient}
-          description={ingredient.description}
-          nutrients={ingredient.foodNutrients} 
-        />
+      <Ingredient
+        key={ingredient.ingre.fdcId}
+        ingredient={ingredient.ingre}
+        description={ingredient.ingre.description}
+        nutrients={ingredient.ingre.foodNutrients} 
+      />
+      
     );
 
   };
@@ -59,7 +84,9 @@ class MealGenerator extends React.Component {
 
             <div className="chartSearchBar">
 
-              <PieChart />
+              <PieChart 
+                macros={this.state.mealMacros}
+              />
 
               <NavLink 
               to="/search"
