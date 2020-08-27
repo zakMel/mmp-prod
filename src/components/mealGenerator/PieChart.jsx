@@ -6,16 +6,16 @@ export default function PieChart (props) {
 
     return (
         <div className="pieChart">
+            
             <Pie
                 data={{
-                    labels: ['protein', 'carbs', 'fats'],
+                    labels: ['protein', 'fat', 'carbs'],
                     datasets: [{
-                        data: [60, 20, 20],
+                        data: [props.macros.protein, props.macros.fat, props.macros.carbs],
                         backgroundColor: ['brown', 'red', 'tan']
                     }]
                 }}
                 height={200}
-
             />
 
         </div>
