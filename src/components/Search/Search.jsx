@@ -45,16 +45,14 @@ class Search extends React.Component {
             }
         }
         
-        this.setState((state)=>{
-
+        this.setState(()=>{
 
             return {
                 totalPages : response.data.totalPages,
                 currentTabs: tabs,
-                mappedIngredients: response.data.foods.map((ingredient) => {
-                    return this.renderIngredients(ingredient);
-                  }),
+                mappedIngredients: response.data.foods.map( ingredient => this.renderIngredients(ingredient) ),
             }
+
         })
     }
 

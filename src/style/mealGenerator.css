@@ -36,6 +36,8 @@
 .list {
     margin-top: 5vh;
     width: 75vw;
+    height: 35vh;
+    overflow: auto;
 }
 
 .submitMealButton {

@@ -83,7 +83,6 @@ class MealGenerator extends React.Component {
     //! ingredient.ingre required with this render
     return (
       <Ingredient
-        key={ingredient.ingre.fdcId}
         ingredient={ingredient.ingre}
         description={ingredient.ingre.description}
         nutrients={ingredient.ingre.foodNutrients} 
@@ -93,16 +92,9 @@ class MealGenerator extends React.Component {
 
   };
 
-  addIngredient = (ingredient) => {
-    this.setState((state)=>{
-      let addedIngredient = state.ingredients;
-      addedIngredient.push(ingredient)
-      
-      return {
-        ingredients : addedIngredient
-      }
+  loadFunc = () =>{
+    //todo add code for db purposes
 
-    })
   }
   
   render() {
@@ -139,10 +131,21 @@ class MealGenerator extends React.Component {
             
             </div>
 
-            <div className="list">
+            {/* <div className="list">
               {this.state.shownIngredients}
-            </div>
+            </div> */}
 
+            <div className="list">
+              <InfiniteScroll
+                  pageStart={0}
+                  loadMore={this.loadFunc}
+                  hasMore={true || false}
+                  // loader={<div className="loader" key={0}>Loading ...</div>}
+                  useWindow={false}
+              >
+                  {this.state.shownIngredients}
+              </InfiniteScroll>
+            </div>
 
             <div className="submitMealButton">
                 <button 
