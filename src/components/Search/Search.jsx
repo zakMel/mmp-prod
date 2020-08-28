@@ -112,7 +112,7 @@ class Search extends React.Component {
                 />
                 
                 <div id="searchForm">
-                    <input onChange={ this.handleInput } type="text" className="form-control searchInput border-primary"></input>
+                    <input onChange={ this.handleInput } placeholder="Enter Search Ingredient" type="text" className="text-center form-control searchInput border-primary"></input>
                     <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
                 </div>
                 

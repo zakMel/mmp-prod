@@ -5,7 +5,7 @@
 }
 
 .chartSearchBar {
-    margin-top: 10vh;
+    margin-top: 6vh;
     display: flex;
     flex-direction: rows;
 }
@@ -39,11 +39,11 @@
 }
 
 .submitMealButton {
-    margin-top: 5vh;
-    justify-content: center;
+    position: fixed;
+    bottom: 10vh;
 }
 
 .mealName {
-    margin-top: 5vh
+    margin-top: 14vh
 
 }
