@@ -1,9 +1,10 @@
 import React from "react"
 import {firestore} from '../../configFirebase';
+import { NavLink } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroller';
+import dbServices from '../../services/dbServices'
 import Ingredient from './Ingredient'
 import PieChart from './PieChart'
-import dbServices from '../../services/dbServices'
-import { NavLink } from "react-router-dom";
 import "../../style/mealGenerator.css";
 
 class MealGenerator extends React.Component {
@@ -28,14 +29,11 @@ class MealGenerator extends React.Component {
     let document = meals.doc(`${this.state.mealName}`);
     let state = this.state;
 
-    dbServices.doc(`${document}`).set(state)
-
-    // dbServices.set(document, {
-    //   mealName: state.mealName,
-    //   shownIngredients: state.shownIngredients,
-    //   savedIngredients: state.savedIngredients,
-    //   mealMacros: state.mealMacros,
-    // })
+    dbServices.set(document, {
+      mealName: state.mealName,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
+    })
   }
 
   componentDidMount(){
