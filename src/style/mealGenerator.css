@@ -5,7 +5,7 @@
 }
 
 .chartSearchBar {
-    margin-top: 10vh;
+    margin-top: 6vh;
     display: flex;
     flex-direction: rows;
 }
@@ -21,15 +21,16 @@
     bottom: 2vh;
     top: 3vh;
     border: 3px solid black;
-    height: 15vh;
+    height: 12vh;
     border-radius: 3em;
     width: 20vw;
     background-color: lightblue;
 }
 
 .eyeGlass  {
+    position: relative;
     margin-left: 2.5vw;
-    margin-top: .5vh;
+    bottom: .5vh
 }
 
 .list {
@@ -38,8 +39,11 @@
 }
 
 .submitMealButton {
-    margin-top: 5vh;
-    justify-content: center;
+    position: fixed;
+    bottom: 10vh;
 }
 
+.mealName {
+    margin-top: 14vh
 
+}

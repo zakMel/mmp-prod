@@ -6,7 +6,7 @@ var ingredientServices = {
 };
 
 
-ingredientServices.getList = (ingredient, pageSize, pageNumber) => {
+ingredientServices.getFoodInfo = (ingredient, pageSize, pageNumber) => {
   const config = {
     method: "GET",
     url: `${ingredientServices.endpoint}&dataType=Foundation, SR Legacy&pageSize=${pageSize}&pageNumber=${pageNumber}&query=${ingredient}`,
@@ -16,18 +16,6 @@ ingredientServices.getList = (ingredient, pageSize, pageNumber) => {
   };
 
   return axios(config);
-}
-
-ingredientServices.getDetails = (id) => {
-    const config = {
-      method: "GET",
-      url: `${ingredientServices.endpoint}/food-details/${id}/nutrients`,
-      withCredentials: true,
-      crossdomain: true,
-      headers: { "Content-Type": "application/json" }
-    };
-  
-    return axios(config);
 }
 
 ingredientServices.error = (response) => {

@@ -29,7 +29,8 @@ class Search extends React.Component {
     }
 
     getList = (ingredient) => {
-        services.getList(ingredient, 11, 1)
+        services
+        .getFoodInfo(ingredient, 11, 1)
         .then(this.getListSuccess)
         .catch(services.error)
     }
@@ -65,7 +66,7 @@ class Search extends React.Component {
         console.log(target, index, ingredient)
 
         services
-        .getList(ingredient, 11, index)
+        .getFoodInfo(ingredient, 11, index)
         .then(this.getListSuccess)
         .catch(services.error)
     
@@ -111,7 +112,7 @@ class Search extends React.Component {
                 />
                 
                 <div id="searchForm">
-                    <input onChange={ this.handleInput } type="text" className="form-control searchInput border-primary"></input>
+                    <input onChange={ this.handleInput } placeholder="Enter Search Ingredient" type="text" className="text-center form-control searchInput border-primary"></input>
                     <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
                 </div>
                 

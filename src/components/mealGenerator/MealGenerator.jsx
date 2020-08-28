@@ -1,7 +1,10 @@
 import React from "react"
+import {firestore} from '../../configFirebase';
+import { NavLink } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroller';
+import dbServices from '../../services/dbServices'
 import Ingredient from './Ingredient'
 import PieChart from './PieChart'
-import { NavLink } from "react-router-dom";
 import "../../style/mealGenerator.css";
 
 class MealGenerator extends React.Component {
@@ -9,24 +12,53 @@ class MealGenerator extends React.Component {
       super(props);
 
       this.state={
-          mealIngredients:[],
-          mealMacros: {
-            protein: 0,
-            fat: 0,
-            carbs: 0
-          }
+        mealName: '',
+        shownIngredients: [],
+        savedIngredients: [],
+        mealMacros: {
+          protein: 0,
+          fat: 0,
+          carbs: 0
+        },
       }
   }
 
-  componentDidMount(){
-    this.setState(() => {
-      let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-        return {
-          mealIngredients : mappedList
-        }
+  sendToDatabase = () => {
+    const db = firestore;
+    let meals = db.collection("meals");
+    let document = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
+
+    dbServices.set(document, {
+      mealName: state.mealName,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
     })
   }
+
+  componentDidMount(){
+
+    this.setState(() => {
+      let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+      let givenIngredients = this.props.list.map(item => item.ingre);
+
+        return {
+          shownIngredients : mappedList,
+          savedIngredients : givenIngredients,
+        }
+    })
+
+  }
   
+  handleNameInput = (e) => {
+    const target = e.target;
+    const value = target.value;
+
+    this.setState({
+      mealName: value
+    });
+  }
+
   renderIngredients = (ingredient) => {
     this.setState((state) => {
       
@@ -72,7 +104,6 @@ class MealGenerator extends React.Component {
 
     })
   }
-
   
   render() {
 
@@ -82,6 +113,10 @@ class MealGenerator extends React.Component {
 
           <div className="mealContainer">
 
+            <div className="mealName">
+              <input onChange={ this.handleNameInput } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
+            </div>
+            
             <div className="chartSearchBar">
 
               <PieChart 
@@ -105,11 +140,23 @@ class MealGenerator extends React.Component {
             </div>
 
             <div className="list">
-              {this.state.mealIngredients}
+              {this.state.shownIngredients}
             </div>
 
+
             <div className="submitMealButton">
-                <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Save</button>
+                <button 
+                  onClick={ 
+                    () => { 
+                      if (this.state.mealName.length > 0) {
+                        this.sendToDatabase() 
+                      }
+                    } 
+                  } 
+                  type="submit" 
+                  className="searchButton btn btn-primary"
+                  >Save Meal
+                </button>
             </div>   
 
           </div>                     
