@@ -55,13 +55,11 @@ class App extends React.Component {
 
   addIngredient = (ingredient) => {
 
-    let macros = this.getMacros(ingredient);
     
-    console.log(macros);
-
     this.setState((state)=>{
-      let addedIngredient = state.ingredients;
+      let macros = this.getMacros(ingredient);
       let itemAndMacros = { ingre: ingredient, itemMacro: macros }
+      let addedIngredient = state.ingredients;
       addedIngredient.push(itemAndMacros)
       
       return {
