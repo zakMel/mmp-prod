@@ -2,6 +2,7 @@
 // Then you can import {firestore} from './yourconfigfile.js'  and you can get started using firestore
 
 import firebase from 'firebase/app'
+import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 

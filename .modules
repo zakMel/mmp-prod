@@ -1,0 +1,3 @@
+export default modules = {}
+
+modules.API_KEY='k1bwOsN1KAIweQ9FQC5WezWjZpX6vNvldgsqlSLD';

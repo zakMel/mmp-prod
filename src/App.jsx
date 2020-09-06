@@ -1,4 +1,6 @@
 import React from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase';
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
 import Meal from './components/mealGenerator/MealGenerator';
@@ -16,9 +18,25 @@ class App extends React.Component {
     
     this.state = {
       ingredients:[],
+      isSignedIn: false,
     };
   }
-  
+
+  // Configure FirebaseUI.
+  uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: 'popup',
+    // We will display Google and Facebook as auth providers.
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      // Avoid redirects after sign-in.
+      signInSuccessWithAuthResult: () => false
+    }
+  };
+
   getMacros = (ingredient) => {
     let nutrients = ingredient.foodNutrients;
 
@@ -69,8 +87,28 @@ class App extends React.Component {
     })
   }
 
-  render(){
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+        (user) => this.setState({isSignedIn: !!user})
+    );
+  }
+  
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
+  
 
+  render(){
+    if (!this.state.isSignedIn) {
+      return (
+        <div>
+          <h1>My App</h1>
+          <p>Please sign-in:</p>
+          <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+        </div>
+      );
+    }
+    
     return (
     <React.Fragment>
 

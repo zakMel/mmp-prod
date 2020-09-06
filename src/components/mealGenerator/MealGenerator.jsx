@@ -131,10 +131,6 @@ class MealGenerator extends React.Component {
             
             </div>
 
-            {/* <div className="list">
-              {this.state.shownIngredients}
-            </div> */}
-
             <div className="list">
               <InfiniteScroll
                   pageStart={0}
