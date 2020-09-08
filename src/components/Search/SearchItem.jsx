@@ -5,7 +5,7 @@ export default function SearchItem (props) {
 
     return (
 
-        <div className="list-group">
+        <div >
             <NavLink 
             to="/meal"
             onClick={() => { props.addIngredient(props.ingredient) }}
