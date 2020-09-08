@@ -4,6 +4,37 @@
     align-items: center;
 }
 
+.listItemContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 5vh;
+}
+
+.listDescription {
+    width: 55vw;
+    height: 3.5vh;
+    margin-right: 1vw;
+    border-radius: .5em;
+    padding: .75vh;
+
+}
+
+.gramInput {
+    width: 10vw;
+    height: 3.5vh;
+    margin-right: 1vw;
+    border-radius: .5em;
+}
+
+.deleteButton {
+    width: 10vw;
+    height: 3.5vh;
+    border-radius: .5em;
+}
+
 .chartSearchBar {
     margin-top: 6vh;
     display: flex;
@@ -13,6 +44,7 @@
 .pieChart {
     position: relative;
     right: 15vw;
+    margin-left: 3vw;
 }
 
 .searchGlass {
@@ -35,8 +67,7 @@
 
 .list {
     margin-top: 5vh;
-    width: 75vw;
-    height: 35vh;
+    width: 90vw;
     overflow: auto;
 }
 

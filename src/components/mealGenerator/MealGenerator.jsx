@@ -23,6 +23,9 @@ class MealGenerator extends React.Component {
       }
   }
 
+//todo -- add another state. ingreMacros. update calculations based off this list. 
+//todo -- list includes each macro contribution for each element.
+
   sendToDatabase = () => {
     const db = firestore;
     let meals = db.collection("meals");
@@ -36,11 +39,20 @@ class MealGenerator extends React.Component {
     })
   }
 
+  addingGrams = (e) => {
+    let container = e.target.parentElement;
+    let description = container.childNodes[0].innerHTML;
+    let target = e.target;
+    let grams = e.target.value;
+    console.log(container, description, target, grams);
+
+  }
+
   componentDidMount(){
+    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let givenIngredients = this.props.list.map(item => item.ingre);
 
     this.setState(() => {
-      let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-      let givenIngredients = this.props.list.map(item => item.ingre);
 
         return {
           shownIngredients : mappedList,
@@ -59,7 +71,9 @@ class MealGenerator extends React.Component {
     });
   }
 
-  renderIngredients = (ingredient) => {
+
+  addMacros = (ingredient) => {
+
     this.setState((state) => {
       
       let macros = ingredient.itemMacro; 
@@ -79,13 +93,20 @@ class MealGenerator extends React.Component {
       }
       
     })
+
+  }
+
+  renderIngredients = (ingredient) => {
+
+    this.addMacros(ingredient)
     
     //! ingredient.ingre required with this render
     return (
       <Ingredient
         ingredient={ingredient.ingre}
         description={ingredient.ingre.description}
-        nutrients={ingredient.ingre.foodNutrients} 
+        nutrients={ingredient.ingre.foodNutrients}
+        addingGrams={this.addingGrams} 
       />
       
     );
@@ -130,10 +151,6 @@ class MealGenerator extends React.Component {
               </NavLink>
             
             </div>
-
-            {/* <div className="list">
-              {this.state.shownIngredients}
-            </div> */}
 
             <div className="list">
               <InfiniteScroll
