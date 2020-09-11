@@ -15,7 +15,15 @@ export default function PieChart (props) {
                         backgroundColor: ['brown', 'red', 'tan'],
                     }]
                 }}
-                height={200}
+                options={{
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontSize: 10
+                        }
+                    }
+                }}
+                height={110}
             />
 
         </div>

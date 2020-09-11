@@ -1,5 +1,24 @@
 
-.App-header {
+.navBar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  /* height: 8.45vh; */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #282c34;
+  height: 7vh;
+  width: 100vw;
+  text-align: center;
+  color: white;
+
+  padding-top: 8px;
+}
+
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -8,4 +27,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
+
+/* * {
+  margin: 0;
+  padding: 0;
+} */
