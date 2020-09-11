@@ -5,16 +5,16 @@ export default function Ingredient (props) {
 
     return (
 
-        <div className="listItemContainer">
+        <div className="itemContainer">
+            <input onChange={props.addingGrams} placeholder="grams" type="text" className="itemGrams"></input>
             <div 
-            className="listDescription border border-dark bg-light text-body list-group-item list-group-item-action"
+            className="itemDescription "
             >
                  { props.description.length > 85 ?
                     `${props.description.slice(0,85)}...` : props.description
                  } 
             </div>  
-            <input onChange={props.addingGrams} placeholder="# grams" type="text" className="gramInput text-center border-primary"></input>
-            <button type="submit" className="text-center deleteButton btn btn-danger">Delete</button>
+            <button type="submit" className="itemDeleteButton btn btn-danger">Delete</button>
         </div>
 
     )

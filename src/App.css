@@ -1,5 +1,29 @@
 
-.App-header {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.module {
+  all: unset;
+}
+
+.navBar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  /* height: 8.45vh; */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color: lightblue;
+  height: 7vh;
+  width: 100vw;
+
+}
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -8,4 +32,17 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+} */
+
+/* div {
+  margin: 0;
+} */
+
+
+/* #root {
+  max-height: 667px;
 }
+
+body {
+  max-height: 667px;
+} */

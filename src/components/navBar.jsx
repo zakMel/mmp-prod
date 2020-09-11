@@ -7,7 +7,7 @@ export default function UserBar (props) {
 
     return (
 
-        <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar className="navBar" collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="/">Macro Meal Planning</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

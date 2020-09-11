@@ -1,82 +1,88 @@
+
 .mealContainer {
     display: flex;
     flex-direction: column;
+    /* justify-content: flex-start; */
     align-items: center;
+    width: 100vw;
+    /* max-height: 84.55vh; */
 }
 
-.listItemContainer {
+element.style {
+    height: 10vh;
+    width: 10vw;
+  }
+
+.chartjs-render-monitor {
+    margin-top: 3vh;
+    width: 10vw;
+}
+
+.listContainer {
+    margin-top: 2vh;
+    width: 100vw;
+    min-height: 6vh;
+    max-height: 60vh;
+}
+
+.itemContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: space-between;
     height: 5vh;
+    margin-bottom: .5vh;
 }
 
-.listDescription {
-    width: 55vw;
-    height: 3.5vh;
-    margin-right: 1vw;
+.itemDescription {
+    width: 70vw;
+    height: 5vh;
+    border: 1px solid black;
     border-radius: .5em;
-    padding: .75vh;
-
+    padding-left: 1vw;
+    padding-top: .5vh;
+    font-size: 3.5vw;
+    
 }
 
-.gramInput {
-    width: 10vw;
-    height: 3.5vh;
-    margin-right: 1vw;
+.itemGrams {
+    width: 12vw;
+    height: 5vh;
+    border: 1px solid black;
     border-radius: .5em;
+    padding: 1%;
+    margin-left: 1.5vw;
+    text-align: center;
+    font-size: 3.5vw;
 }
 
-.deleteButton {
-    width: 10vw;
-    height: 3.5vh;
+.itemDeleteButton {
+    width: 13vw;
+    height: 5vh;
+    border: 2px solid black;
     border-radius: .5em;
+    margin-right: 1.5vw;
+    padding: 1%;
+    text-align: center;
+    font-size: 3.5vw;
 }
 
-.chartSearchBar {
-    margin-top: 6vh;
-    display: flex;
-    flex-direction: rows;
-}
-
-.pieChart {
-    position: relative;
-    right: 15vw;
-    margin-left: 3vw;
-}
-
-.searchGlass {
-    position: relative;
-    left: 7vw;
-    bottom: 2vh;
-    top: 3vh;
-    border: 3px solid black;
-    height: 12vh;
-    border-radius: 3em;
-    width: 20vw;
-    background-color: lightblue;
-}
-
-.eyeGlass  {
-    position: relative;
-    margin-left: 2.5vw;
-    bottom: .5vh
-}
-
-.list {
-    margin-top: 5vh;
-    width: 90vw;
-    overflow: auto;
-}
-
-.submitMealButton {
+.saveButton {
     position: fixed;
-    bottom: 10vh;
+    bottom: 8vh;
+    
 }
 
-.mealName {
-    margin-top: 14vh
-
+.magnifyingGlass {
+    position: fixed;
+    bottom: 15vh;
+    height: 5vh;
+    width: 18vw;
+    margin-top: 2vh;
+    border: 2px solid black;
+    border-radius: .5em;
+    background-color: lightblue;
+    
 }
+
+
+
