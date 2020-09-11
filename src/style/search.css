@@ -1,3 +1,31 @@
+.ingreContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: lavender;
+
+
+}
+
+.ingredientList {
+    margin-top: 10vh;
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+.ingredient {
+    font-size: 12px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-color: white;
+    min-height: 6vh;
+}
+
+.ingredientText {
+    margin-left: 4px;
+    color: black;
+}
+
 #searchForm {
     display: flex;
     flex-direction: row;
@@ -5,7 +33,7 @@
     justify-content: center;
 
     width: 100vw;
-    bottom: 17vh;
+    bottom: 14vh;
     position: fixed;
 
 }

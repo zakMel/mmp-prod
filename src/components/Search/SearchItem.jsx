@@ -2,17 +2,18 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 
 export default function SearchItem (props) {
+    console.log(props)
 
     return (
 
-        <div >
+        <div className="ingredient">
             <NavLink 
             to="/meal"
             onClick={() => { props.addIngredient(props.ingredient) }}
-            className="border border-dark bg-light text-body list-group-item list-group-item-action"
+            className="ingredientText"
             >
-                 { props.description.length > 95 ?
-                    `${props.description.slice(0,90)}...` : props.description
+                 { props.description.length > 140 ?
+                    `${props.description.slice(0, 140)}...` : props.description
                  } 
 
             </NavLink>  

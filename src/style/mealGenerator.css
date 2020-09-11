@@ -2,16 +2,13 @@
 .mealContainer {
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-start; */
     align-items: center;
     width: 100vw;
+    height: 100vh;
+    background-color: lavender;
+    /* justify-content: flex-start; */
     /* max-height: 84.55vh; */
 }
-
-element.style {
-    height: 10vh;
-    width: 10vw;
-  }
 
 .chartjs-render-monitor {
     margin-top: 3vh;
@@ -36,11 +33,12 @@ element.style {
 .itemDescription {
     width: 70vw;
     height: 5vh;
+    background-color: white;
     border: 1px solid black;
     border-radius: .5em;
     padding-left: 1vw;
     padding-top: .5vh;
-    font-size: 3.5vw;
+    font-size: 12px;
     
 }
 
@@ -52,7 +50,7 @@ element.style {
     padding: 1%;
     margin-left: 1.5vw;
     text-align: center;
-    font-size: 3.5vw;
+    font-size: 12px;
 }
 
 .itemDeleteButton {
@@ -63,7 +61,7 @@ element.style {
     margin-right: 1.5vw;
     padding: 1%;
     text-align: center;
-    font-size: 3.5vw;
+    font-size: 12px;
 }
 
 .saveButton {

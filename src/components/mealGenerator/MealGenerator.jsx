@@ -24,9 +24,23 @@ class MealGenerator extends React.Component {
       },
     }
   }
-
-//todo -- add another state. ingreMacros. update calculations based off this list. 
-//todo -- list includes each macro contribution for each element.
+  
+  //todo -- add another state. ingreMacros. update calculations based off this list. 
+  //todo -- list includes each macro contribution for each element.
+  
+  componentDidMount(){
+    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let givenIngredients = this.props.list.map(item => item.ingre);
+  
+    this.setState(() => {
+  
+        return {
+          shownIngredients : mappedList,
+          savedIngredients : givenIngredients,
+        }
+    })
+  
+  }
 
   sendToDatabase = () => {
     const db = firestore;
@@ -47,20 +61,6 @@ class MealGenerator extends React.Component {
     let target = e.target;
     let grams = e.target.value;
     console.log(container, description, target, grams);
-
-  }
-
-  componentDidMount(){
-    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list.map(item => item.ingre);
-
-    this.setState(() => {
-
-        return {
-          shownIngredients : mappedList,
-          savedIngredients : givenIngredients,
-        }
-    })
 
   }
   
@@ -114,6 +114,25 @@ class MealGenerator extends React.Component {
     );
 
   };
+
+  handleDeleteFromDOM = (id) => {
+
+    let searchCriteria = (item) => item.id === id
+
+    this.setState((state, props) => {
+
+      let removeIndex = state.orderItems.findIndex(searchCriteria)
+      let newState = state.orderItems.slice()
+      newState.splice(removeIndex, 1)
+
+      return {
+        orderItems: newState
+
+      }
+
+    })
+
+  }
 
   loadFunc = () =>{
     //todo add code for db purposes

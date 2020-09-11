@@ -13,10 +13,14 @@ class Search extends React.Component {
         this.state={
             input:"",
             totalPages: 0,
-            currentTabs: [],
+            // currentTabs: [],
             mappedIngredients: []
 
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props.currentTabs)
     }
 
     handleInput = (e) => {
@@ -30,12 +34,12 @@ class Search extends React.Component {
 
     getList = (ingredient) => {
         services
-        .getFoodInfo(ingredient, 11, 1)
-        .then(this.getListSuccess)
+        .getFoodInfo(ingredient, 8, 1)
+        .then(this.handleListSuccess)
         .catch(services.error)
     }
 
-    getListSuccess = (response) => {
+    handleListSuccess = (response) => {
         console.log(response);
 
         let tabs = []
@@ -44,12 +48,13 @@ class Search extends React.Component {
                 tabs.push(i);
             }
         }
+
+        this.props.handleUpdatePage(tabs);
         
         this.setState(()=>{
 
             return {
                 totalPages : response.data.totalPages,
-                currentTabs: tabs,
                 mappedIngredients: response.data.foods.map( ingredient => this.renderIngredients(ingredient) ),
             }
 
@@ -64,19 +69,23 @@ class Search extends React.Component {
         console.log(target, index, ingredient)
 
         services
-        .getFoodInfo(ingredient, 11, index)
-        .then(this.getListSuccess)
+        .getFoodInfo(ingredient, 8, index)
+        .then(this.handlePageSuccess)
         .catch(services.error)
     
     }
 
-    handleUpdatePage = (newTabs) => {
-        this.setState(() => {
-            return {
-                currentTabs: newTabs
-            }
-        })
+    handlePageSuccess = (response) => {
+        console.log(response);
+        
+        this.setState(()=>{
 
+            return {
+                totalPages : response.data.totalPages,
+                mappedIngredients: response.data.foods.map( ingredient => this.renderIngredients(ingredient) ),
+            }
+
+        })
     }
     
 
@@ -97,22 +106,23 @@ class Search extends React.Component {
 
         return (
             <React.Fragment>
-
-                <div className="ingredientList">
-                    {this.state.mappedIngredients}
-                </div>
-                
-                <Pagination  
-                    currentTabs={this.state.currentTabs}
-                    totalPages={this.state.totalPages}
-                    handleUpdatePage={this.handleUpdatePage}
-                    handlePagination={this.handlePagination}
-                />
-                
-                <div id="searchForm">
-                    <input onChange={ this.handleInput } placeholder="Enter Search Ingredient" type="text" className="text-center form-control searchInput border-primary"></input>
-                    <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
-                </div>
+                <div className="ingreContainer">
+                    <div className="ingredientList">
+                        {this.state.mappedIngredients}
+                    </div>
+                    
+                    <Pagination  
+                        currentTabs={this.props.currentTabs}
+                        handleUpdatePage={this.props.handleUpdatePage}
+                        totalPages={this.state.totalPages}
+                        handlePagination={this.handlePagination}
+                    />
+                    
+                    <div id="searchForm">
+                        <input onChange={ this.handleInput } placeholder="Enter Ingredient" type="text" className="text-center form-control searchInput border-primary"></input>
+                        <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
+                    </div>
+                </div>    
                 
             </React.Fragment>
         )

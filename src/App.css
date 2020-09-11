@@ -1,13 +1,4 @@
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.module {
-  all: unset;
-}
-
 .navBar {
   position: fixed;
   top: 0;
@@ -18,11 +9,15 @@
 .footer {
   position: fixed;
   bottom: 0;
-  background-color: lightblue;
+  background-color: #282c34;
   height: 7vh;
   width: 100vw;
+  text-align: center;
+  color: white;
 
+  padding-top: 8px;
 }
+
 /* .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -34,15 +29,7 @@
   color: white;
 } */
 
-/* div {
+/* * {
   margin: 0;
-} */
-
-
-/* #root {
-  max-height: 667px;
-}
-
-body {
-  max-height: 667px;
+  padding: 0;
 } */

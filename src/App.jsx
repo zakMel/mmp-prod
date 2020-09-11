@@ -18,6 +18,7 @@ class App extends React.Component {
     
     this.state = {
       ingredients:[],
+      currentTabs: [],
       isSignedIn: false,
     };
   }
@@ -96,7 +97,15 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
-  
+
+  handleUpdatePage = (newTabs) => {
+        this.setState(() => {
+            return {
+                currentTabs: newTabs
+            }
+        })
+
+  }
 
   render(){
     if (!this.state.isSignedIn) {
@@ -141,6 +150,8 @@ class App extends React.Component {
           render={(props) => (
             <Search 
               addIngredient={this.addIngredient}
+              handleUpdatePage={this.handleUpdatePage}
+              currentTabs={this.state.currentTabs}
             />
           )}
         />
