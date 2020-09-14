@@ -147,6 +147,8 @@ class MealGenerator extends React.Component {
 
           <div className="mealContainer">
 
+            <h5 className="instructions">To start search an ingredient!</h5>
+
             <div className="mealName">
               <input onChange={ this.handleNameInput } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
             </div>
@@ -160,17 +162,20 @@ class MealGenerator extends React.Component {
             : "" }        
 
 
-            <div className="listContainer">
-              <InfiniteScroll
-                  pageStart={0}
-                  loadMore={this.loadFunc}
-                  hasMore={false}
-                  // loader={<div className="loader" key={0}>Loading ...</div>}
-                  useWindow={false}
-              >
-                  {this.state.shownIngredients}
-              </InfiniteScroll>
-            </div>
+              <div className="listContainer" style={{height:"260px", overflow:"auto"}}>
+                <InfiniteScroll
+                    className="listContainer"
+                    pageStart={0}
+                    loadMore={this.loadFunc}
+                    hasMore={false}
+                    // threshold={280}
+                    // loader={<div className="loader" key={0}>Loading ...</div>}
+                    // useWindow={true}
+                >
+                    {this.state.shownIngredients}
+                </InfiniteScroll>
+              </div>
+
 
             <NavLink 
             to="/search"
