@@ -4,11 +4,15 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 567px;
+    /* height: 567px; */
+    height: 100vh;
     background-color: lavender;
-    margin-top: 8.3vh;
-    /* justify-content: flex-start; */
-    /* max-height: 84.55vh; */
+    /* margin-top: 8.3vh; */
+}
+
+.instructions {
+    margin-top: 57px;
+
 }
 
 .chartjs-render-monitor {
@@ -17,23 +21,24 @@
 }
 
 .listContainer {
-    margin-top: 5px;
+    margin-top: 3px;
     width: 100vw;
     /* min-height: 6vh; */
-    height: 250px;
+    height: 260px;
+    overflow: auto;
 }
 
 .itemContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 5vh;
-    margin-bottom: .5vh;
+    height: 29px;
+    margin-bottom: 5px;
 }
 
 .itemDescription {
     width: 70vw;
-    height: 5vh;
+    /* height: 5vh; */
     background-color: white;
     border: 1px solid black;
     border-radius: .5em;
@@ -45,7 +50,7 @@
 
 .itemGrams {
     width: 12vw;
-    height: 5vh;
+    /* height: 5vh; */
     border: 1px solid black;
     border-radius: .5em;
     padding: 1%;
@@ -56,7 +61,7 @@
 
 .itemDeleteButton {
     width: 13vw;
-    height: 5vh;
+    /* height: 5vh; */
     border: 2px solid black;
     border-radius: .5em;
     margin-right: 1.5vw;
@@ -67,13 +72,13 @@
 
 .saveButton {
     position: fixed;
-    bottom: 8vh;
+    bottom: 60px;
     
 }
 
 .magnifyingGlass {
     position: fixed;
-    bottom: 15vh;
+    bottom: 105px;
     height: 5vh;
     width: 18vw;
     margin-top: 2vh;
@@ -83,5 +88,11 @@
     
 }
 
+@media only screen and (min-width: 768px) {
 
+    .listContainer {
+        height: 530px;
+    }
+
+}
 
