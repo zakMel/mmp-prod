@@ -50,11 +50,11 @@ class Pagination extends React.Component {
 
       <div className="arrows react-bootstrap-table-pagination-list col-md-12 col-xs-12 col-sm-12 col-lg-12">
         <ul className="pagination react-bootstrap-table-page-btns-ul">
-          <li className="page-item pl-1">
-            <button onClick={this.handleShiftLeft} className="btn btn-primary">
-              &lt;
-            </button>
-          </li>
+          
+          <button onClick={this.handleShiftLeft} className="btn btn-primary">
+            &lt;
+          </button>
+     
 
           {this.props.currentTabs.map(
             (tab, index) =>
@@ -65,11 +65,10 @@ class Pagination extends React.Component {
               />
           )}
 
-          <li className="page-item pl-1">
-            <button onClick={this.handleShiftRight} className="btn btn-primary">
-              &gt;
-            </button>
-          </li>
+          <button onClick={this.handleShiftRight} className="btn btn-primary">
+            &gt;
+          </button>
+
         </ul>
       </div>
 
