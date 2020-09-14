@@ -4,17 +4,17 @@
   top: 0;
   width: 100vw;
   /* height: 8.45vh; */
+  /* height: 56px; */
 }
 
 .footer {
   position: fixed;
   bottom: 0;
   background-color: #282c34;
-  height: 7vh;
   width: 100vw;
   text-align: center;
   color: white;
-
+  height: 50px;
   padding-top: 8px;
 }
 

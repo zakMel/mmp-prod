@@ -2,17 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 8.3vh;
-    height: 567px;
+    /* margin-top: 8.3vh; */
+    /* height: 567px; */
+    height: 100vh;
     background-color: lavender;
 
 
 }
 
 .ingredientList {
-    margin-top: 20px;
+    margin-top: 75px;
     width: 365px;
-    height: 300px;
 }
 
 .ingredient {
@@ -38,7 +38,7 @@
     justify-content: center;
 
     width: 100vw;
-    bottom: 14vh;
+    bottom: 105px;
     position: fixed;
 
 }
@@ -56,4 +56,36 @@
 
 .tab {
     background-color: white;
+}
+
+.arrows {
+    margin-bottom: 10px;
+}
+
+
+@media only screen and (min-width: 400px) {
+
+    .ingredient {
+        height: 45px;
+    }
+
+    #searchForm {
+        bottom: 110px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    
+    .ingredientList {
+        width: 700px;
+    }
+
+    .ingredient {
+        height: 67px;
+        width: 700px;
+    }
+
+    #searchForm {
+        bottom: 145px;
+    }
 }

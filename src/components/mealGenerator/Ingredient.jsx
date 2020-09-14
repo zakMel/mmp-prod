@@ -2,6 +2,7 @@ import React from 'react'
 import "../../style/mealGenerator.css"
 
 export default function Ingredient (props) {
+    console.log(window.screen.width)
 
     return (
 
@@ -10,7 +11,7 @@ export default function Ingredient (props) {
             <div 
             className="itemDescription "
             >
-                 { props.description.length > 45 ?
+                 { props.description.length > 45 && window.screen.width < 668?
                     `${props.description.slice(0, 45)}...` : props.description
                  } 
             </div>  

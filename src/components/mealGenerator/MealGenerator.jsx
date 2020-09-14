@@ -162,7 +162,7 @@ class MealGenerator extends React.Component {
             : "" }        
 
 
-              <div className="listContainer" style={{height:"260px", overflow:"auto"}}>
+              <div className="listContainer">
                 <InfiniteScroll
                     className="listContainer"
                     pageStart={0}
