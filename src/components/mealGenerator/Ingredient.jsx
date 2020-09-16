@@ -7,7 +7,7 @@ export default function Ingredient (props) {
     return (
 
         <div className="itemContainer">
-            <input onChange={props.addingGrams} placeholder="grams" type="text" className="itemGrams"></input>
+            <input onBlur={ (e) => props.updateMacros(e, props.macros) } placeholder="grams" type="text" className="itemGrams"></input>
             <div 
             className="itemDescription "
             >
