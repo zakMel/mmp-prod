@@ -218,8 +218,6 @@ class MealGenerator extends React.Component {
     let container = e.target.parentElement;
     let grams = $(container).children().filter(".itemGrams")[0].value;
     let description = $(container).children().filter(".itemDescription").html();
-    let stateMacros = this.state.mealMacros;
-    console.log(macros);
 
     //removes macros
     if(grams !== ""){
@@ -253,8 +251,9 @@ class MealGenerator extends React.Component {
       for ( let u = 0; u < state.shownIngredients.length;  u++) {
         let arr = state.shownIngredients;
         let current = arr[u];
-        
-        if(current.props.description !== description){
+        let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
+      
+        if(!includes){
           newRender.push(current)
         }  
 
@@ -272,8 +271,9 @@ class MealGenerator extends React.Component {
       let arr = this.props.list;
       let current = arr[i];
       let ingredent = arr[i].ingre;
+      let includes = ingredent.description.includes(description.slice(0, (description.length - 3)));
 
-      if(ingredent.description !== description){
+      if(!includes){
         newList.push(current);
       }
     }
