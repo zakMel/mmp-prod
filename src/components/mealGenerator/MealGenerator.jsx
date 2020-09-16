@@ -29,35 +29,46 @@ class MealGenerator extends React.Component {
   //todo -- list includes each macro contribution for each element.
   
   componentDidMount(){
-
-    this.renderDOM()
-  
-  }
-
-  sendToDatabase = () => {
-    const db = firestore;
-    let meals = db.collection("meals");
-    let document = meals.doc(`${this.state.mealName}`);
-    let state = this.state;
-
-    dbServices.set(document, {
-      mealName: state.mealName,
-      savedIngredients: state.savedIngredients,
-      mealMacros: state.mealMacros,
-    })
-  }
-
-  
-  handleNameInput = (e) => {
-    const target = e.target;
-    const value = target.value;
     
-    this.setState({
-      mealName: value
-    });
+    this.renderDOM()
+    
   }
   
+  renderDOM = () => {
+    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let givenIngredients = this.props.list.map(item => item.ingre);
+    
+    this.setState(() => {
+      
+      return {
+        shownIngredients : mappedList,
+        savedIngredients : givenIngredients,
+      }
+    })
+    
+  }
   
+  renderIngredients = (ingredient) => {
+    
+    this.addMacros(ingredient)
+    
+    //! ingredient.ingre required with this render
+    return (
+      <Ingredient
+      ingredient={ingredient.ingre}
+      description={ingredient.ingre.description}
+      nutrients={ingredient.ingre.foodNutrients}
+      addingGrams={this.addingGrams} 
+      renderDOM={this.renderDOM}
+      macros={ingredient.itemMacro}
+      exitIngreInput={this.exitIngreInput}
+      enterIngreInput={this.enterIngreInput}
+      />
+      
+      );
+      
+    };
+    
   addMacros = (ingredient) => {
     
     this.setState((state) => {
@@ -84,8 +95,31 @@ class MealGenerator extends React.Component {
     
   }
 
-  enterIngreInput = (e, macros) => {
+  sendToDatabase = () => {
+    const db = firestore;
+    let meals = db.collection("meals");
+    let document = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
+    
+    dbServices.set(document, {
+      mealName: state.mealName,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
+    })
+  }
+  
+  handleNameInput = (e) => {
+    const target = e.target;
+    const value = target.value;
+    
+    this.setState({
+      mealName: value
+    });
+  }  
 
+  enterIngreInput = (e, macros) => {
+    //   let container = e.target.parentElement;
+    //   let description = container.childNodes[0].innerHTML;
     let grams = e.target.value;
     console.log(macros, grams)
 
@@ -134,8 +168,6 @@ class MealGenerator extends React.Component {
     
   }
 
-  //todo changeMacros = () =>{}
-  //use onFocus on the ingredient.jsx input;
   exitIngreInput = (e, macros) => {
 
     let grams = e.target.value;
@@ -188,41 +220,6 @@ class MealGenerator extends React.Component {
     
   }
   
-  renderIngredients = (ingredient) => {
-    
-    this.addMacros(ingredient)
-    
-    //! ingredient.ingre required with this render
-    return (
-      <Ingredient
-      ingredient={ingredient.ingre}
-      description={ingredient.ingre.description}
-      nutrients={ingredient.ingre.foodNutrients}
-      addingGrams={this.addingGrams} 
-      renderDOM={this.renderDOM}
-      macros={ingredient.itemMacro}
-      exitIngreInput={this.exitIngreInput}
-      enterIngreInput={this.enterIngreInput}
-      />
-      
-    );
-    
-  };
-    
-  renderDOM = () => {
-    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list.map(item => item.ingre);
-    
-    this.setState(() => {
-      
-      return {
-        shownIngredients : mappedList,
-        savedIngredients : givenIngredients,
-      }
-    })
-    
-  }
-    
   handleDeleteFromDOM = (id) => {
     
     let searchCriteria = (item) => item.id === id
@@ -246,16 +243,6 @@ class MealGenerator extends React.Component {
     //todo add code for db purposes
     
   }
-
-  // addingGrams = (e) => {
-  
-  //   let container = e.target.parentElement;
-  //   let description = container.childNodes[0].innerHTML;
-    // let target = e.target;
-    // let grams = e.target.value;
-  //   console.log(container, description, target, grams);
-
-  // }
     
   render() {
     
