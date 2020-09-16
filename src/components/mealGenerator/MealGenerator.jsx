@@ -1,6 +1,7 @@
 import React from "react"
 import {firestore} from '../../configFirebase';
 import { NavLink } from "react-router-dom";
+import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
 import dbServices from '../../services/dbServices'
 import Ingredient from './Ingredient'
@@ -10,13 +11,12 @@ import "../../App.css";
 
 class MealGenerator extends React.Component {
   constructor (props) {
-    super();
-    console.log(props)
+    super(props);
     
     this.state={
       mealName: '',
       shownIngredients: [],
-      savedIngredients: [],
+      // savedIngredients: [],
       mealMacros: {
         protein: 0,
         fat: 0,
@@ -25,94 +25,24 @@ class MealGenerator extends React.Component {
     }
   }
   
-  //todo -- add another state. ingreMacros. update calculations based off this list. 
-  //todo -- list includes each macro contribution for each element.
-  
-  componentDidMount(){
-
+  componentDidMount(){ 
     this.renderDOM()
-  
-  }
-
-  sendToDatabase = () => {
-    const db = firestore;
-    let meals = db.collection("meals");
-    let document = meals.doc(`${this.state.mealName}`);
-    let state = this.state;
-
-    dbServices.set(document, {
-      mealName: state.mealName,
-      savedIngredients: state.savedIngredients,
-      mealMacros: state.mealMacros,
-    })
-  }
-
-  
-  handleNameInput = (e) => {
-    const target = e.target;
-    const value = target.value;
     
-    this.setState({
-      mealName: value
-    });
   }
   
-  
-  addMacros = (ingredient) => {
+  renderDOM = () => {
+    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+    // let givenIngredients = this.props.list.map(item => item.ingre);
     
-    this.setState((state) => {
-      
-      let macros = ingredient.itemMacro; 
-      let stateMacros = state.mealMacros; 
-      
-      let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
-      let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
-      let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
-      
-      console.log(newProtein)
+    this.setState(() => {
       
       return {
-        
-        mealMacros: {
-          protein: newProtein,
-          fat: newFat,
-          carbs: newCarbs
-        },
+        shownIngredients : mappedList,
+        // savedIngredients : givenIngredients,
       }
-      
     })
     
   }
-
-  updateMacros = (e, macros) => {
-    let grams = e.target.value;
-    console.log(e, macros)
-
-    this.setState((state) => {
-      
-      let stateMacros = state.mealMacros; 
-      
-      let newProtein = (( stateMacros.protein ) - ( macros.proteinPerGram )) + (macros.proteinPerGram * grams)
-      let newFat = (( stateMacros.fat ) - ( macros.fatPerGram)) + (macros.fatPerGram * grams)
-      let newCarbs = (( stateMacros.carbs ) - ( macros.carbsPerGram)) + (macros.carbsPerGram * grams)
-      
-      console.log(newProtein)
-      
-      return {
-        
-        mealMacros: {
-          protein: newProtein,
-          fat: newFat,
-          carbs: newCarbs
-        },
-      }
-      
-    })
-    
-  }
-
-  //todo changeMacros = () =>{}
-  //use onFocus on the ingredient.jsx input;
   
   renderIngredients = (ingredient) => {
     
@@ -127,60 +57,235 @@ class MealGenerator extends React.Component {
       addingGrams={this.addingGrams} 
       renderDOM={this.renderDOM}
       macros={ingredient.itemMacro}
-      updateMacros={this.updateMacros}
+      exitIngreInput={this.exitIngreInput}
+      enterIngreInput={this.enterIngreInput}
+      handleDeleteFromDOM={this.handleDeleteFromDOM}
       />
       
-    );
-    
+      );
+      
   };
     
-  renderDOM = () => {
-    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list.map(item => item.ingre);
+  addMacros = (ingredient) => {
     
-    this.setState(() => {
+    this.setState((state) => {
+      
+      let macros = ingredient.itemMacro; 
+      let stateMacros = state.mealMacros; 
+      
+      let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+      let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+      let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
       
       return {
-        shownIngredients : mappedList,
-        savedIngredients : givenIngredients,
+        
+        mealMacros: {
+          protein: newProtein,
+          fat: newFat,
+          carbs: newCarbs
+        },
       }
+      
     })
     
   }
+
+  sendToDatabase = () => {
+    const db = firestore;
+    let meals = db.collection("meals");
+    let document = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
     
-  handleDeleteFromDOM = (id) => {
-    
-    let searchCriteria = (item) => item.id === id
-    
-    this.setState((state, props) => {
-      
-      let removeIndex = state.orderItems.findIndex(searchCriteria)
-      let newState = state.orderItems.slice()
-      newState.splice(removeIndex, 1)
-      
-      return {
-        orderItems: newState
-        
-      }
-      
+    dbServices.set(document, {
+      mealName: state.mealName,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
     })
+  }
+  
+  handleNameInput = (e) => {
+    const target = e.target;
+    const value = target.value;
     
+    this.setState({
+      mealName: value
+    });
+  }  
+
+  enterIngreInput = (e, macros) => {
+    //   let container = e.target.parentElement;
+    //   let description = container.childNodes[0].innerHTML;
+    let grams = e.target.value;
+
+    if(grams === "") {
+
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) - ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) - ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) - ( macros.carbsPerGram)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    } else {
+
+      this.setState((state) => {
+        
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) - (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) - (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) - (macros.carbsPerGram * grams)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    }
+    
+  }
+
+  exitIngreInput = (e, macros) => {
+
+    let grams = e.target.value;
+
+    if(grams === "") {
+
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+
+
+          },
+        }
+        
+      })
+
+    } else {
+
+      this.setState((state) => {
+        
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) + (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) + (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) + (macros.carbsPerGram * grams)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    }
+    
+  }
+  
+  handleDeleteFromDOM = (e, macros) => {
+    
+    let container = e.target.parentElement;
+    let grams = $(container).children().filter(".itemGrams")[0].value;
+    let description = $(container).children().filter(".itemDescription").html();
+    let stateMacros = this.state.mealMacros;
+    console.log(macros);
+
+    //removes macros
+    if(grams !== ""){
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - (macros.proteinPerGram * grams),
+            fat: (state.mealMacros.fat) - (macros.fatPerGram * grams),
+            carbs: (state.mealMacros.carbs) - (macros.carbsPerGram * grams)
+          }
+        }
+      })
+
+    } else {
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - macros.proteinPerGram,
+            fat: (state.mealMacros.fat) - macros.fatPerGram,
+            carbs: (state.mealMacros.carbs) - macros.carbsPerGram
+          }
+        }
+      })
+
+    }
+
+    //removes from the dom
+    this.setState( (state) => {
+      let newRender = [];
+
+      for ( let u = 0; u < state.shownIngredients.length;  u++) {
+        let arr = state.shownIngredients;
+        let current = arr[u];
+        
+        if(current.props.description !== description){
+          newRender.push(current)
+        }  
+
+      }
+
+      return {
+        shownIngredients: newRender
+      }
+
+    })
+
+    //delete from App.jsx
+    let newList = []
+    for ( let i = 0; i < this.props.list.length; i++ ){
+      let arr = this.props.list;
+      let current = arr[i];
+      let ingredent = arr[i].ingre;
+
+      if(ingredent.description !== description){
+        newList.push(current);
+      }
+    }
+
+    this.props.updateList(newList);
+
   }
   
   loadFunc = () =>{
     //todo add code for db purposes
     
   }
-
-  // addingGrams = (e) => {
-  
-  //   let container = e.target.parentElement;
-  //   let description = container.childNodes[0].innerHTML;
-    // let target = e.target;
-    // let grams = e.target.value;
-  //   console.log(container, description, target, grams);
-
-  // }
     
   render() {
     

@@ -73,7 +73,6 @@ class App extends React.Component {
   }
 
   addIngredient = (ingredient) => {
-
     
     this.setState((state)=>{
       let macros = this.getMacros(ingredient);
@@ -86,6 +85,15 @@ class App extends React.Component {
       }
 
     })
+  }
+
+  updateList = (newArr) => {
+    this.setState(() => {
+      return {
+        ingredients: newArr
+      }
+    })
+
   }
 
   componentDidMount() {
@@ -141,6 +149,7 @@ class App extends React.Component {
           render={(props) => (
             <Meal 
               list={this.state.ingredients}
+              updateList={this.updateList}
             />
           )}
         />
