@@ -1,6 +1,7 @@
 import React from "react"
 import {firestore} from '../../configFirebase';
 import { NavLink } from "react-router-dom";
+import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
 import dbServices from '../../services/dbServices'
 import Ingredient from './Ingredient'
@@ -10,13 +11,12 @@ import "../../App.css";
 
 class MealGenerator extends React.Component {
   constructor (props) {
-    super();
-    console.log(props)
+    super(props);
     
     this.state={
       mealName: '',
       shownIngredients: [],
-      savedIngredients: [],
+      // savedIngredients: [],
       mealMacros: {
         protein: 0,
         fat: 0,
@@ -25,24 +25,20 @@ class MealGenerator extends React.Component {
     }
   }
   
-  //todo -- add another state. ingreMacros. update calculations based off this list. 
-  //todo -- list includes each macro contribution for each element.
-  
-  componentDidMount(){
-    
+  componentDidMount(){ 
     this.renderDOM()
     
   }
   
   renderDOM = () => {
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list.map(item => item.ingre);
+    // let givenIngredients = this.props.list.map(item => item.ingre);
     
     this.setState(() => {
       
       return {
         shownIngredients : mappedList,
-        savedIngredients : givenIngredients,
+        // savedIngredients : givenIngredients,
       }
     })
     
@@ -63,11 +59,12 @@ class MealGenerator extends React.Component {
       macros={ingredient.itemMacro}
       exitIngreInput={this.exitIngreInput}
       enterIngreInput={this.enterIngreInput}
+      handleDeleteFromDOM={this.handleDeleteFromDOM}
       />
       
       );
       
-    };
+  };
     
   addMacros = (ingredient) => {
     
@@ -79,8 +76,6 @@ class MealGenerator extends React.Component {
       let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
       let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
       let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
-      
-      console.log(newProtein)
       
       return {
         
@@ -121,7 +116,6 @@ class MealGenerator extends React.Component {
     //   let container = e.target.parentElement;
     //   let description = container.childNodes[0].innerHTML;
     let grams = e.target.value;
-    console.log(macros, grams)
 
     if(grams === "") {
 
@@ -171,7 +165,6 @@ class MealGenerator extends React.Component {
   exitIngreInput = (e, macros) => {
 
     let grams = e.target.value;
-    console.log(macros, grams)
 
     if(grams === "") {
 
@@ -220,23 +213,73 @@ class MealGenerator extends React.Component {
     
   }
   
-  handleDeleteFromDOM = (id) => {
+  handleDeleteFromDOM = (e, macros) => {
     
-    let searchCriteria = (item) => item.id === id
-    
-    this.setState((state, props) => {
-      
-      let removeIndex = state.orderItems.findIndex(searchCriteria)
-      let newState = state.orderItems.slice()
-      newState.splice(removeIndex, 1)
-      
-      return {
-        orderItems: newState
+    let container = e.target.parentElement;
+    let grams = $(container).children().filter(".itemGrams")[0].value;
+    let description = $(container).children().filter(".itemDescription").html();
+    let stateMacros = this.state.mealMacros;
+    console.log(macros);
+
+    //removes macros
+    if(grams !== ""){
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - (macros.proteinPerGram * grams),
+            fat: (state.mealMacros.fat) - (macros.fatPerGram * grams),
+            carbs: (state.mealMacros.carbs) - (macros.carbsPerGram * grams)
+          }
+        }
+      })
+
+    } else {
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - macros.proteinPerGram,
+            fat: (state.mealMacros.fat) - macros.fatPerGram,
+            carbs: (state.mealMacros.carbs) - macros.carbsPerGram
+          }
+        }
+      })
+
+    }
+
+    //removes from the dom
+    this.setState( (state) => {
+      let newRender = [];
+
+      for ( let u = 0; u < state.shownIngredients.length;  u++) {
+        let arr = state.shownIngredients;
+        let current = arr[u];
         
+        if(current.props.description !== description){
+          newRender.push(current)
+        }  
+
       }
-      
+
+      return {
+        shownIngredients: newRender
+      }
+
     })
-    
+
+    //delete from App.jsx
+    let newList = []
+    for ( let i = 0; i < this.props.list.length; i++ ){
+      let arr = this.props.list;
+      let current = arr[i];
+      let ingredent = arr[i].ingre;
+
+      if(ingredent.description !== description){
+        newList.push(current);
+      }
+    }
+
+    this.props.updateList(newList);
+
   }
   
   loadFunc = () =>{
