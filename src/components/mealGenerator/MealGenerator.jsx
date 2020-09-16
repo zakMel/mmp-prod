@@ -84,35 +84,109 @@ class MealGenerator extends React.Component {
     
   }
 
-  updateMacros = (e, macros) => {
-    let grams = e.target.value;
-    console.log(e, macros)
+  enterIngreInput = (e, macros) => {
 
-    this.setState((state) => {
-      
-      let stateMacros = state.mealMacros; 
-      
-      let newProtein = (( stateMacros.protein ) - ( macros.proteinPerGram )) + (macros.proteinPerGram * grams)
-      let newFat = (( stateMacros.fat ) - ( macros.fatPerGram)) + (macros.fatPerGram * grams)
-      let newCarbs = (( stateMacros.carbs ) - ( macros.carbsPerGram)) + (macros.carbsPerGram * grams)
-      
-      console.log(newProtein)
-      
-      return {
+    let grams = e.target.value;
+    console.log(macros, grams)
+
+    if(grams === "") {
+
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
         
-        mealMacros: {
-          protein: newProtein,
-          fat: newFat,
-          carbs: newCarbs
-        },
-      }
-      
-    })
+        let newProtein = ( stateMacros.protein ) - ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) - ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) - ( macros.carbsPerGram)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    } else {
+
+      this.setState((state) => {
+        
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) - (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) - (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) - (macros.carbsPerGram * grams)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    }
     
   }
 
   //todo changeMacros = () =>{}
   //use onFocus on the ingredient.jsx input;
+  exitIngreInput = (e, macros) => {
+
+    let grams = e.target.value;
+    console.log(macros, grams)
+
+    if(grams === "") {
+
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+
+
+          },
+        }
+        
+      })
+
+    } else {
+
+      this.setState((state) => {
+        
+        let stateMacros = state.mealMacros; 
+        
+        let newProtein = ( stateMacros.protein ) + (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) + (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) + (macros.carbsPerGram * grams)
+        
+        return {
+          
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
+        
+      })
+
+    }
+    
+  }
   
   renderIngredients = (ingredient) => {
     
@@ -127,7 +201,8 @@ class MealGenerator extends React.Component {
       addingGrams={this.addingGrams} 
       renderDOM={this.renderDOM}
       macros={ingredient.itemMacro}
-      updateMacros={this.updateMacros}
+      exitIngreInput={this.exitIngreInput}
+      enterIngreInput={this.enterIngreInput}
       />
       
     );

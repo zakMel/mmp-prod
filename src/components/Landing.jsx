@@ -1,7 +1,7 @@
 import React from 'react';
 import {firestore} from '../configFirebase';
 import dbServices from '../services/dbServices';
-import "../style/landing.css"
+import "../style/landing.css";
 
 class Landing extends React.Component {
   constructor(props){
@@ -30,7 +30,7 @@ class Landing extends React.Component {
       <div className="landingContainer">
        
           <h1>Keep it up Zachary!!!</h1>
-          <h3>"Just Make Progress Today :)"</h3>
+          <h3>Just Make Progress :)</h3>
        
       </div>
     </React.Fragment>
