@@ -1,11 +1,12 @@
-import React from "react"
+import React from "react";
+import firebase from 'firebase';
 import {firestore} from '../../configFirebase';
 import { NavLink } from "react-router-dom";
 import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
-import dbServices from '../../services/dbServices'
-import Ingredient from './Ingredient'
-import PieChart from './PieChart'
+import dbServices from '../../services/dbServices';
+import Ingredient from './Ingredient';
+import PieChart from './PieChart';
 import "../../style/mealGenerator.css";
 import "../../App.css";
 
@@ -16,7 +17,7 @@ class MealGenerator extends React.Component {
     this.state={
       mealName: '',
       shownIngredients: [],
-      // savedIngredients: [],
+      savedIngredients: [],
       mealMacros: {
         protein: 0,
         fat: 0,
@@ -32,13 +33,13 @@ class MealGenerator extends React.Component {
   
   renderDOM = () => {
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    // let givenIngredients = this.props.list.map(item => item.ingre);
+    let givenIngredients = this.props.list.map(item => item.ingre);
     
     this.setState(() => {
       
       return {
         shownIngredients : mappedList,
-        // savedIngredients : givenIngredients,
+        savedIngredients : givenIngredients,
       }
     })
     
@@ -48,7 +49,6 @@ class MealGenerator extends React.Component {
     
     this.addMacros(ingredient)
     
-    //! ingredient.ingre required with this render
     return (
       <Ingredient
       ingredient={ingredient.ingre}
@@ -95,9 +95,11 @@ class MealGenerator extends React.Component {
     let meals = db.collection("meals");
     let document = meals.doc(`${this.state.mealName}`);
     let state = this.state;
-    
+    let user = firebase.auth().currentUser.uid;
+
     dbServices.set(document, {
       mealName: state.mealName,
+      userId: user,
       savedIngredients: state.savedIngredients,
       mealMacros: state.mealMacros,
     })

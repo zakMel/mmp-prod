@@ -1,0 +1,11 @@
+
+.savedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 55px;
+    background-color: lavender;
+    height: 564px;
+}

@@ -14,6 +14,7 @@ dbServices.get = (document) => {
         });
 }
 
+
 dbServices.set = (document, data) => {
     document.set(data)
         .then(function() {

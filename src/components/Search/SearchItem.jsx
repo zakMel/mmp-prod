@@ -7,7 +7,7 @@ export default function SearchItem (props) {
 
         <NavLink 
         className="ingredient"
-        to="/meal"
+        to="/mealGenerator"
         onClick={() => { props.addIngredient(props.ingredient) }}
         macros={props.macros}
         >
