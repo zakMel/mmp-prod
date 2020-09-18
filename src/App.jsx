@@ -3,11 +3,11 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
-import Meal from './components/mealGenerator/MealGenerator';
+import MealGenerator from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search';
+import SavedMeals from './components/savedMeals/SavedMeals';
 import { Route } from "react-router-dom";
 import './App.css';
-// import Ingredient from './components/mealGenerator/Ingredient';
 
 const Big = require('big.js') //probably want to remove the use of this.
 
@@ -144,10 +144,10 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/meal"
+          path="/mealGenerator"
           exact={true}
           render={(props) => (
-            <Meal 
+            <MealGenerator 
               list={this.state.ingredients}
               updateList={this.updateList}
             />
@@ -161,6 +161,14 @@ class App extends React.Component {
               addIngredient={this.addIngredient}
               handleUpdatePage={this.handleUpdatePage}
               currentTabs={this.state.currentTabs}
+            />
+          )}
+        />
+        <Route
+          path="/savedMeals"
+          exact={true}
+          render={(props) => (
+            <SavedMeals 
             />
           )}
         />

@@ -54,7 +54,7 @@ export default function UserBar (props) {
                             Shopping List
                     </NavLink>
                     <NavLink 
-                        to="/meal"
+                        to="/mealGenerator"
                         className="nav-link"
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="white" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">

@@ -1,0 +1,23 @@
+
+.savedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 55px;
+    background-color: lavender;
+    height: 564px;
+}
+
+.savedMeal {
+    display: block;
+    width: 365px;
+    height: 40px;
+    font-size: 12px;
+    border: 1.5px solid black;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+
+}
