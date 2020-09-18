@@ -11,58 +11,68 @@ class SavedMeals extends React.Component {
         super(props)
 
         this.state = {
-            meals: []
+            importedMeals: [],
+            renderedMeals: []
 
         };
     }
 
     componentDidMount() {
-        this.getMeals();
-        
-        
+        this.renderDOM();
     }
     
-    getMeals = () => {
+    renderSavedMeals = () => {
+        this.setState((state)=>{
+            let rendered = state.importedMeals.map(this.renderMeals)
+    
+            return{
+                renderedMeals: rendered
+            }
+        })
+    }
+
+    renderDOM = () => {
         const db = firestore;
         let meals = db.collection("meals");
         let user = firebase.auth().currentUser.uid;
         let query = meals.where("userId", "==", user)
-        let list = [];
         
-        query.get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                list.push({mealName: doc.id, info: doc.data()})
-            });
-        })
+        query
+        .get()
+        .then(this.handleQuerySuccess)
+        .then(this.renderSavedMeals)
         .catch(function(error) {
             console.log("Error getting documents: ", error);
         });
         
-        // this.setState(()=>{
-        //     return{
-        //         meals: list
-        //     }
-        // })
-        console.log(list)
+  
     }
     
-    renderMeals = (ingredient) => {
+    handleQuerySuccess = (response) => {
+        let list = []
+        response.forEach(doc => {
+            list.push(doc.data());
+        })
+
+        this.setState(() => {
+            return {
+                importedMeals: list
+            }
+        })
+
+    }
+
+    renderMeals = (meal) => {
         
         return (
-            <Meal
-        //   ingredient={ingredient.ingre}
-        //   description={ingredient.ingre.description}
-        //   nutrients={ingredient.ingre.foodNutrients}
-        //   addingGrams={this.addingGrams} 
-        //   renderDOM={this.renderDOM}
-        //   macros={ingredient.itemMacro}
-        //   exitIngreInput={this.exitIngreInput}
-        //   enterIngreInput={this.enterIngreInput}
-        //   handleDeleteFromDOM={this.handleDeleteFromDOM}
+          <Meal
+            meal={meal}
+            description={meal.mealName}
+            // macros={meal.mealMacros}
+            // ingredients={meal.savedIngredients}
           />
           
-          );
+        );
           
       };
 
@@ -75,20 +85,18 @@ class SavedMeals extends React.Component {
         return (
             <div className="savedContainer">
 
-            <div className="mealListContainer">
-              <InfiniteScroll
-                  pageStart={0}
-                  loadMore={this.loadFunc}
-                  hasMore={false}
-                  // threshold={280}
-                  // loader={<div className="loader" key={0}>Loading ...</div>}
-                  // useWindow={true}
-              >
-                  {this.state.meals}
-              </InfiniteScroll>
-            </div>
-
-                {<Meal />}
+                <div className="mealListContainer">
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.loadFunc}
+                    hasMore={false}
+                    // threshold={280}
+                    // loader={<div className="loader" key={0}>Loading ...</div>}
+                    // useWindow={true}
+                >
+                    {this.state.renderedMeals}
+                </InfiniteScroll>
+                </div>
 
             </div>
 
