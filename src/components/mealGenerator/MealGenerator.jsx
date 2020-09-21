@@ -6,7 +6,7 @@ import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
 import dbServices from '../../services/dbServices';
 import Ingredient from './Ingredient';
-import PieChart from './PieChart';
+import PieChart from '../PieChart';
 import "../../style/mealGenerator.css";
 import "../../App.css";
 
@@ -303,13 +303,13 @@ class MealGenerator extends React.Component {
             <input onChange={ this.handleNameInput } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
           </div>
           
-          {this.state.mealMacros.protein > 0 || 
-            this.state.mealMacros.fat > 0 ||
-            this.state.mealMacros.carbs > 0 ? 
+          {this.state.shownIngredients.length > 0 ? 
             <PieChart 
+            className="pieChart_MG"
             macros={this.state.mealMacros}
             /> 
-            : "" }        
+            : ""
+          }        
 
 
             <div className="listContainer">

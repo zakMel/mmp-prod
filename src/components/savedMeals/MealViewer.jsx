@@ -2,11 +2,11 @@ import React from "react";
 import firebase from "firebase";
 import {firestore} from '../../configFirebase';
 import InfiniteScroll from 'react-infinite-scroller';
-import Meal from "./Meal";
+import SavedMeal from "./SavedMeal";
 import "../../style/savedMeals.css";
 
 
-class SavedMeals extends React.Component {
+class MealViewer extends React.Component {
     constructor(props){
         super(props)
 
@@ -65,9 +65,10 @@ class SavedMeals extends React.Component {
     renderMeals = (meal) => {
         
         return (
-          <Meal
-            meal={meal}
+          <SavedMeal
+            passedMeal={meal}
             description={meal.mealName}
+            updateList={this.props.updateList}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />
@@ -105,4 +106,4 @@ class SavedMeals extends React.Component {
     }
 }
 
-export default SavedMeals
+export default MealViewer;
