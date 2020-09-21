@@ -16,6 +16,7 @@ class SavedMeal extends Component {
                     pathname: "/mealEditor",
                     passedMeal: this.props.passedMeal 
                 }}
+                onClick={()=>{this.props.updateList(this.props.passedMeal.savedIngredients)}}
                 className="savedMeal"
                 >
                     <p className="ingredientText">

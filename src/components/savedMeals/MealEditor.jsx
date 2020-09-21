@@ -5,11 +5,12 @@ import { NavLink } from "react-router-dom";
 import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
 import dbServices from '../../services/dbServices';
-import SavedMeal from './SavedMeal';
+import MealViewer from './MealViewer';
 import PieChart from '../PieChart';
+import ContentEditable from 'react-contenteditable'
+import Ingredient from './Ingredient'
 import "../../App.css";
 import "../../style/savedMeals.css";
-import { useHistory } from 'react-router-dom';
 
 class MealEditor extends React.Component {
     
@@ -22,48 +23,82 @@ class MealEditor extends React.Component {
         fat: 0,
         carbs: 0
       },
+      editable: false
     }
 
   
   componentDidMount(){ 
-    // this.renderDOM()
+    this.renderDOM()
   }
   
-  // renderDOM = () => {
-  //   let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-  //   let givenIngredients = this.props.list.map(item => item.ingre);
+  updateName = (e) => {
+    this.setState(() => {
+      return {
+        mealName: e.target.value
+      }
+    })
+
+  }
+  
+  renderDOM = () => {
+    let name = this.props.passedProps.mealName
+    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let givenIngredients = this.props.list
+    let macros = this.state.editable? this.state.mealMacros : this.props.passedProps.mealMacros;
     
-  //   this.setState(() => {
+    this.setState(() => {
       
+      return {
+        mealName: name,
+        shownIngredients : mappedList,
+        savedIngredients : givenIngredients,
+        mealMacros: {
+          protein: macros.protein,
+          fat: macros.fat,
+          carbs: macros.carbs
+        },
+      }
+    })
+    
+  }
+  
+  // initialMacros = (passedMacros) => {
+  //   this.setState(() => {
   //     return {
-  //       shownIngredients : mappedList,
-  //       savedIngredients : givenIngredients,
+  //       mealMacros: {
+  //         protein: passedMacros.mealMacros.protein,
+  //         fat: passedMacros.mealMacros.fat,
+  //         carbs: passedMacros.mealMacros.carbs
+  //       },
   //     }
   //   })
-    
+
   // }
-  
-  // renderIngredients = (ingredient) => {
+
+  renderIngredients = (ingredient) => {
     
-  //   this.addMacros(ingredient)
-    
-  //   return (
-  //     <Ingredient
-  //     ingredient={ingredient.ingre}
-  //     description={ingredient.ingre.description}
-  //     nutrients={ingredient.ingre.foodNutrients}
-  //     addingGrams={this.addingGrams} 
-  //     renderDOM={this.renderDOM}
-  //     macros={ingredient.itemMacro}
-  //     exitIngreInput={this.exitIngreInput}
-  //     enterIngreInput={this.enterIngreInput}
-  //     handleDeleteFromDOM={this.handleDeleteFromDOM}
-  //     />
+    // this.initialMacros(this.props.passedProps);
+    console.log(this.state.editable)
+
+    return (
+      <Ingredient
+      ingredient={ingredient}
+      editable={this.state.editable}
+      description={ingredient.description}
+      nutrients={ingredient.foodNutrients}
+      // addingGrams={this.addingGrams} 
+      renderDOM={this.renderDOM}
+      macros={ingredient.itemMacro}
+      exitIngreInput={this.exitIngreInput}
+      enterIngreInput={this.enterIngreInput}
+      handleDeleteFromDOM={this.handleDeleteFromDOM}
+      />
       
-  //     );
+    );
       
-  // };
+  };
     
+
   // addMacros = (ingredient) => {
     
   //   this.setState((state) => {
@@ -88,29 +123,21 @@ class MealEditor extends React.Component {
     
   // }
 
-  // sendToDatabase = () => {
-  //   const db = firestore;
-  //   let meals = db.collection("meals");
-  //   let document = meals.doc(`${this.state.mealName}`);
-  //   let state = this.state;
-  //   let user = firebase.auth().currentUser.uid;
+  sendToDatabase = () => {
+    const db = firestore;
+    let meals = db.collection("meals");
+    let document = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
+    let user = firebase.auth().currentUser.uid;
 
-  //   dbServices.set(document, {
-  //     mealName: state.mealName,
-  //     userId: user,
-  //     savedIngredients: state.savedIngredients,
-  //     mealMacros: state.mealMacros,
-  //   })
-  // }
+    dbServices.set(document, {
+      mealName: state.mealName,
+      userId: user,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
+    })
+  }
   
-  // handleNameInput = (e) => {
-  //   const target = e.target;
-  //   const value = target.value;
-    
-  //   this.setState({
-  //     mealName: value
-  //   });
-  // }  
 
   // enterIngreInput = (e, macros) => {
   //   let grams = e.target.value;
@@ -284,7 +311,33 @@ class MealEditor extends React.Component {
     //todo add code for db purposes
     
   }
+  
+  reRenderList = () => {
+    this.setState(()=>{
+      let reMappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+
+      return {
+        shownIngredients: reMappedList,
+      }
+
+    })
+
+  }
+
+  handleEditablility = () => {
     
+    this.setState((state) => {
+      let makeEditable = !state.editable;
+
+      return {
+        editable: makeEditable
+
+      }
+    }, this.reRenderList)
+
+  }
+  
+
   render() {
     
     return (
@@ -293,9 +346,13 @@ class MealEditor extends React.Component {
 
         <div className="updateMealContainer">
 
-          <div className="updateMealName">
-            <input onChange={ this.handleNameInput } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
-          </div>
+          <ContentEditable
+            // innerRef={this.contentEditable}
+            html={this.state.mealName} // innerHTML of the editable div
+            disabled={false}       // use true to disable editing
+            onChange={this.updateName} 
+            // tagName='article' // Use a custom HTML tag (uses a div by default)
+          />
           
           {this.state.shownIngredients.length > 0 ? 
             <PieChart 
@@ -320,8 +377,8 @@ class MealEditor extends React.Component {
               </InfiniteScroll>
             </div>
 
-
-          <NavLink 
+          {this.state.editable
+          ?<NavLink 
           to="/search"
           className="searchButton"
           >
@@ -334,10 +391,12 @@ class MealEditor extends React.Component {
               <circle fill="#64B5F6" cx="20" cy="20" r="13"></circle><path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1 C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"></path>
             </svg>
           </NavLink>
-
-          <div className="saveButton">
-              <button 
-                onClick={ 
+          : ""
+  }
+          <div className="saveEditButton">
+            {this.state.editable
+              ? <button 
+                 onClick={ 
                   () => { 
                     if (this.state.mealName.length > 0) {
                       this.sendToDatabase() 
@@ -347,7 +406,18 @@ class MealEditor extends React.Component {
                 type="submit" 
                 className="btn btn-primary"
                 >Save Meal
-              </button>
+               </button>
+              : <button 
+                  onClick={ 
+                    () => {
+                      this.handleEditablility()
+                    }
+                  } 
+                type="submit" 
+                className="btn btn-primary"
+                >Edit
+                </button> 
+  }  
           </div>   
 
         </div>                     

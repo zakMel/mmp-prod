@@ -44,6 +44,56 @@
 
 } 
 
+.saveEditButton {
+    position: fixed;
+    bottom: 60px;
+    
+}
+
+.fixedItemContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 29px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.fixedItemDescription {
+    width: 90vw;
+    /* height: 5vh; */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: .5em;
+    padding-left: 1vw;
+    padding-top: .5vh;
+    font-size: 12px;
+    
+}
+
+.editItemContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 29px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.editItemDescription {
+    width: 70vw;
+    /* height: 5vh; */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: .5em;
+    padding-left: 1vw;
+    padding-top: .5vh;
+    font-size: 12px;
+    
+}
+
 a:link {
     text-decoration: none;
 }

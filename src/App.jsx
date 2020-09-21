@@ -170,7 +170,8 @@ class App extends React.Component {
           path="/mealViewer"
           exact={true}
           render={(props) => (
-            <MealViewer 
+            <MealViewer
+              updateList={this.updateList} 
             />
           )}
         />
@@ -179,6 +180,7 @@ class App extends React.Component {
           exact={true}
           render={(props) => (
             <MealEditor 
+              list={this.state.ingredients}
               passedProps={this.props.location.passedMeal}
             />
           )}
