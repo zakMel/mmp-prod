@@ -63,7 +63,7 @@ export default function UserBar (props) {
                             Meal Generator
                     </NavLink>
                     <NavLink 
-                        to="/savedMeals"
+                        to="/mealViewer"
                         className="nav-link"
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="1em" width="1em">

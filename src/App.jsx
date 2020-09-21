@@ -5,8 +5,9 @@ import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search';
-import SavedMeals from './components/savedMeals/SavedMeals';
-import { Route } from "react-router-dom";
+import MealViewer from './components/savedMeals/MealViewer';
+import MealEditor from './components/savedMeals/MealEditor';
+import { Route, withRouter } from "react-router-dom";
 import './App.css';
 
 const Big = require('big.js') //probably want to remove the use of this.
@@ -100,6 +101,7 @@ class App extends React.Component {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedIn: !!user})
     );
+
   }
   
   componentWillUnmount() {
@@ -165,10 +167,19 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/savedMeals"
+          path="/mealViewer"
           exact={true}
           render={(props) => (
-            <SavedMeals 
+            <MealViewer 
+            />
+          )}
+        />
+        <Route
+          path="/mealEditor"
+          exact={true}
+          render={(props) => (
+            <MealEditor 
+              passedProps={this.props.location.passedMeal}
             />
           )}
         />
@@ -180,4 +191,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+export default withRouter(App);

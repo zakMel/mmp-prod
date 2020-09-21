@@ -9,7 +9,6 @@ export default function SearchItem (props) {
         className="ingredient"
         to="/mealGenerator"
         onClick={() => { props.addIngredient(props.ingredient) }}
-        macros={props.macros}
         >
             <p className="ingredientText">
                 { props.description.length > 140 ?

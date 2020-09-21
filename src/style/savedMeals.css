@@ -3,21 +3,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     margin-top: 55px;
     background-color: lavender;
     height: 564px;
 }
 
+.updateMealContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 567px;
+    margin-top: 55px;
+    background-color: lavender;
+}
+
+.updateMealName {
+    margin-top: 10px;
+}
+
+.pieChart_UM {
+    margin-top: 3vh;
+    width: 10vw;
+}
+
 .savedMeal {
     display: block;
     width: 365px;
     height: 40px;
-    font-size: 12px;
+    margin-bottom: 2.5px;
+    font-size: 15
+    px;
     border: 1.5px solid black;
-    border-radius: 3px;
-    background-color: white;
+    border-radius: 8px;
     color: black;
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    text-decoration: none;
+
+} 
+
+a:link {
+    text-decoration: none;
+}
+
+a:active {
+    color: black;
+}
+
+.mealListContainer {
+    margin-top: 10px;
 
 }
