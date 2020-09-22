@@ -31,20 +31,14 @@ class MealEditor extends React.Component {
     this.renderDOM()
   }
   
-  updateName = (e) => {
-    this.setState(() => {
-      return {
-        mealName: e.target.value
-      }
-    })
-
-  }
-  
   renderDOM = () => {
-    let name = this.props.passedProps.mealName
+    console.log(this.props.passedProps === undefined);
+    // let name = this.props.passedProps === undefined ? this.props.history.location.passedProps.mealName : this.props.passedProps.mealName;
+    let name =this.props.mealName;
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list
-    let macros = this.state.editable? this.state.mealMacros : this.props.passedProps.mealMacros;
+    let givenIngredients = this.props.list;
+    let macros = this.props.passedProps !== undefined ? this.props.passedProps.mealMacros : this.state.mealMacros
+    let passedEditability = this.props.passedEditability;
     
     this.setState(() => {
       
@@ -55,7 +49,8 @@ class MealEditor extends React.Component {
         mealMacros: {
           protein: macros.protein,
           fat: macros.fat,
-          carbs: macros.carbs
+          carbs: macros.carbs,
+          editable: passedEditability,
         },
       }
     })
@@ -92,7 +87,7 @@ class MealEditor extends React.Component {
 
       return (
       <Ingredient
-      editable={this.state.editable}
+      editable={this.props.passedEditability}
       ingredient={ingredient.ingre}
       description={ingredient.ingre.description}
       nutrients={ingredient.ingre.foodNutrients}
@@ -294,18 +289,25 @@ class MealEditor extends React.Component {
 
   }
 
-  handleEditablility = () => {
-    
-    this.setState((state) => {
-      let makeEditable = !state.editable;
-
-      return {
-        editable: makeEditable
-
-      }
-    }, this.reRenderList)
-
+  componentDidUpdate (prevProps) {
+    if(this.props.passedEditability !== prevProps.passedEditability){
+      this.reRenderList();
+      // console.log('updated')
+    }
   }
+
+  // handleEditablility = () => {
+    
+  //   this.setState((state) => {
+  //     let makeEditable = !state.editable;
+
+  //     return {
+  //       editable: makeEditable
+
+  //     }
+  //   }, this.reRenderList)
+
+  // }
   
   sendToDatabase = () => {
     const db = firestore;
@@ -351,7 +353,6 @@ class MealEditor extends React.Component {
             : ""
           }        
 
-
             <div className="updaterListContainer">
               <InfiniteScroll
                   // className="listContainer"
@@ -366,24 +367,28 @@ class MealEditor extends React.Component {
               </InfiniteScroll>
             </div>
 
-          {this.state.editable
-          ?<NavLink 
-          to="/search"
-          className="searchButton"
-          >
-            <svg className="magnifyingGlass" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
-              <g fill="#616161">
-                <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17"></rect>
-                <circle cx="20" cy="20" r="16"></circle>
-              </g>
-              <rect x="36.2" y="32.1" transform="matrix(.707 -.707 .707 .707 -15.839 38.239)" fill="#37474F" width="4" height="12.3"></rect>
-              <circle fill="#64B5F6" cx="20" cy="20" r="13"></circle><path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1 C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"></path>
-            </svg>
-          </NavLink>
-          : ""
-  }
+          {this.props.passedEditability
+            ?<NavLink 
+            to={{
+              pathname: "/search",
+              lastURL: this.props.history.location.pathname,
+              passedProps: this.props.passedProps
+            }}
+            className="searchButton"
+            >
+              <svg className="magnifyingGlass" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
+                <g fill="#616161">
+                  <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17"></rect>
+                  <circle cx="20" cy="20" r="16"></circle>
+                </g>
+                <rect x="36.2" y="32.1" transform="matrix(.707 -.707 .707 .707 -15.839 38.239)" fill="#37474F" width="4" height="12.3"></rect>
+                <circle fill="#64B5F6" cx="20" cy="20" r="13"></circle><path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1 C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"></path>
+              </svg>
+            </NavLink>
+            : ""
+          }
           <div className="saveEditButton">
-            {this.state.editable
+            {this.props.passedEditability
               ? <button 
                  onClick={ 
                   () => { 
@@ -399,7 +404,8 @@ class MealEditor extends React.Component {
               : <button 
                   onClick={ 
                     () => {
-                      this.handleEditablility()
+                      this.props.handleEditablility();
+                      // this.reRenderList();
                     }
                   } 
                 type="submit" 

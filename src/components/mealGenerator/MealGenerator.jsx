@@ -103,16 +103,7 @@ class MealGenerator extends React.Component {
       savedIngredients: state.savedIngredients,
       mealMacros: state.mealMacros,
     })
-  }
-  
-  handleNameInput = (e) => {
-    const target = e.target;
-    const value = target.value;
-    
-    this.setState({
-      mealName: value
-    });
-  }  
+  } 
 
   enterIngreInput = (e, macros) => {
     //   let container = e.target.parentElement;
@@ -300,7 +291,7 @@ class MealGenerator extends React.Component {
           <h5 className="instructions">To start search an ingredient!</h5>
 
           <div className="mealName">
-            <input onChange={ this.handleNameInput } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
+            <input onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
           </div>
           
           {this.state.shownIngredients.length > 0 ? 
