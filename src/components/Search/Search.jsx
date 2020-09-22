@@ -13,14 +13,13 @@ class Search extends React.Component {
         this.state={
             input:"",
             totalPages: 0,
-            // currentTabs: [],
             mappedIngredients: []
 
         }
     }
 
     componentDidMount() {
-        console.log(this.props.currentTabs)
+        console.log(this.props.history.location.lastURL)
     }
 
     handleInput = (e) => {
@@ -97,6 +96,8 @@ class Search extends React.Component {
                 description={ingredient.description}
                 nutrients={ingredient.foodNutrients}
                 addIngredient={this.props.addIngredient}
+                lastURL={this.props.history.location.lastURL}
+                passedProps={this.props.history.location.passedProps}
             />
         );
 

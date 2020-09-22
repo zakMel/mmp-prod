@@ -69,6 +69,7 @@ class MealViewer extends React.Component {
             passedMeal={meal}
             description={meal.mealName}
             updateList={this.props.updateList}
+            handleSetName_ME={this.props.handleSetName_ME}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />

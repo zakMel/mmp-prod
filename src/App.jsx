@@ -21,7 +21,50 @@ class App extends React.Component {
       ingredients:[],
       currentTabs: [],
       isSignedIn: false,
+      nameMealEdited: "",
+      editable: false,
     };
+  }
+
+  handleUpdateName_ME = (e) => {
+    this.setState(() => {
+      return {
+        mealName: e.target.value
+      }
+    })
+
+  }
+
+  handleNameInput_MG = (e) => {
+    const target = e.target;
+    const value = target.value;
+    
+    this.setState({
+      mealName: value
+    });
+  }  
+
+  handleSetName_ME = (name) => {
+
+    this.setState(() => {
+      return {
+        mealName: name
+      }
+
+    })
+  }
+
+   handleEditablility = () => {
+    
+    this.setState((state) => {
+      let makeEditable = !state.editable;
+
+      return {
+        editable: makeEditable
+
+      }
+    })
+
   }
 
   // Configure FirebaseUI.
@@ -152,6 +195,8 @@ class App extends React.Component {
             <MealGenerator 
               list={this.state.ingredients}
               updateList={this.updateList}
+              history={this.props.history}
+              handleNameInput_MG={this.handleNameInput_MG}
             />
           )}
         />
@@ -163,6 +208,7 @@ class App extends React.Component {
               addIngredient={this.addIngredient}
               handleUpdatePage={this.handleUpdatePage}
               currentTabs={this.state.currentTabs}
+              history={this.props.history}
             />
           )}
         />
@@ -172,6 +218,8 @@ class App extends React.Component {
           render={(props) => (
             <MealViewer
               updateList={this.updateList} 
+              history={this.props.history}
+              handleSetName_ME={this.handleSetName_ME}
             />
           )}
         />
@@ -182,6 +230,11 @@ class App extends React.Component {
             <MealEditor 
               list={this.state.ingredients}
               passedProps={this.props.location.passedMeal}
+              history={this.props.history}
+              handleUpdateName_ME={this.handleUpdateName_ME}
+              mealName={this.state.mealName}
+              handleEditablility={this.handleEditablility}
+              passedEditability={this.state.editable}
             />
           )}
         />

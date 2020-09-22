@@ -2,12 +2,15 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 
 export default function SearchItem (props) {
-
+    console.log(props.passedProps)
     return (
 
         <NavLink 
         className="ingredient"
-        to="/mealGenerator"
+        to={{
+            pathname: props.lastURL === "/mealEditor"? "/mealEditor" : "/mealGenerator",
+            passedProps: props.passedProps
+        }}
         onClick={() => { props.addIngredient(props.ingredient) }}
         >
             <p className="ingredientText">
