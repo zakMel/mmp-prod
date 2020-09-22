@@ -61,32 +61,42 @@ class MealEditor extends React.Component {
     })
     
   }
-  
-  // initialMacros = (passedMacros) => {
-  //   this.setState(() => {
-  //     return {
-  //       mealMacros: {
-  //         protein: passedMacros.mealMacros.protein,
-  //         fat: passedMacros.mealMacros.fat,
-  //         carbs: passedMacros.mealMacros.carbs
-  //       },
-  //     }
-  //   })
 
-  // }
+  addMacros = (ingredient) => {
+    
+    this.setState((state) => {
+      
+      let macros = ingredient.itemMacro; 
+      let stateMacros = state.mealMacros; 
+      
+      let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+      let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+      let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
+      
+      return {
+        
+        mealMacros: {
+          protein: newProtein,
+          fat: newFat,
+          carbs: newCarbs
+        },
+      }
+      
+    })
+    
+  }
 
   renderIngredients = (ingredient) => {
-    
-    // this.initialMacros(this.props.passedProps);
-    console.log(this.state.editable)
 
-    return (
+      this.addMacros(ingredient)
+
+      return (
       <Ingredient
-      ingredient={ingredient}
       editable={this.state.editable}
-      description={ingredient.description}
-      nutrients={ingredient.foodNutrients}
-      // addingGrams={this.addingGrams} 
+      ingredient={ingredient.ingre}
+      description={ingredient.ingre.description}
+      nutrients={ingredient.ingre.foodNutrients}
+      addingGrams={this.addingGrams} 
       renderDOM={this.renderDOM}
       macros={ingredient.itemMacro}
       exitIngreInput={this.exitIngreInput}
@@ -94,149 +104,108 @@ class MealEditor extends React.Component {
       handleDeleteFromDOM={this.handleDeleteFromDOM}
       />
       
-    );
-      
+      );
   };
-    
-
-  // addMacros = (ingredient) => {
-    
-  //   this.setState((state) => {
-      
-  //     let macros = ingredient.itemMacro; 
-  //     let stateMacros = state.mealMacros; 
-      
-  //     let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
-  //     let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
-  //     let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
-      
-  //     return {
-        
-  //       mealMacros: {
-  //         protein: newProtein,
-  //         fat: newFat,
-  //         carbs: newCarbs
-  //       },
-  //     }
-      
-  //   })
-    
-  // }
-
-  sendToDatabase = () => {
-    const db = firestore;
-    let meals = db.collection("meals");
-    let document = meals.doc(`${this.state.mealName}`);
-    let state = this.state;
-    let user = firebase.auth().currentUser.uid;
-
-    dbServices.set(document, {
-      mealName: state.mealName,
-      userId: user,
-      savedIngredients: state.savedIngredients,
-      mealMacros: state.mealMacros,
-    })
-  }
   
 
-  // enterIngreInput = (e, macros) => {
-  //   let grams = e.target.value;
+  enterIngreInput = (e, macros) => {
+    let grams = e.target.value;
 
-  //   if(grams === "") {
+    if(grams === "") {
 
-  //     this.setState((state) => {
-  //       let stateMacros = state.mealMacros; 
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
         
-  //       let newProtein = ( stateMacros.protein ) - ( macros.proteinPerGram )
-  //       let newFat = ( stateMacros.fat ) - ( macros.fatPerGram)
-  //       let newCarbs = ( stateMacros.carbs ) - ( macros.carbsPerGram)
+        let newProtein = ( stateMacros.protein ) - ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) - ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) - ( macros.carbsPerGram)
         
-  //       return {
+        return {
           
-  //         mealMacros: {
-  //           protein: newProtein,
-  //           fat: newFat,
-  //           carbs: newCarbs
-  //         },
-  //       }
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
         
-  //     })
+      })
 
-  //   } else {
+    } else {
 
-  //     this.setState((state) => {
+      this.setState((state) => {
         
-  //       let stateMacros = state.mealMacros; 
+        let stateMacros = state.mealMacros; 
         
-  //       let newProtein = ( stateMacros.protein ) - (macros.proteinPerGram * grams)
-  //       let newFat = ( stateMacros.fat ) - (macros.fatPerGram * grams)
-  //       let newCarbs = ( stateMacros.carbs ) - (macros.carbsPerGram * grams)
+        let newProtein = ( stateMacros.protein ) - (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) - (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) - (macros.carbsPerGram * grams)
         
-  //       return {
+        return {
           
-  //         mealMacros: {
-  //           protein: newProtein,
-  //           fat: newFat,
-  //           carbs: newCarbs
-  //         },
-  //       }
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
         
-  //     })
+      })
 
-  //   }
+    }
     
-  // }
+  }
 
-  // exitIngreInput = (e, macros) => {
+  exitIngreInput = (e, macros) => {
 
-  //   let grams = e.target.value;
+    let grams = e.target.value;
 
-  //   if(grams === "") {
+    if(grams === "") {
 
-  //     this.setState((state) => {
-  //       let stateMacros = state.mealMacros; 
+      this.setState((state) => {
+        let stateMacros = state.mealMacros; 
         
-  //       let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
-  //       let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
-  //       let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
+        let newProtein = ( stateMacros.protein ) + ( macros.proteinPerGram )
+        let newFat = ( stateMacros.fat ) + ( macros.fatPerGram)
+        let newCarbs = ( stateMacros.carbs ) + ( macros.carbsPerGram)
         
-  //       return {
+        return {
           
-  //         mealMacros: {
-  //           protein: newProtein,
-  //           fat: newFat,
-  //           carbs: newCarbs
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
 
 
-  //         },
-  //       }
+          },
+        }
         
-  //     })
+      })
 
-  //   } else {
+    } else {
 
-  //     this.setState((state) => {
+      this.setState((state) => {
         
-  //       let stateMacros = state.mealMacros; 
+        let stateMacros = state.mealMacros; 
         
-  //       let newProtein = ( stateMacros.protein ) + (macros.proteinPerGram * grams)
-  //       let newFat = ( stateMacros.fat ) + (macros.fatPerGram * grams)
-  //       let newCarbs = ( stateMacros.carbs ) + (macros.carbsPerGram * grams)
+        let newProtein = ( stateMacros.protein ) + (macros.proteinPerGram * grams)
+        let newFat = ( stateMacros.fat ) + (macros.fatPerGram * grams)
+        let newCarbs = ( stateMacros.carbs ) + (macros.carbsPerGram * grams)
         
-  //       return {
+        return {
           
-  //         mealMacros: {
-  //           protein: newProtein,
-  //           fat: newFat,
-  //           carbs: newCarbs
-  //         },
-  //       }
+          mealMacros: {
+            protein: newProtein,
+            fat: newFat,
+            carbs: newCarbs
+          },
+        }
         
-  //     })
+      })
 
-  //   }
+    }
     
-  // }
+  }
   
   // handleDeleteFromDOM = (e, macros) => {
     
@@ -307,17 +276,18 @@ class MealEditor extends React.Component {
 
   // }
   
-  loadFunc = () =>{
-    //todo add code for db purposes
-    
-  }
-  
   reRenderList = () => {
+    
     this.setState(()=>{
       let reMappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
 
       return {
         shownIngredients: reMappedList,
+        mealMacros: {
+          protein: 0,
+          fat: 0,
+          carbs: 0
+        },
       }
 
     })
@@ -337,6 +307,25 @@ class MealEditor extends React.Component {
 
   }
   
+  sendToDatabase = () => {
+    const db = firestore;
+    let meals = db.collection("meals");
+    let document = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
+    let user = firebase.auth().currentUser.uid;
+
+    dbServices.set(document, {
+      mealName: state.mealName,
+      userId: user,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
+    })
+  }
+
+  loadFunc = () =>{
+    //todo add code for db purposes
+    
+  }
 
   render() {
     

@@ -2,8 +2,7 @@ import React from 'react'
 import "../../style/mealGenerator.css"
 
 export default function Ingredient (props) {
-    console.log(window.screen.width)
-    console.log(props)
+    console.log('screen width -->', window.screen.width)
 
     return (
         

@@ -33,7 +33,7 @@ class MealGenerator extends React.Component {
   
   renderDOM = () => {
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list.map(item => item.ingre);
+    let givenIngredients = this.props.list;
     
     this.setState(() => {
       
