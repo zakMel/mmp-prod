@@ -287,8 +287,10 @@ class MealGenerator extends React.Component {
       <React.Fragment>
 
         <div className="mealContainer">
-
-          <h5 className="instructions">To start search an ingredient!</h5>
+          { this.state.shownIngredients.length > 0 
+            ? <div className="holdingTitleSpot"></div>
+            : <h5 className="instructions">To start search an ingredient!</h5>
+          }
 
           <div className="mealName">
             <input onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>

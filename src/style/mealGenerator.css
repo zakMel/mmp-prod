@@ -15,16 +15,20 @@
 
 }
 
+.holdingTitleSpot {
+    margin-top: 65px;
+}
+
 .pieChart_MG {
     margin-top: 3vh;
     width: 10vw;
 }
 
 .listContainer {
-    margin-top: 3px;
+    margin-top: 8px;
     width: 100vw;
     /* min-height: 6vh; */
-    height: 260px;
+    height: 295px;
     overflow: auto;
 }
 
