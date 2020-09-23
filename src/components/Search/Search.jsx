@@ -19,7 +19,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.history.location.lastURL)
+        // console.log(this.props.history.location.lastURL)
     }
 
     handleInput = (e) => {

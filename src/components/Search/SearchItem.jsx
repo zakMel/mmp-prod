@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 
 export default function SearchItem (props) {
-    console.log(props.passedProps)
+    
     return (
 
         <NavLink 

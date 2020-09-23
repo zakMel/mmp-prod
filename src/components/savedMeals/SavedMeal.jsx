@@ -14,11 +14,11 @@ class SavedMeal extends Component {
                 <NavLink 
                 to={{
                     pathname: "/mealEditor",
-                    passedMeal: this.props.passedMeal 
+                    passedProps: this.props.passedProps 
                 }}
                 onClick={()=>{
-                    this.props.updateList(this.props.passedMeal.savedIngredients);
-                    this.props.handleSetName_ME(this.props.passedMeal.mealName);
+                    this.props.updateList(this.props.passedProps.savedIngredients);
+                    this.props.handleSetName_ME(this.props.passedProps.mealName);
                 }}
                 className="savedMeal"
                 >

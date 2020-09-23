@@ -229,7 +229,7 @@ class App extends React.Component {
           render={(props) => (
             <MealEditor 
               list={this.state.ingredients}
-              passedProps={this.props.location.passedMeal}
+              passedProps={this.props.location.passedProps}
               history={this.props.history}
               handleUpdateName_ME={this.handleUpdateName_ME}
               mealName={this.state.mealName}
