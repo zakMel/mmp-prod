@@ -29,6 +29,7 @@ class MealEditor extends React.Component {
   
   componentDidMount(){ 
     this.renderDOM()
+    
   }
   
   renderDOM = () => {
@@ -100,7 +101,6 @@ class MealEditor extends React.Component {
       
       );
   };
-  
 
   enterIngreInput = (e, macros) => {
     let grams = e.target.value;
@@ -201,74 +201,76 @@ class MealEditor extends React.Component {
     
   }
   
-  // handleDeleteFromDOM = (e, macros) => {
+  handleDeleteFromDOM = (e, macros) => {
     
-  //   let container = e.target.parentElement;
-  //   let grams = $(container).children().filter(".itemGrams")[0].value;
-  //   let description = $(container).children().filter(".itemDescription").html();
+    let container = e.target.parentElement;
+    let grams = $(container).children().filter(".itemGrams")[0].value;
+    let description = $(container).children().filter("div.editItemDescription")[0].innerText;
 
-  //   //removes macros
-  //   if(grams !== ""){
-  //     this.setState( (state) => {
-  //       return {
-  //         mealMacros: {
-  //           protein: (state.mealMacros.protein) - (macros.proteinPerGram * grams),
-  //           fat: (state.mealMacros.fat) - (macros.fatPerGram * grams),
-  //           carbs: (state.mealMacros.carbs) - (macros.carbsPerGram * grams)
-  //         }
-  //       }
-  //     })
+    //removes macros
+    if(grams !== ""){
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - (macros.proteinPerGram * grams),
+            fat: (state.mealMacros.fat) - (macros.fatPerGram * grams),
+            carbs: (state.mealMacros.carbs) - (macros.carbsPerGram * grams)
+          }
+        }
+      })
 
-  //   } else {
-  //     this.setState( (state) => {
-  //       return {
-  //         mealMacros: {
-  //           protein: (state.mealMacros.protein) - macros.proteinPerGram,
-  //           fat: (state.mealMacros.fat) - macros.fatPerGram,
-  //           carbs: (state.mealMacros.carbs) - macros.carbsPerGram
-  //         }
-  //       }
-  //     })
+    } else {
+      this.setState( (state) => {
+        return {
+          mealMacros: {
+            protein: (state.mealMacros.protein) - macros.proteinPerGram,
+            fat: (state.mealMacros.fat) - macros.fatPerGram,
+            carbs: (state.mealMacros.carbs) - macros.carbsPerGram
+          }
+        }
+      })
 
-  //   }
+    }
 
-  //   //removes from the dom
-  //   this.setState( (state) => {
-  //     let newRender = [];
+    //removes from the dom
+    this.setState( (state) => {
+      let newRender = [];
 
-  //     for ( let u = 0; u < state.shownIngredients.length;  u++) {
-  //       let arr = state.shownIngredients;
-  //       let current = arr[u];
-  //       let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
+      for ( let u = 0; u < state.shownIngredients.length;  u++) {
+        let arr = state.shownIngredients;
+        let current = arr[u];
+        let includes = current.props.description.includes(description);
       
-  //       if(!includes){
-  //         newRender.push(current)
-  //       }  
+        if(!includes){
+          newRender.push(current)
+        }  
 
-  //     }
+      }
 
-  //     return {
-  //       shownIngredients: newRender
-  //     }
+      console.log(newRender);
 
-  //   })
+      return {
+        shownIngredients: newRender
+      }
 
-  //   //delete from App.jsx
-  //   let newList = []
-  //   for ( let i = 0; i < this.props.list.length; i++ ){
-  //     let arr = this.props.list;
-  //     let current = arr[i];
-  //     let ingredent = arr[i].ingre;
-  //     let includes = ingredent.description.includes(description.slice(0, (description.length - 3)));
+    })
 
-  //     if(!includes){
-  //       newList.push(current);
-  //     }
-  //   }
+    //delete from App.jsx
+    let newList = []
+    for ( let i = 0; i < this.props.list.length; i++ ){
+      let arr = this.props.list;
+      let current = arr[i];
+      let ingredent = arr[i].ingre;
+      let includes = ingredent.description.includes(description);
 
-  //   this.props.updateList(newList);
+      if(!includes){
+        newList.push(current);
+      }
+    }
 
-  // }
+    this.props.updateList(newList);
+
+  }
   
   reRenderList = () => {
     
@@ -285,7 +287,19 @@ class MealEditor extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
 
-    if(this.state.editable === true && this.state.savedIngredients.length !== prevState.savedIngredients.length){
+    if(this.state.savedIngredients.length !== prevState.savedIngredients.length){
+      this.setState(()=>{
+        return {
+          mealMacros: {
+            protein: 0,
+            fat: 0,
+            carbs: 0
+          }
+        }
+      }, this.reRenderList())
+    }
+
+    else if (this.props.passedEditability !== prevProps.passedEditability){
       this.setState(()=>{
         return {
           mealMacros: {
@@ -302,12 +316,17 @@ class MealEditor extends React.Component {
   sendToDatabase = () => {
     const db = firestore;
     let meals = db.collection("meals");
-    let document = meals.doc(`${this.state.mealName}`);
+    let document = meals.doc(`${this.props.mealName}`);
+    let oldName = meals.doc(`${this.state.mealName}`)
     let state = this.state;
     let user = firebase.auth().currentUser.uid;
 
+    if(this.props.mealName !== state.mealName){
+      dbServices.delete(oldName)
+    }
+
     dbServices.set(document, {
-      mealName: state.mealName,
+      mealName: this.props.mealName,
       userId: user,
       savedIngredients: state.savedIngredients,
       mealMacros: state.mealMacros,
@@ -329,9 +348,10 @@ class MealEditor extends React.Component {
 
           <ContentEditable
             // innerRef={this.contentEditable}
-            html={this.state.mealName} // innerHTML of the editable div
-            disabled={false}       // use true to disable editing
-            onChange={this.updateName} 
+            html={this.props.mealName} // innerHTML of the editable div
+            disabled={this.props.passedEditability? false : true}       // use true to disable editing
+            onChange={this.props.handleUpdateName_ME} 
+            className="editableName"
             // tagName='article' // Use a custom HTML tag (uses a div by default)
           />
           

@@ -230,6 +230,7 @@ class App extends React.Component {
             <MealEditor 
               list={this.state.ingredients}
               passedProps={this.props.location.passedProps}
+              updateList={this.updateList}
               history={this.props.history}
               handleUpdateName_ME={this.handleUpdateName_ME}
               mealName={this.state.mealName}
