@@ -433,4 +433,4 @@ class MealEditor extends React.Component {
   }
 }
 
-export default MealEditor
+export default MealEditor;

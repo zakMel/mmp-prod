@@ -7,6 +7,7 @@ import MealGenerator from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search';
 import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
+import Calendar from './components/Calendar';
 import { Route, withRouter } from "react-router-dom";
 import './App.css';
 
@@ -14,17 +15,15 @@ const Big = require('big.js') //probably want to remove the use of this.
 
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
-    
-    this.state = {
-      ingredients:[],
-      currentTabs: [],
-      isSignedIn: false,
-      nameMealEdited: "",
-      editable: false,
-    };
-  }
+
+  state = {
+    ingredients:[],
+    currentTabs: [],
+    isSignedIn: false,
+    nameMealEdited: "",
+    editable: false,
+  };
+
 
   handleUpdateName_ME = (e) => {
     this.setState(() => {
@@ -179,6 +178,13 @@ class App extends React.Component {
           exact={true}
           render={(props) => (
             <Landing />
+          )}
+        />
+        <Route
+          path="/calendar"
+          exact={true}
+          render={(props) => (
+            <Calendar />
           )}
         />
         <Route
