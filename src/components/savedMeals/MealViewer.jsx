@@ -66,7 +66,7 @@ class MealViewer extends React.Component {
         
         return (
           <SavedMeal
-            passedMeal={meal}
+            passedProps={meal}
             description={meal.mealName}
             updateList={this.props.updateList}
             handleSetName_ME={this.props.handleSetName_ME}

@@ -32,7 +32,6 @@ class MealEditor extends React.Component {
   }
   
   renderDOM = () => {
-    console.log(this.props.passedProps === undefined);
     // let name = this.props.passedProps === undefined ? this.props.history.location.passedProps.mealName : this.props.passedProps.mealName;
     let name =this.props.mealName;
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
@@ -50,8 +49,8 @@ class MealEditor extends React.Component {
           protein: macros.protein,
           fat: macros.fat,
           carbs: macros.carbs,
-          editable: passedEditability,
         },
+        editable: passedEditability,
       }
     })
     
@@ -105,7 +104,7 @@ class MealEditor extends React.Component {
 
   enterIngreInput = (e, macros) => {
     let grams = e.target.value;
-
+    console.log(this.state.mealMacros)
     if(grams === "") {
 
       this.setState((state) => {
@@ -277,37 +276,28 @@ class MealEditor extends React.Component {
       let reMappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
 
       return {
-        shownIngredients: reMappedList,
-        mealMacros: {
-          protein: 0,
-          fat: 0,
-          carbs: 0
-        },
+        shownIngredients: reMappedList
       }
 
     })
 
   }
 
-  componentDidUpdate (prevProps) {
-    if(this.props.passedEditability !== prevProps.passedEditability){
-      this.reRenderList();
-      // console.log('updated')
+  componentDidUpdate (prevProps, prevState) {
+
+    if(this.state.editable === true && this.state.savedIngredients.length !== prevState.savedIngredients.length){
+      this.setState(()=>{
+        return {
+          mealMacros: {
+            protein: 0,
+            fat: 0,
+            carbs: 0
+          }
+        }
+      }, this.reRenderList())
     }
+
   }
-
-  // handleEditablility = () => {
-    
-  //   this.setState((state) => {
-  //     let makeEditable = !state.editable;
-
-  //     return {
-  //       editable: makeEditable
-
-  //     }
-  //   }, this.reRenderList)
-
-  // }
   
   sendToDatabase = () => {
     const db = firestore;
@@ -405,7 +395,6 @@ class MealEditor extends React.Component {
                   onClick={ 
                     () => {
                       this.props.handleEditablility();
-                      // this.reRenderList();
                     }
                   } 
                 type="submit" 
