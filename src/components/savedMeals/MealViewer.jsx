@@ -4,18 +4,16 @@ import {firestore} from '../../configFirebase';
 import InfiniteScroll from 'react-infinite-scroller';
 import SavedMeal from "./SavedMeal";
 import "../../style/savedMeals.css";
-
+const db = firestore;
 
 class MealViewer extends React.Component {
-    constructor(props){
-        super(props)
 
-        this.state = {
+        state = {
             importedMeals: [],
             renderedMeals: []
 
         };
-    }
+    
 
     componentDidMount() {
         this.renderDOM();
@@ -32,13 +30,14 @@ class MealViewer extends React.Component {
     }
 
     renderDOM = () => {
-        const db = firestore;
-        let meals = db.collection("meals");
-        let user = firebase.auth().currentUser.uid;
-        let query = meals.where("userId", "==", user)
-        
-        query
-        .get()
+        let user = firebase.auth().currentUser;
+        const users = db.collection("users");
+        let userFile = users.doc(`${user.uid}`);
+        let meals = userFile.collection("meals");
+        // let query = meals.where("userId", "==", user)
+        // console.log(query);
+        // query
+        meals.get()
         .then(this.handleQuerySuccess)
         .then(this.renderSavedMeals)
         .catch(function(error) {
