@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import $ from "jquery"
 import InfiniteScroll from 'react-infinite-scroller';
 import dbServices from '../../services/dbServices';
-import MealViewer from './MealViewer';
 import PieChart from '../PieChart';
 import ContentEditable from 'react-contenteditable'
 import Ingredient from './Ingredient'

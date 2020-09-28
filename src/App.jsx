@@ -22,6 +22,7 @@ class App extends React.Component {
     isSignedIn: false,
     nameMealEdited: "",
     editable: false,
+    mealName: "",
   };
 
 
@@ -203,6 +204,7 @@ class App extends React.Component {
               updateList={this.updateList}
               history={this.props.history}
               handleNameInput_MG={this.handleNameInput_MG}
+              mealName={this.state.mealName}
             />
           )}
         />

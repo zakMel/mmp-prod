@@ -9,13 +9,12 @@ import Ingredient from './Ingredient';
 import PieChart from '../PieChart';
 import "../../style/mealGenerator.css";
 import "../../App.css";
+const db = firestore;
 
 class MealGenerator extends React.Component {
-  constructor (props) {
-    super(props);
     
-    this.state={
-      mealName: '',
+    state = {
+      mealName: this.props.mealName,
       shownIngredients: [],
       savedIngredients: [],
       mealMacros: {
@@ -24,12 +23,42 @@ class MealGenerator extends React.Component {
         carbs: 0
       },
     }
-  }
   
-  componentDidMount(){ 
-    this.renderDOM()
-    
+  
+  componentDidMount(){
+
+  this.renderDOM()
+  this.checkUserFile();
+
+  if(this.props.mealName.length > 0){
+    $('.mealName.input').text(this.props.mealName);
   }
+
+  
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.mealName !== prevProps.mealName){
+      this.setState({mealName: this.props.mealName});
+    }
+  }
+
+  checkUserFile = async () => {
+    let user = firebase.auth().currentUser;
+    const users = db.collection("users");
+    let userFile = users.doc(`${user.uid}`);
+    let checking = await userFile.get();
+    
+    console.log(checking.exists);
+
+    if(!checking.exists) {
+      userFile.set({
+      email: user.email
+      })
+    }
+
+  }
+
   
   renderDOM = () => {
     let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
@@ -91,15 +120,16 @@ class MealGenerator extends React.Component {
   }
 
   sendToDatabase = () => {
-    const db = firestore;
-    let meals = db.collection("meals");
+    let user = firebase.auth().currentUser;
+    const users = db.collection("users");
+    let userFile = users.doc(`${user.uid}`);
+
+    let meals = userFile.collection("meals");
     let document = meals.doc(`${this.state.mealName}`);
     let state = this.state;
-    let user = firebase.auth().currentUser.uid;
 
     dbServices.set(document, {
       mealName: state.mealName,
-      userId: user,
       savedIngredients: state.savedIngredients,
       mealMacros: state.mealMacros,
     })
@@ -293,7 +323,7 @@ class MealGenerator extends React.Component {
           }
 
           <div className="mealName">
-            <input onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
+            <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
           </div>
           
           {this.state.shownIngredients.length > 0 ? 
@@ -340,6 +370,7 @@ class MealGenerator extends React.Component {
                   () => { 
                     if (this.state.mealName.length > 0) {
                       this.sendToDatabase() 
+                      console.log("sent")
                     }
                   } 
                 } 

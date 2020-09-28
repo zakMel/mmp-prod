@@ -1,12 +1,15 @@
+
 var dbServices = {};
 
 dbServices.get = (document) => {
-    document.get()
+    return document.get()
         .then(doc => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
+                return true
             } else {
                 console.log("No such document!");
+                return false;
             }
         })
         .catch(function(error) {
