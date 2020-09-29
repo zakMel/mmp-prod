@@ -69,6 +69,7 @@ class MealViewer extends React.Component {
             description={meal.mealName}
             updateList={this.props.updateList}
             handleSetName_ME={this.props.handleSetName_ME}
+            prevPath={this.props.history.location.prevPath === "/calendar"? this.props.history.location.prevPath : this.props.history.location.pathname}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />
