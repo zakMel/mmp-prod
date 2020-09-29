@@ -316,7 +316,7 @@ class MealGenerator extends React.Component {
       
       <React.Fragment>
 
-        <div className="mealContainer">
+        <div className="mealGeneratorContainer">
           { this.state.shownIngredients.length > 0 
             ? <div className="holdingTitleSpot"></div>
             : <h5 className="instructions">To start search an ingredient!</h5>

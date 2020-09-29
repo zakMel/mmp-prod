@@ -20,11 +20,55 @@ class App extends React.Component {
     ingredients:[],
     currentTabs: [],
     isSignedIn: false,
-    nameMealEdited: "",
     editable: false,
     mealName: "",
+    selectedCalendarElement:"",
+    week:{
+        date: "",
+        
+        monday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+        tuesday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+        wednesday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+        thursday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+        friday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },  
+        saturday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+        sunday: {
+            breakfast: "breakfast",
+            lunch: "lunch",
+            dinner: "dinner",
+        },
+
+    },
   };
 
+
+  updateCalendarElement = (e) => {
+    this.setState({selectedCalendarElement: e.target})
+  }
 
   handleUpdateName_ME = (e) => {
     this.setState(() => {
@@ -185,7 +229,11 @@ class App extends React.Component {
           path="/calendar"
           exact={true}
           render={(props) => (
-            <Calendar />
+            <Calendar 
+              history={this.props.history}
+              updateCalendarElement={this.updateCalendarElement}
+              week={this.state.week}
+            />
           )}
         />
         <Route
