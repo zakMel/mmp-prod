@@ -7,7 +7,7 @@ import MealGenerator from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search';
 import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
-import Calendar from './components/Calendar';
+import Calendar from './components/Calendar/Calendar';
 import { Route, withRouter } from "react-router-dom";
 import './App.css';
 
@@ -22,52 +22,94 @@ class App extends React.Component {
     isSignedIn: false,
     editable: false,
     mealName: "",
-    selectedCalendarElement:"",
-    week:{
-        date: "",
-        
-        monday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+    calendarUpdate: {
+      day: "",
+      meal: "",
+    },
+    calendarDate: "date placeholder",
+    calendarWeek:[
+        {
+          day: "Monday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
-        tuesday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Tuesday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
-        wednesday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Wednesday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
-        thursday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Thursday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
-        friday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Friday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },  
-        saturday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Saturday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
-        sunday: {
-            breakfast: "breakfast",
-            lunch: "lunch",
-            dinner: "dinner",
+        {
+          day: "Sunday",
+          Breakfast: "Breakfast",
+          Lunch: "Lunch",
+          Dinner: "Dinner",
         },
 
-    },
+      ],
   };
 
 
-  updateCalendarElement = (e) => {
-    this.setState({selectedCalendarElement: e.target})
+  updateCalendarDate = (dayInput, mealInput) => {
+    this.setState(()=>{
+      return{
+        calendarUpdate:{
+          day: dayInput,
+          meal: mealInput,
+        }
+      }
+    })
+  }
+
+  updateCalendarMeal = (day, meal, update) => {
+    console.log(day, meal, update);
+
+    let updatedWeek = this.state.calendarWeek.map((item)=>{
+      if(item.day === day) {
+        item[`${meal}`] = update
+      }
+      return item;
+    })
+
+    console.log(updatedWeek)
+
+    // this.setState(() => {
+    //   return {
+    //     calendarWeek : updatedWeek
+    //   }
+    // })
+
+    // for(let i = 0; i < this.state.calendarWeek.length; i++){
+    //   let current = this.state.calendarWeek[i];
+    //   if(current.day === day){
+    //     current.meal = update
+    //   }
+    // }
   }
 
   handleUpdateName_ME = (e) => {
@@ -190,6 +232,12 @@ class App extends React.Component {
     );
 
   }
+
+  componentDidUpdate (prevProps, prevState) {
+    if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
+      console.log(this.state.selectedCalendarElement)
+    }
+  }
   
   componentWillUnmount() {
     this.unregisterAuthObserver();
@@ -231,8 +279,10 @@ class App extends React.Component {
           render={(props) => (
             <Calendar 
               history={this.props.history}
-              updateCalendarElement={this.updateCalendarElement}
-              week={this.state.week}
+              updateCalendarDate={this.updateCalendarDate}
+              week={this.state.calendarWeek}
+              date={this.state.calendarDate}
+              update={this.state.calendarUpdate}
             />
           )}
         />
@@ -276,6 +326,8 @@ class App extends React.Component {
               updateList={this.updateList} 
               history={this.props.history}
               handleSetName_ME={this.handleSetName_ME}
+              calendarUpdate={this.state.calendarUpdate}
+              updateCalendarMeal={this.updateCalendarMeal}
             />
           )}
         />

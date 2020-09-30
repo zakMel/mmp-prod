@@ -20,7 +20,9 @@ class SavedMeal extends Component {
                     if(this.props.prevPath === "/mealViewer") {
                         this.props.updateList(this.props.passedProps.savedIngredients)
                         this.props.handleSetName_ME(this.props.passedProps.mealName)
-                    } 
+                    } else  {
+                        this.props.updateList(this.props.updateCalendarMeal(this.props.calendarUpdate.day, this.props.calendarUpdate.meal, this.props.passedProps))
+                    }
                 }}
                 className="savedMeal"
                 >
