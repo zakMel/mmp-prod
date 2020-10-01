@@ -61,14 +61,15 @@ class Calendar extends React.Component {
                     <h2 className="weeks" > Calendar </h2>  
         
                     <DateRangePicker 
-                        // calendarType={"US"}
+                        calendarIcon={null}
+                        clearIcon={null}
                         className="dateRanger"
                         onChange={this.props.setWeekDateRange}
                         value={this.props.weekDateRange}
                     />
 
                     <botton 
-                    className="calendarButton"
+                    className="calendarSaveButton"
                     onClick={()=> { this.props.saveWeekToDB() }}
                     >
                     Save Week
@@ -87,6 +88,12 @@ class Calendar extends React.Component {
 
                         {this.state.mappedWeek}
 
+                        <botton 
+                        className="calendarPrintButton"
+                        // onClick={()=> { this.props.saveWeekToDB() }}
+                        >
+                        Print
+                        </botton>
                         </InfiniteScroll>
 
                     </div>
