@@ -1,12 +1,14 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import CalendarItem from './CalendarItem';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import "../../style/calendar.css";
 
 class Calendar extends React.Component {
     
     state = {
-        mappedWeek: []
+        mappedWeek: [],
+        dateRange:[new Date(), new Date () ]
     }
 
     componentDidMount() {
@@ -16,6 +18,17 @@ class Calendar extends React.Component {
 
     loadFunc = () => {
 
+    }
+
+    setDate = (newDates) => {
+
+    let firstWeekDay = newDates[0].getDay();
+        if(firstWeekDay === 1){
+            this.setState({ dateRange : newDates})
+        } else {
+            alert("must select a Monday as a start date.")
+        }
+        console.log(firstWeekDay)
     }
 
     renderDOM = () => {
@@ -53,7 +66,11 @@ class Calendar extends React.Component {
                 <div className="calendarContainer ">
 
                     <h2 className="weeks" > Calendar </h2>     
-                    <div>{this.props.date}</div>
+                    <DateRangePicker 
+                        // calendarType={"US"}
+                        onChange={this.setDate}
+                        value={this.state.dateRange}
+                    />
                     <div className="weekContainer">
 
                         <InfiniteScroll
