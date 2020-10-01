@@ -72,10 +72,20 @@ class App extends React.Component {
         },
 
       ],
+    dateRange: [ new Date(), new Date () ],
   };
 
+  setWeekDateRange = (newDates) => {
 
-  updateCalendarDate = (dayInput, mealInput) => {
+    let firstWeekDay = newDates[0].getDay();
+        if(firstWeekDay === 1){
+            this.setState({ dateRange : newDates})
+        } else {
+            alert("must select a Monday as a start date.")
+        }
+    }
+
+  updateDayMeal = (dayInput, mealInput) => {
     this.setState(()=>{
       return{
         calendarUpdate:{
@@ -86,7 +96,7 @@ class App extends React.Component {
     })
   }
 
-  updateCalendarMeal = (day, meal, update) => {
+  updateWeekItem = (day, meal, update) => {
     console.log(day, meal, update);
 
     let updatedWeek = this.state.calendarWeek.map((item)=>{
@@ -279,7 +289,9 @@ class App extends React.Component {
           render={(props) => (
             <Calendar 
               history={this.props.history}
-              updateCalendarDate={this.updateCalendarDate}
+              weekDateRange={this.state.dateRange}
+              setWeekDateRange={this.setWeekDateRange}
+              updateDayMeal={this.updateDayMeal}
               week={this.state.calendarWeek}
               date={this.state.calendarDate}
               update={this.state.calendarUpdate}
@@ -327,7 +339,7 @@ class App extends React.Component {
               history={this.props.history}
               handleSetName_ME={this.handleSetName_ME}
               calendarUpdate={this.state.calendarUpdate}
-              updateCalendarMeal={this.updateCalendarMeal}
+              updateWeekItem={this.updateWeekItem}
             />
           )}
         />
