@@ -1,7 +1,7 @@
 .calendarContainer {
     display: flex;
     flex-direction: column;
-    justify-content: flex;
+    justify-content: flex-start;
     align-items: center;
     width: 100vw;
     height: 565px;
@@ -14,10 +14,10 @@
     flex-direction: column;
     justify-content: flex;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 5px;
     width: 100vw;
     /* min-height: 6vh; */
-    height: 450px;
+    height: 420px;
     overflow: auto;
 }
 
@@ -57,4 +57,16 @@
     position: relative;
     z-index: 1;
     /* color: white; */
+}
+
+.calendarButton {
+    margin-top: 8px;
+    width: 200px;
+    height: 35px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-color: #6b8e23;
+    text-align: center;
+    color: snow;
+    padding: 3px;
 }

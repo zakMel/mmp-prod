@@ -31,6 +31,12 @@ class Calendar extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.week !== prevProps.week){
+            this.renderDOM()
+        }
+    }
+
     renderDays = (item) => {
         return (
             <CalendarItem 
@@ -52,13 +58,22 @@ class Calendar extends React.Component {
         
                 <div className="calendarContainer ">
 
-                    <h2 className="weeks" > Calendar </h2>     
+                    <h2 className="weeks" > Calendar </h2>  
+        
                     <DateRangePicker 
                         // calendarType={"US"}
                         className="dateRanger"
                         onChange={this.props.setWeekDateRange}
                         value={this.props.weekDateRange}
                     />
+
+                    <botton 
+                    className="calendarButton"
+                    onClick={()=> { this.props.saveWeekToDB() }}
+                    >
+                    Save Week
+                    </botton>
+
                     <div className="weekContainer">
 
                         <InfiniteScroll
