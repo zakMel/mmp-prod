@@ -1,6 +1,7 @@
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
+import {firestore} from './configFirebase';
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
@@ -9,10 +10,11 @@ import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
 import Calendar from './components/Calendar/Calendar';
 import { Route, withRouter } from "react-router-dom";
+import dbServices from './services/dbServices';
 import './App.css';
 
 const Big = require('big.js') //probably want to remove the use of this.
-
+const db = firestore;
 
 class App extends React.Component {
 
@@ -72,18 +74,73 @@ class App extends React.Component {
         },
 
       ],
-    dateRange: [ new Date(), new Date () ],
+    dateRangeCal: [ new Date(), new Date () ],
+    weekDateDB: ""
   };
+
+  existingWeekCheck = () => {
+    let user = firebase.auth().currentUser;
+    const users = db.collection("users");
+    let userFile = users.doc(`${user.uid}`);
+    let weeks = userFile.collection("weeks");
+    let query = weeks.where("weekDateDB", "==", this.state.weekDateDB)
+    
+    query.get()
+    .then(this.handleQuerySuccess)
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+  }
+
+  handleQuerySuccess = (response) => {
+    console.log("week exists")
+    
+    response.forEach(doc => {
+      if(doc.data().weekDateDB === this.state.weekDateDB){
+        console.log(doc.data().weekDateDB, doc.data().calendarWeek)
+        this.setState(() => {
+            return {
+              calendarWeek: doc.data().calendarWeek
+            }
+        })
+      }
+    })
+
+
+  }
+
+  saveWeekToDB = () => {
+    console.log("clicked save week")
+    let user = firebase.auth().currentUser;
+    const users = db.collection("users");
+    let userFile = users.doc(`${user.uid}`);
+
+    let meals = userFile.collection("weeks");
+    let document = meals.doc(`${this.state.weekDateDB}`);
+    let state = this.state;
+
+    dbServices.set(document, {
+      weekDateDB: state.weekDateDB,
+      dateRangeCal: state.dateRangeCal,
+      calendarWeek: state.calendarWeek,
+    })
+  }
 
   setWeekDateRange = (newDates) => {
 
     let firstWeekDay = newDates[0].getDay();
         if(firstWeekDay === 1){
-            this.setState({ dateRange : newDates})
+            this.setState(() => { 
+              return {
+                dateRangeCal : newDates,
+                weekDateDB: JSON.stringify(newDates),
+              }
+            
+            }, this.existingWeekCheck)
         } else {
             alert("must select a Monday as a start date.")
         }
-    }
+  }
 
   updateDayMeal = (dayInput, mealInput) => {
     this.setState(()=>{
@@ -289,12 +346,13 @@ class App extends React.Component {
           render={(props) => (
             <Calendar 
               history={this.props.history}
-              weekDateRange={this.state.dateRange}
+              weekDateRange={this.state.dateRangeCal}
               setWeekDateRange={this.setWeekDateRange}
               updateDayMeal={this.updateDayMeal}
               week={this.state.calendarWeek}
               date={this.state.calendarDate}
               update={this.state.calendarUpdate}
+              saveWeekToDB={this.saveWeekToDB}
             />
           )}
         />
