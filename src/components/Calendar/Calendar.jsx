@@ -8,29 +8,16 @@ class Calendar extends React.Component {
     
     state = {
         mappedWeek: [],
-        dateRange:[new Date(), new Date () ]
     }
 
     componentDidMount() {
         this.renderDOM()
-
     }
 
     loadFunc = () => {
 
     }
-
-    setDate = (newDates) => {
-
-    let firstWeekDay = newDates[0].getDay();
-        if(firstWeekDay === 1){
-            this.setState({ dateRange : newDates})
-        } else {
-            alert("must select a Monday as a start date.")
-        }
-        console.log(firstWeekDay)
-    }
-
+    
     renderDOM = () => {
         let mapped = this.props.week.map(item => this.renderDays(item));
 
@@ -52,7 +39,7 @@ class Calendar extends React.Component {
                 breakfast={item.Breakfast}
                 lunch={item.Lunch}
                 dinner={item.Dinner}
-                setCalendarDate={this.props.updateCalendarDate}
+                updateDayMeal={this.props.updateDayMeal}
                 prevPath={this.props.history.location.pathname}
             />
         )
@@ -68,8 +55,9 @@ class Calendar extends React.Component {
                     <h2 className="weeks" > Calendar </h2>     
                     <DateRangePicker 
                         // calendarType={"US"}
-                        onChange={this.setDate}
-                        value={this.state.dateRange}
+                        className="dateRanger"
+                        onChange={this.props.setWeekDateRange}
+                        value={this.props.weekDateRange}
                     />
                     <div className="weekContainer">
 

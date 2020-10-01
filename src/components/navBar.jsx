@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
+import "../App.css";
 
 export default function UserBar (props) {
     let [navState, setExpand] = useState(false);

@@ -48,3 +48,13 @@
     background-image: linear-gradient(rgb(191 191 191), white, rgb(191 191 191));
     text-decoration: none;
 } 
+
+.dateRanger {
+    all: unset;
+    border: 1.75px solid black;
+    background-color: #fffafa;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    /* color: white; */
+}

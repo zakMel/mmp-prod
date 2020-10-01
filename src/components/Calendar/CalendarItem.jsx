@@ -18,7 +18,7 @@ export default function CalendarItem (props) {
                     pathname: "/mealViewer",
                     prevPath: props.prevPath
                 }}
-                onClick={(e)=>{props.setCalendarDate(props.day, $(e.target).html())}}
+                onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
                     {props.breakfast === "Breakfast" ? "Breakfast" : props.breakfast.mealName} 
@@ -40,7 +40,7 @@ export default function CalendarItem (props) {
                     pathname: "/mealViewer",
                     prevPath: props.prevPath
                 }}
-                onClick={(e)=>{props.setCalendarDate(props.day, $(e.target).html())}}
+                onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
                     {props.lunch === "Lunch" ? "Lunch" : props.lunch.mealName} 
@@ -62,7 +62,7 @@ export default function CalendarItem (props) {
                     pathname: "/mealViewer",
                     prevPath: props.prevPath
                 }}
-                onClick={(e)=>{props.setCalendarDate(props.day, $(e.target).html())}}
+                onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
                     {props.dinner === "Dinner" ? "Dinner" : props.dinner.mealName} 
