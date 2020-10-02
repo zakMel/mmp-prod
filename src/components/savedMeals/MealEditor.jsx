@@ -14,19 +14,18 @@ const db = firestore;
 
 class MealEditor extends React.Component {
     
-    state = { 
-      mealName: '',
-      shownIngredients: [],
-      savedIngredients: [],
-      mealMacros: {
-        protein: 0,
-        fat: 0,
-        carbs: 0
-      },
-      editable: false
-    }
+  state = { 
+    mealName: '',
+    shownIngredients: [],
+    savedIngredients: [],
+    mealMacros: {
+      protein: 0,
+      fat: 0,
+      carbs: 0
+    },
+    editable: false
+  }
 
-  
   componentDidMount(){ 
     this.renderDOM() 
   }
@@ -360,26 +359,51 @@ class MealEditor extends React.Component {
 
     if(exists){
       // var batch = db.batch
-
+      let newDoc = {};
       weeks.get()  
       .then((week) => {
         week.forEach(doc => {
           let calendarWeek = doc.data().calendarWeek
-          console.log(Array.isArray(calendarWeek), calendarWeek)
-          calendarWeek.forEach(day => {
-            // console.log(day)
-            for (let meal in day){
-                // console.log(typeof meal)
-              // console.log(Object.values(meal));
-              // console.log(meal.mealName);
-              if(typeof meal !== "string"){
-                meal.forEach(data => {
-                  console.log(data.mealName)
-                })
-              }
-            }
-          })
+          console.log(Array.isArray(doc.data()), doc.data())
+          // adding uneffected props to newDoc
+          newDoc.dateRangeCal = doc.data().dateRangeCal;
+          newDoc.weekDateDB = doc.data().weekDateDB;
+
+          if(calendarWeek){
+            let newWeek = []
+            calendarWeek.forEach(day => {
+              // looks at each day of the week
+              // console.log(day)
+              let newDay = {};
+              for (let meal in day){
+                // looks at meals of each day
+                // console.log(`${meal}-->`, day[meal])
+                if(day[meal].mealName === this.state.mealName){
+                  // if the meal is the target meal then
+                  newDay[meal] = {
+                    mealName: this.props.mealName,
+                    savedIngredients: state.savedIngredients,
+                    mealMacros: state.mealMacros,
+                  }
+
+                } else {                  
+                  newDay[meal] = day[meal];
+                }  
+              }    
+              newWeek.push(newDay);
+            })
+            newDoc.calendarWeek = newWeek;
+          }
+
         })
+
+        console.log(newDoc);
+        // let refDoc = weeks.doc(doc).
+        // batch.update(day[meal], {
+        //   mealName: this.props.mealName,
+        //   savedIngredients: state.savedIngredients,
+        //   mealMacros: state.mealMacros,
+        // })
       })
 
       // batch.set(newMeal, {
@@ -387,6 +411,7 @@ class MealEditor extends React.Component {
       //   savedIngredients: state.savedIngredients,
       //   mealMacros: state.mealMacros,
       // })
+
       // batch.delete(targetMeal)
 
       // batch.commit()
