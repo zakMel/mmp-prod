@@ -12,11 +12,9 @@
 .weekContainer {
     display: flex;
     flex-direction: column;
-    justify-content: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 10px;
     width: 100vw;
-    /* min-height: 6vh; */
     height: 420px;
     overflow: auto;
 }
@@ -45,8 +43,9 @@
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(191 191 191), white, rgb(191 191 191));
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
+    padding: 5.5px
 } 
 
 .dateRanger {
@@ -59,14 +58,28 @@
     /* color: white; */
 }
 
-.calendarButton {
+.calendarSaveButton {
     margin-top: 8px;
     width: 200px;
     height: 35px;
     border: 1.5px solid black;
     border-radius: 5px;
-    background-color: #6b8e23;
+    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
     text-align: center;
-    color: snow;
+    color: black;
     padding: 3px;
+}
+
+.calendarPrintButton {
+    display: block; 
+    margin-top: 8px;
+    margin: auto;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
+    text-align: center;
+    color: black;
+    padding: 3px;
+    width: 200px;
+    height: 35px;
 }

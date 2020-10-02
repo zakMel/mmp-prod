@@ -10,25 +10,24 @@ import ContentEditable from 'react-contenteditable'
 import Ingredient from './Ingredient'
 import "../../App.css";
 import "../../style/savedMeals.css";
+const db = firestore;
 
 class MealEditor extends React.Component {
     
-    state = { 
-      mealName: '',
-      shownIngredients: [],
-      savedIngredients: [],
-      mealMacros: {
-        protein: 0,
-        fat: 0,
-        carbs: 0
-      },
-      editable: false
-    }
+  state = { 
+    mealName: '',
+    shownIngredients: [],
+    savedIngredients: [],
+    mealMacros: {
+      protein: 0,
+      fat: 0,
+      carbs: 0
+    },
+    editable: false
+  }
 
-  
   componentDidMount(){ 
-    this.renderDOM()
-    
+    this.renderDOM() 
   }
   
   renderDOM = () => {
@@ -313,24 +312,110 @@ class MealEditor extends React.Component {
   }
   
   sendToDatabase = () => {
-    const db = firestore;
-    let meals = db.collection("meals");
-    let document = meals.doc(`${this.props.mealName}`);
-    let oldName = meals.doc(`${this.state.mealName}`)
-    let state = this.state;
-    let user = firebase.auth().currentUser.uid;
+    let user = firebase.auth().currentUser;
+    const userFile = db.collection("users").doc(`${user.uid}`);
+    let meals = userFile.collection("meals");
+    let prevDoc = meals.doc(`${this.state.mealName}`);
 
-    if(this.props.mealName !== state.mealName){
-      dbServices.delete(oldName)
+    prevDoc.get()
+    .then(this.checkMealExistance)
+    .then(this.handleBatching)
+    .catch(function(error) {
+      console.log("Error getting document:", error);
+    });
+
+  }
+
+  checkMealExistance = (doc) => {
+      if(!doc.exists){
+        let user = firebase.auth().currentUser;
+        const userFile = db.collection("users").doc(`${user.uid}`);
+        let meals = userFile.collection("meals");
+        let document = meals.doc(`${this.props.mealName}`);
+        let state = this.state;
+
+        dbServices.set(document, {
+            mealName: this.props.mealName,
+            savedIngredients: state.savedIngredients,
+            mealMacros: state.mealMacros,
+          })
+        
+      } else {
+        return true;
+      } 
+  }
+
+  handleBatching = (exists) => {
+    let user = firebase.auth().currentUser;
+    const userFile = db.collection("users").doc(`${user.uid}`);
+    let meals = userFile.collection("meals");
+    let weeks = userFile.collection("weeks");
+    let newMeal = meals.doc(`${this.props.mealName}`);
+    let targetMeal = meals.doc(`${this.state.mealName}`);
+    let state = this.state;
+
+    if(exists){
+      var batch = db.batch
+      let newDoc = {};
+      let edited = false;
+      weeks.get()  
+      .then((week) => {
+        week.forEach(doc => {
+          let calendarWeek = doc.data().calendarWeek
+          console.log(edited, doc.data())
+          // adding uneffected props to newDoc
+          newDoc.dateRangeCal = doc.data().dateRangeCal;
+          newDoc.weekDateDB = doc.data().weekDateDB;
+
+          if(calendarWeek){
+            let newWeek = []
+            calendarWeek.forEach(day => {
+              // looks at each day of the week
+              let newDay = {};
+              for (let meal in day){
+                // looks at meals of each day
+                if(day[meal].mealName === this.state.mealName){
+                  // if the meal is the target meal then
+                  edited = true;
+                  newDay[meal] = {
+                    mealName: this.props.mealName,
+                    savedIngredients: state.savedIngredients,
+                    mealMacros: state.mealMacros,
+                  }
+
+                } else {                  
+                  newDay[meal] = day[meal];
+                }  
+              }    
+              newWeek.push(newDay);
+            })
+            newDoc.calendarWeek = newWeek;
+          }
+          console.log(edited, newDoc);
+          
+          if(edited){
+            let refDoc = weeks.doc(newDoc.weekDateDB);
+            batch.update(refDoc, newDoc)
+
+          }
+        })
+
+      })
+
+      batch.set(newMeal, {
+        mealName: this.props.mealName,
+        savedIngredients: state.savedIngredients,
+        mealMacros: state.mealMacros,
+      })
+
+      batch.delete(targetMeal)
+
+      batch.commit()
     }
 
-    dbServices.set(document, {
-      mealName: this.props.mealName,
-      userId: user,
-      savedIngredients: state.savedIngredients,
-      mealMacros: state.mealMacros,
-    })
   }
+  
+
 
   loadFunc = () =>{
     //todo add code for db purposes
