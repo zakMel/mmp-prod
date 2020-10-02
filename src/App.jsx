@@ -115,8 +115,8 @@ class App extends React.Component {
     const users = db.collection("users");
     let userFile = users.doc(`${user.uid}`);
 
-    let meals = userFile.collection("weeks");
-    let document = meals.doc(`${this.state.weekDateDB}`);
+    let weeks = userFile.collection("weeks");
+    let document = weeks.doc(`${this.state.weekDateDB}`);
     let state = this.state;
 
     dbServices.set(document, {
@@ -414,6 +414,7 @@ class App extends React.Component {
               mealName={this.state.mealName}
               handleEditablility={this.handleEditablility}
               passedEditability={this.state.editable}
+              weekDateDB={this.state.weekDateDB}
             />
           )}
         />

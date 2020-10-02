@@ -102,7 +102,7 @@ class MealEditor extends React.Component {
 
   enterIngreInput = (e, macros) => {
     let grams = e.target.value;
-    console.log(this.state.mealMacros)
+    
     if(grams === "") {
 
       this.setState((state) => {
@@ -345,7 +345,7 @@ class MealEditor extends React.Component {
       } 
   }
 
-  handleBatching = (exists) => {
+  handleBatching = async exists => {
     let user = firebase.auth().currentUser;
     const userFile = db.collection("users").doc(`${user.uid}`);
     let meals = userFile.collection("meals");
@@ -355,17 +355,17 @@ class MealEditor extends React.Component {
     let state = this.state;
 
     if(exists){
-      var batch = db.batch
+      var batch = db.batch()
       let newDoc = {};
       let edited = false;
-      weeks.get()  
+      await weeks.get()  
       .then((week) => {
         week.forEach(doc => {
           let calendarWeek = doc.data().calendarWeek
-          console.log(edited, doc.data())
           // adding uneffected props to newDoc
           newDoc.dateRangeCal = doc.data().dateRangeCal;
           newDoc.weekDateDB = doc.data().weekDateDB;
+          console.log(doc.data().weekDateDB);
 
           if(calendarWeek){
             let newWeek = []
@@ -377,21 +377,23 @@ class MealEditor extends React.Component {
                 if(day[meal].mealName === this.state.mealName){
                   // if the meal is the target meal then
                   edited = true;
-                  newDay[meal] = {
+                  newDay[meal] = { //! here is the last error
                     mealName: this.props.mealName,
-                    savedIngredients: state.savedIngredients,
+                    savedIngredients: this.props.list,
                     mealMacros: state.mealMacros,
                   }
+                   
 
                 } else {                  
                   newDay[meal] = day[meal];
                 }  
-              }    
+              }
               newWeek.push(newDay);
+
             })
             newDoc.calendarWeek = newWeek;
           }
-          console.log(edited, newDoc);
+          console.log(edited, newDoc, typeof newDoc.weekDateDB.slice(2, newDoc.weekDateDB.length -2));
           
           if(edited){
             let refDoc = weeks.doc(newDoc.weekDateDB);
@@ -404,7 +406,7 @@ class MealEditor extends React.Component {
 
       batch.set(newMeal, {
         mealName: this.props.mealName,
-        savedIngredients: state.savedIngredients,
+        savedIngredients: this.props.list,
         mealMacros: state.mealMacros,
       })
 
