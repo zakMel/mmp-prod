@@ -315,10 +315,7 @@ class MealEditor extends React.Component {
     let user = firebase.auth().currentUser;
     const userFile = db.collection("users").doc(`${user.uid}`);
     let meals = userFile.collection("meals");
-    let weeks = userFile.collection("weeks");
-    let document = meals.doc(`${this.props.mealName}`);
     let prevDoc = meals.doc(`${this.state.mealName}`);
-    let state = this.state;
 
     prevDoc.get()
     .then(this.checkMealExistance)
@@ -337,11 +334,11 @@ class MealEditor extends React.Component {
         let document = meals.doc(`${this.props.mealName}`);
         let state = this.state;
 
-        // dbServices.set(document, {
-          //   mealName: this.props.mealName,
-          //   savedIngredients: state.savedIngredients,
-          //   mealMacros: state.mealMacros,
-          // })
+        dbServices.set(document, {
+            mealName: this.props.mealName,
+            savedIngredients: state.savedIngredients,
+            mealMacros: state.mealMacros,
+          })
         
       } else {
         return true;
@@ -358,13 +355,14 @@ class MealEditor extends React.Component {
     let state = this.state;
 
     if(exists){
-      // var batch = db.batch
+      var batch = db.batch
       let newDoc = {};
+      let edited = false;
       weeks.get()  
       .then((week) => {
         week.forEach(doc => {
           let calendarWeek = doc.data().calendarWeek
-          console.log(Array.isArray(doc.data()), doc.data())
+          console.log(edited, doc.data())
           // adding uneffected props to newDoc
           newDoc.dateRangeCal = doc.data().dateRangeCal;
           newDoc.weekDateDB = doc.data().weekDateDB;
@@ -373,13 +371,12 @@ class MealEditor extends React.Component {
             let newWeek = []
             calendarWeek.forEach(day => {
               // looks at each day of the week
-              // console.log(day)
               let newDay = {};
               for (let meal in day){
                 // looks at meals of each day
-                // console.log(`${meal}-->`, day[meal])
                 if(day[meal].mealName === this.state.mealName){
                   // if the meal is the target meal then
+                  edited = true;
                   newDay[meal] = {
                     mealName: this.props.mealName,
                     savedIngredients: state.savedIngredients,
@@ -394,33 +391,28 @@ class MealEditor extends React.Component {
             })
             newDoc.calendarWeek = newWeek;
           }
+          console.log(edited, newDoc);
+          
+          if(edited){
+            let refDoc = weeks.doc(newDoc.weekDateDB);
+            batch.update(refDoc, newDoc)
 
+          }
         })
 
-        console.log(newDoc);
-        // let refDoc = weeks.doc(doc).
-        // batch.update(day[meal], {
-        //   mealName: this.props.mealName,
-        //   savedIngredients: state.savedIngredients,
-        //   mealMacros: state.mealMacros,
-        // })
       })
 
-      // batch.set(newMeal, {
-      //   mealName: this.props.mealName,
-      //   savedIngredients: state.savedIngredients,
-      //   mealMacros: state.mealMacros,
-      // })
+      batch.set(newMeal, {
+        mealName: this.props.mealName,
+        savedIngredients: state.savedIngredients,
+        mealMacros: state.mealMacros,
+      })
 
-      // batch.delete(targetMeal)
+      batch.delete(targetMeal)
 
-      // batch.commit()
+      batch.commit()
     }
 
-    // if(this.props.mealName !== state.mealName){
-    //   dbServices.delete(prevDoc)
-    // }
-  //}
   }
   
 
