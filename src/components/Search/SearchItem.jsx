@@ -11,7 +11,12 @@ export default function SearchItem (props) {
             pathname: props.lastURL === "/mealEditor"? "/mealEditor" : "/mealGenerator",
             passedProps: props.passedProps
         }}
-        onClick={() => { props.addIngredient(props.ingredient) }}
+        onClick={() => { 
+            props.addIngredient(props.ingredient) 
+            if ( props.handleSearching ) {
+               props.handleSearching()
+            }}
+        }
         >
             <p className="ingredientText">
                 { props.description.length > 140 ?

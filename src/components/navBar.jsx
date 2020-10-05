@@ -11,8 +11,12 @@ export default function UserBar (props) {
         <Navbar expanded={navState} expand="true" bg="dark" variant="dark" className="navBar" >
             <Navbar.Brand href="/">Macro Meal Planning</Navbar.Brand>
             <Navbar.Toggle 
-            onClick={() => setExpand(!navState)}
-            aria-controls="responsive-navbar-nav" />
+            onClick={() => {
+                setExpand(!navState);
+                // props.handleSearching()
+            }}
+            aria-controls="responsive-navbar-nav" 
+            />
             <Navbar.Collapse id="responsive-navbar-nav" >
                 <Nav className="mr-auto" >
                     <NavLink 

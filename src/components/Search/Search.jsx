@@ -98,6 +98,7 @@ class Search extends React.Component {
                 addIngredient={this.props.addIngredient}
                 lastURL={this.props.history.location.lastURL}
                 passedProps={this.props.history.location.passedProps}
+                handleSearching={this.props.handleSearching}
             />
         );
 
