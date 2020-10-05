@@ -6,7 +6,6 @@ import PieChart from '../PieChart';
 class MG_Body extends React.Component {
 
     componentDidMount () {
-        console.log('body mount');
         this.props.renderDOM()
     }
 

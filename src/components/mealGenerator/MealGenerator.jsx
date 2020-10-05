@@ -30,7 +30,6 @@ class MealGenerator extends React.Component {
 
     (async function mounting (component) {
 
-      console.log('mounting')
       await component.props.clearIngredients();
       await component.checkUserFile();
       component.renderDOM();
