@@ -2,10 +2,12 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import {firestore} from './configFirebase';
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
-import Search from './components/Search/Search';
+import Search from './components/Search/Search'
 import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
 import Calendar from './components/Calendar/Calendar';
@@ -29,6 +31,9 @@ class App extends React.Component {
       meal: "",
     },
     calendarDate: "date placeholder",
+    dateRangeCal: [ new Date(), new Date () ],
+    weekDateDB: "",
+    searching: false,
     calendarWeek:[
         {
           day: "Monday",
@@ -74,9 +79,24 @@ class App extends React.Component {
         },
 
       ],
-    dateRangeCal: [ new Date(), new Date () ],
-    weekDateDB: ""
   };
+
+  handleSearching = () => {
+    this.setState(() => {
+      return {
+        searching: !this.state.searching
+      }
+    }, this.renderDOM)
+  }
+
+  clearIngredients = () => {
+    this.setState( () => {
+      return {
+        ingredients: [],
+      }
+    })
+
+  }
 
   existingWeekCheck = () => {
     let user = firebase.auth().currentUser;
@@ -304,6 +324,7 @@ class App extends React.Component {
     if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
       console.log(this.state.selectedCalendarElement)
     }
+
   }
   
   componentWillUnmount() {
@@ -332,6 +353,9 @@ class App extends React.Component {
     
     return (
     <React.Fragment>
+      <NavBar
+      handleSearching={this.handleSearching}
+      />
 
         <Route
           path="/"
@@ -365,7 +389,7 @@ class App extends React.Component {
         />
         <Route
           path="/mealGenerator"
-          exact={true}
+          // exact={true}
           render={(props) => (
             <MealGenerator 
               list={this.state.ingredients}
@@ -373,6 +397,12 @@ class App extends React.Component {
               history={this.props.history}
               handleNameInput_MG={this.handleNameInput_MG}
               mealName={this.state.mealName}
+              addIngredient={this.addIngredient}
+              handleUpdatePage={this.handleUpdatePage}
+              currentTabs={this.state.currentTabs}
+              clearIngredients={this.clearIngredients}
+              handleSearching={this.handleSearching}
+              searching={this.state.searching}
             />
           )}
         />
@@ -418,6 +448,8 @@ class App extends React.Component {
             />
           )}
         />
+
+      <Footer />
     </React.Fragment>
     );
 
