@@ -81,12 +81,21 @@ class App extends React.Component {
       ],
   };
 
-  handleSearching = () => {
-    this.setState(() => {
-      return {
-        searching: !this.state.searching
-      }
-    }, this.renderDOM)
+  handleSearching = (makeFalse) => {
+    if(makeFalse === false){
+      
+      this.setState(() => {
+        return {
+          searching: false
+        }
+      })
+    } else {
+      this.setState(() => {
+        return {
+          searching: !this.state.searching
+        }
+      })
+    }
   }
 
   clearIngredients = () => {
