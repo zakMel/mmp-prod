@@ -20,29 +20,40 @@
     background-color: lavender;
 }
 
+.viewListItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 370px;
+    height: 42px;
+    text-align: center;
+}
+
 .editableName {
     margin-top: 10px;
 }
 
-.pieChart_UM {
-    margin-top: 3vh;
-    width: 10vw;
-}
-
 .savedMeal {
     display: block;
-    width: 365px;
+    width: 260px;
     height: 40px;
-    margin-bottom: 2.5px;
-    font-size: 15
-    px;
+    padding:3px;
+    font-size: 15px;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
 
 } 
+
+.viewerDeleteButton {
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+}
 
 .saveEditButton {
     position: fixed;

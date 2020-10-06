@@ -3,6 +3,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 5;
   /* height: 8.45vh; */
   /* height: 56px; */
 }
@@ -16,24 +17,5 @@
   color: white;
   height: 50px;
   padding-top: 8px;
-}
-
-.navBar {
   z-index: 5;
 }
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* * {
-  margin: 0;
-  padding: 0;
-} */

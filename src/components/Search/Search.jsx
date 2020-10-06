@@ -7,20 +7,14 @@ import "../../style/search.css";
 import "../../style/pagination.css";
 
 class Search extends React.Component {
-    constructor (props) {
-        super(props);
 
-        this.state={
-            input:"",
-            totalPages: 0,
-            mappedIngredients: []
+    state = {
+        input:"",
+        totalPages: 0,
+        mappedIngredients: []
 
-        }
     }
-
-    componentDidMount() {
-        // console.log(this.props.history.location.lastURL)
-    }
+    
 
     handleInput = (e) => {
         const target = e.target;
@@ -39,7 +33,7 @@ class Search extends React.Component {
     }
 
     handleListSuccess = (response) => {
-        console.log(response);
+        // console.log(response);
 
         let tabs = []
         for (let i = 1; i < response.data.totalPages; i++) {
@@ -65,7 +59,7 @@ class Search extends React.Component {
         let index = $(target).html()
         let ingredient = this.state.input
 
-        console.log(target, index, ingredient)
+        // console.log(target, index, ingredient)
 
         services
         .getFoodInfo(ingredient, 11, index)
@@ -75,7 +69,7 @@ class Search extends React.Component {
     }
 
     handlePageSuccess = (response) => {
-        console.log(response);
+        // console.log(response);
         
         this.setState(()=>{
 

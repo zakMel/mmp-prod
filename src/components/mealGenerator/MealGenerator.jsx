@@ -1,9 +1,9 @@
 import React from "react";
 import firebase from 'firebase';
 import {firestore} from '../../configFirebase';
-import { NavLink, Route, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import $ from "jquery"
-import MG_Body from "./MG_Body"
+import MgBody from "./MG_Body"
 import Search from '../Search/Search'
 import dbServices from '../../services/dbServices';
 import Ingredient from './Ingredient';
@@ -318,22 +318,23 @@ class MealGenerator extends React.Component {
       
       <React.Fragment>
 
-        <div className="mealGeneratorContainer">
+        {/* <div className="mealGeneratorContainer"> */}
 
           { this.props.searching === false 
           ?
-          <div className="switchContainer">
-            <MG_Body 
+          <div className="mealGeneratorContainer">
+            <MgBody 
               shownIngredients={this.state.shownIngredients}
               handleSearching={this.props.handleSearching}
               renderDOM={this.renderDOM}
               mealMacros={this.state.mealMacros}
               mealName={this.props.mealName}
               handleNameInput_MG={this.props.handleNameInput_MG}
+              sendToDatabase={this.sendToDatabase}
             />
           </div>
           :
-          <div className="switchContainer">
+          <div className="mealGeneratorContainer">
             <Route
               path="/mealGenerator/search"
               exact={true}
@@ -352,7 +353,7 @@ class MealGenerator extends React.Component {
           }
           
 
-        </div>                     
+        {/* </div>                      */}
 
       </React.Fragment>
 

@@ -362,103 +362,112 @@ class App extends React.Component {
     
     return (
     <React.Fragment>
+
       <NavBar
-      handleSearching={this.handleSearching}
+        handleSearching={this.handleSearching}
       />
 
-        <Route
-          path="/"
-          exact={true}
-          render={(props) => (
-            <Landing />
-          )}
-        />
-        <Route
-          path="/calendar"
-          exact={true}
-          render={(props) => (
-            <Calendar 
-              history={this.props.history}
-              weekDateRange={this.state.dateRangeCal}
-              setWeekDateRange={this.setWeekDateRange}
-              updateDayMeal={this.updateDayMeal}
-              week={this.state.calendarWeek}
-              date={this.state.calendarDate}
-              update={this.state.calendarUpdate}
-              saveWeekToDB={this.saveWeekToDB}
-            />
-          )}
-        />
-        <Route
-          path="/shoppingList"
-          exact={true}
-          render={(props) => (
-            <ShoppingList />
-          )}
-        />
-        <Route
-          path="/mealGenerator"
-          // exact={true}
-          render={(props) => (
-            <MealGenerator 
-              list={this.state.ingredients}
-              updateList={this.updateList}
-              history={this.props.history}
-              handleNameInput_MG={this.handleNameInput_MG}
-              mealName={this.state.mealName}
-              addIngredient={this.addIngredient}
-              handleUpdatePage={this.handleUpdatePage}
-              currentTabs={this.state.currentTabs}
-              clearIngredients={this.clearIngredients}
-              handleSearching={this.handleSearching}
-              searching={this.state.searching}
-            />
-          )}
-        />
-        <Route
-          path="/search"
-          exact={true}
-          render={(props) => (
-            <Search 
-              addIngredient={this.addIngredient}
-              handleUpdatePage={this.handleUpdatePage}
-              currentTabs={this.state.currentTabs}
-              history={this.props.history}
-            />
-          )}
-        />
-        <Route
-          path="/mealViewer"
-          exact={true}
-          render={(props) => (
-            <MealViewer
-              updateList={this.updateList} 
-              history={this.props.history}
-              handleSetName_ME={this.handleSetName_ME}
-              calendarUpdate={this.state.calendarUpdate}
-              updateWeekItem={this.updateWeekItem}
-            />
-          )}
-        />
-        <Route
-          path="/mealEditor"
-          exact={true}
-          render={(props) => (
-            <MealEditor 
-              list={this.state.ingredients}
-              passedProps={this.props.location.passedProps}
-              updateList={this.updateList}
-              history={this.props.history}
-              handleUpdateName_ME={this.handleUpdateName_ME}
-              mealName={this.state.mealName}
-              handleEditablility={this.handleEditablility}
-              passedEditability={this.state.editable}
-              weekDateDB={this.state.weekDateDB}
-            />
-          )}
-        />
+      <Route
+        path="/"
+        exact={true}
+        render={(props) => (
+          <Landing />
+        )}
+      />
 
-      <Footer />
+      <Route
+        path="/calendar"
+        exact={true}
+        render={(props) => (
+          <Calendar 
+            history={this.props.history}
+            weekDateRange={this.state.dateRangeCal}
+            setWeekDateRange={this.setWeekDateRange}
+            updateDayMeal={this.updateDayMeal}
+            week={this.state.calendarWeek}
+            date={this.state.calendarDate}
+            update={this.state.calendarUpdate}
+            saveWeekToDB={this.saveWeekToDB}
+          />
+        )}
+      />
+
+      <Route
+        path="/shoppingList"
+        exact={true}
+        render={(props) => (
+          <ShoppingList />
+        )}
+      />
+
+      <Route
+        path="/mealGenerator"
+        // exact={true}
+        render={(props) => (
+          <MealGenerator 
+            list={this.state.ingredients}
+            updateList={this.updateList}
+            history={this.props.history}
+            handleNameInput_MG={this.handleNameInput_MG}
+            mealName={this.state.mealName}
+            addIngredient={this.addIngredient}
+            handleUpdatePage={this.handleUpdatePage}
+            currentTabs={this.state.currentTabs}
+            clearIngredients={this.clearIngredients}
+            handleSearching={this.handleSearching}
+            searching={this.state.searching}
+          />
+        )}
+      />
+
+      <Route
+        path="/search"
+        exact={true}
+        render={(props) => (
+          <Search 
+            addIngredient={this.addIngredient}
+            handleUpdatePage={this.handleUpdatePage}
+            currentTabs={this.state.currentTabs}
+            history={this.props.history}
+            handleSearching={this.handleSearching}
+          />
+        )}
+      />
+
+      <Route
+        path="/mealViewer"
+        exact={true}
+        render={(props) => (
+          <MealViewer
+            updateList={this.updateList} 
+            history={this.props.history}
+            handleSetName_ME={this.handleSetName_ME}
+            calendarUpdate={this.state.calendarUpdate}
+            updateWeekItem={this.updateWeekItem}
+          />
+        )}
+      />
+      
+      <Route
+        path="/mealEditor"
+        exact={true}
+        render={(props) => (
+          <MealEditor 
+            list={this.state.ingredients}
+            passedProps={this.props.location.passedProps}
+            updateList={this.updateList}
+            history={this.props.history}
+            handleUpdateName_ME={this.handleUpdateName_ME}
+            mealName={this.state.mealName}
+            handleEditablility={this.handleEditablility}
+            passedEditability={this.state.editable}
+            weekDateDB={this.state.weekDateDB}
+          />
+        )}
+      />
+
+    <Footer />
+
     </React.Fragment>
     );
 

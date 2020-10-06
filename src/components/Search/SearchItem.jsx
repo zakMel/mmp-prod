@@ -14,7 +14,7 @@ export default function SearchItem (props) {
         onClick={() => { 
             props.addIngredient(props.ingredient) 
             if ( props.handleSearching ) {
-               props.handleSearching()
+               props.handleSearching(false)
             }}
         }
         >
