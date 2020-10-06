@@ -53,6 +53,8 @@ class MealViewer extends React.Component {
             list.push(doc.data());
         })
 
+        console.log(list);
+
         this.setState(() => {
             return {
                 importedMeals: list
@@ -72,6 +74,7 @@ class MealViewer extends React.Component {
             prevPath={this.props.history.location.prevPath === "/calendar"? this.props.history.location.prevPath : this.props.history.location.pathname}
             calendarUpdate={this.props.calendarUpdate}
             updateWeekItem={this.props.updateWeekItem}
+            mealMacros={meal.mealMacros}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />

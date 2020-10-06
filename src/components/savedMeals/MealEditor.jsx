@@ -403,22 +403,35 @@ class MealEditor extends React.Component {
         })
 
       })
+      // let newMeal = meals.doc(`${this.props.mealName}`);
+      // let targetMeal = meals.doc(`${this.state.mealName}`);
+      //if there is a name change
+      if(exists && this.props.mealName !== this.state.mealName){
+        batch.delete(targetMeal)
+        
+        batch.set(newMeal, {
+          mealName: this.props.mealName,
+          savedIngredients: this.props.list,
+          mealMacros: state.mealMacros,
+        })
+  
 
-      batch.set(newMeal, {
-        mealName: this.props.mealName,
-        savedIngredients: this.props.list,
-        mealMacros: state.mealMacros,
-      })
+      }
+      //if there is no name change
+      if(exists && this.props.mealName === this.state.mealName){
+        batch.update(targetMeal, {
+          mealName: this.props.mealName,
+          savedIngredients: this.props.list,
+          mealMacros: state.mealMacros,
+        })
 
-      batch.delete(targetMeal)
+      }
 
       batch.commit()
     }
 
   }
   
-
-
   loadFunc = () =>{
     //todo add code for db purposes
     
@@ -445,6 +458,9 @@ class MealEditor extends React.Component {
             <PieChart 
             className="pieChart_UM"
             macros={this.state.mealMacros}
+            height={120}
+            labels={['protein', 'fat', 'carbs']}
+            width={350}
             /> 
             : ""
           }        

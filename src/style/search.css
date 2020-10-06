@@ -2,16 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-top: 8.3vh; */
-    /* height: 567px; */
-    height: 100vh;
+    height: 566px;
+    margin-top: 53px;
     background-color: lavender;
 
 
 }
 
 .ingredientList {
-    margin-top: 75px;
+    margin-top: 10px;
     width: 365px;
 }
 

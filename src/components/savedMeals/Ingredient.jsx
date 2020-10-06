@@ -31,17 +31,18 @@ export default function Ingredient (props) {
                             >Delete
                         </button>
                  </div>
-                  : <div className="fixedItemContainer">
-                    
-                        <div 
-                        className="fixedItemDescription"
-                        >
-                            { props.description.length > 60 && window.screen.width < 668?
-                                `${props.description.slice(0, 60)}...` : props.description
-                            } 
-                        </div>  
-            
-                    </div>
+                 
+                : <div className="fixedItemContainer">
+                
+                    <div 
+                    className="fixedItemDescription"
+                    >
+                        { props.description.length > 60 && window.screen.width < 668?
+                            `${props.description.slice(0, 60)}...` : props.description
+                        } 
+                    </div>  
+        
+                </div>
             }
         </div>
     )

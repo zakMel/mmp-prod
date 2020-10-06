@@ -4,37 +4,20 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    /* height: 567px; */
-    height: 100vh;
-    background-color: lavender;
-    /* margin-top: 8.3vh; */
-}
-
-.switchContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: 53px;
+    height: 568px;
+    background-color: lavender; 
 }
 
 .instructions {
-    margin-top: 57px;
+    margin-top: 5px;
 
-}
-
-.holdingTitleSpot {
-    margin-top: 65px;
-}
-
-.pieChart_MG {
-    margin-top: 3vh;
-    width: 10vw;
 }
 
 .listContainer {
     margin-top: 8px;
     width: 100vw;
-    /* min-height: 6vh; */
-    height: 295px;
+    height: 293px;
     overflow: auto;
 }
 
@@ -47,20 +30,21 @@
 }
 
 .itemDescription {
-    width: 70vw;
-    /* height: 5vh; */
+    width: 262px;
     background-color: white;
     border: 1px solid black;
     border-radius: .5em;
-    padding-left: 1vw;
-    padding-top: .5vh;
+    padding: 4px;
     font-size: 12px;
     
 }
 
+.mealName {
+    margin-top: 10px;
+}
+
 .itemGrams {
-    width: 12vw;
-    /* height: 5vh; */
+    width: 46px;
     border: 1px solid black;
     border-radius: .5em;
     padding: 1%;
@@ -70,8 +54,7 @@
 }
 
 .itemDeleteButton {
-    width: 13vw;
-    /* height: 5vh; */
+    width: 49px;
     border: 2px solid black;
     border-radius: .5em;
     margin-right: 1.5vw;
@@ -81,7 +64,7 @@
 }
 
 .saveButton {
-    position: fixed;
+    position: fixed; 
     bottom: 60px;
     
 }
@@ -89,9 +72,8 @@
 .magnifyingGlass {
     position: fixed;
     bottom: 105px;
-    height: 5vh;
+    height: 32px;
     width: 18vw;
-    margin-top: 2vh;
     border: 2px solid black;
     border-radius: .5em;
     background-color: lightblue;

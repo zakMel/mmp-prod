@@ -9,21 +9,26 @@ export default function PieChart (props) {
 
             <Pie
                 data={{
-                    labels: ['protein', 'fat', 'carbs'],
+                    labels: props.labels,
                     datasets: [{
                         data: [props.macros.protein, props.macros.fat, props.macros.carbs],
                         backgroundColor: ['brown', 'red', 'tan'],
-                    }]
+                    }],
                 }}
                 options={{
                     legend: {
+                        // position: "bottom",
                         display: true,
                         labels: {
                             fontSize: 10
                         }
-                    }
+                    },
+                    layout: props.layout
                 }}
-                height={110}
+                height={props.height}
+                width={props.width}
+                // style={props.style}
+
             />
 
         </div>

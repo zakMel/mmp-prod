@@ -10,7 +10,9 @@ ReactDOM.render(
   <React.Fragment>
 
     <BrowserRouter> 
+
       <App />
+      
     </BrowserRouter>
 
   </React.Fragment>,
