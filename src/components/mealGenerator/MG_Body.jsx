@@ -9,20 +9,21 @@ class MG_Body extends React.Component {
         this.props.renderDOM()
     }
 
+    loadFunc = () => {
+    }
+
     render() {
 
         return (
             <React.Fragment>
-
+  
               { this.props.shownIngredients.length > 0 
-              ? ""
-              //<div className="holdingTitleSpot"></div>
+              ? 
+              <div className="mealName">
+               <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
+              </div>
               : <h5 className="instructions">To start search an ingredient!</h5>
               }
-  
-              <div className="mealName">
-                <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="text-center form-control searchInput border-primary"></input>
-              </div>
               
               {this.props.shownIngredients.length > 0 ? 
                 <PieChart 

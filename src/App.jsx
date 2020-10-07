@@ -5,7 +5,7 @@ import {firestore} from './configFirebase';
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Landing from './components/Landing';
-import ShoppingList from './components/ShoppingList';
+import ShoppingList from './components/ShoppingList/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
 import Search from './components/Search/Search'
 import MealViewer from './components/savedMeals/MealViewer';
@@ -34,6 +34,7 @@ class App extends React.Component {
     dateRangeCal: [ new Date(), new Date () ],
     weekDateDB: "",
     searching: false,
+    checkedSl: [],
     calendarWeek:[
         {
           day: "Monday",
@@ -81,6 +82,18 @@ class App extends React.Component {
       ],
   };
 
+  handlingChecked = (e) => {
+    let container = e.target.parentElement;
+    let description = container.childNodes[1].innerHTML;
+    this.setState( (state) => {
+      let newState = state.checkedSl;
+      newState.push(description)
+      return {
+        checkedSl: newState
+      }
+    })
+  }
+
   handleSearching = (makeFalse) => {
     if(makeFalse === false){
       
@@ -102,6 +115,7 @@ class App extends React.Component {
     this.setState( () => {
       return {
         ingredients: [],
+        mealName: "",
       }
     })
 
@@ -396,7 +410,10 @@ class App extends React.Component {
         path="/shoppingList"
         exact={true}
         render={(props) => (
-          <ShoppingList />
+          <ShoppingList 
+            checkedSl={this.state.checkedSl}
+            handlingChecked={this.handlingChecked}
+          />
         )}
       />
 

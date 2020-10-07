@@ -1,8 +1,10 @@
 import React from "react";
 import firebase from "firebase";
 import {firestore} from '../../configFirebase';
+import $ from 'jquery'
 import InfiniteScroll from 'react-infinite-scroller';
 import SavedMeal from "./SavedMeal";
+import dbServices from '../../services/dbServices';
 import "../../style/savedMeals.css";
 const db = firestore;
 
@@ -75,13 +77,48 @@ class MealViewer extends React.Component {
             calendarUpdate={this.props.calendarUpdate}
             updateWeekItem={this.props.updateWeekItem}
             mealMacros={meal.mealMacros}
+            handleDeleteFromDOM={this.handleDeleteFromDOM}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />
           
         );
           
-      };
+    };
+    
+    handleDeleteFromDOM = (e) => {
+        let user = firebase.auth().currentUser;
+        const users = db.collection("users");
+        let userFile = users.doc(`${user.uid}`);
+        let meals = userFile.collection("meals");
+        let container = e.target.parentElement;
+        let description = $(container).children().filter(".savedMeal").text();
+        let document = meals.doc(`${description}`);
+    
+        //removes from the dom
+        this.setState( (state) => {
+          let newRender = [];
+    
+          for ( let u = 0; u < state.renderedMeals.length;  u++) {
+            let arr = state.renderedMeals;
+            let current = arr[u];
+            let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
+          
+            if(!includes){
+              newRender.push(current)
+            }  
+    
+          }
+    
+          return {
+            renderedMeals: newRender
+          }
+    
+        })
+
+        dbServices.delete(document);
+
+    }
 
     loadFunc = () => {
 
@@ -91,6 +128,11 @@ class MealViewer extends React.Component {
 
         return (
             <div className="savedContainer">
+
+                {this.state.importedMeals.length === 0 
+                ? <div className="instructions">You must make a meal first!</div>
+                : ""
+                }
 
                 <div className="mealListContainer">
                 <InfiniteScroll
