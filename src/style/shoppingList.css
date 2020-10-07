@@ -8,3 +8,24 @@
     margin-top: 55px;
     background-color: lavender;
 }
+
+.itemContainer_SL {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:flex-start;
+    width: 100vw;
+}
+
+.title_SL {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.itemCheck_SL {
+    margin-left: 10px;
+}
+
+.itemDescr_SL {
+    margin-left: 10px;
+}
