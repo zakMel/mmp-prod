@@ -203,7 +203,8 @@ class MealEditor extends React.Component {
     
     let container = e.target.parentElement;
     let grams = $(container).children().filter(".itemGrams")[0].value;
-    let description = $(container).children().filter("div.editItemDescription")[0].innerText;
+    let desRef = $(container).children().filter("div.editItemDescription")[0].innerText;
+    let description = desRef.slice(0, desRef.length-3);
 
     //removes macros
     if(grams !== ""){
@@ -231,19 +232,20 @@ class MealEditor extends React.Component {
     }
 
     //removes from the dom
-    this.setState( (state) => {
-      let newRender = [];
+    let newRender = [];
 
-      for ( let u = 0; u < state.shownIngredients.length;  u++) {
-        let arr = state.shownIngredients;
-        let current = arr[u];
-        let includes = current.props.description.includes(description);
-      
-        if(!includes){
-          newRender.push(current)
-        }  
+    for ( let u = 0; u < this.state.shownIngredients.length;  u++) {
+      let arr = this.state.shownIngredients;
+      let current = arr[u];
+      let includes = current.props.description.includes(description);
+    
+      if(!includes){
+        newRender.push(current)
+      }  
 
-      }
+    }
+
+    this.setState( () => {
 
       console.log(newRender);
 
@@ -351,7 +353,7 @@ class MealEditor extends React.Component {
     let meals = userFile.collection("meals");
     let weeks = userFile.collection("weeks");
     let newMeal = meals.doc(`${this.props.mealName}`);
-    let targetMeal = meals.doc(`${this.state.mealName}`);
+    let targetMeal = meals.doc(`${this.props.passedProps.mealName}`);
     let state = this.state;
 
     if(exists){
@@ -403,12 +405,10 @@ class MealEditor extends React.Component {
         })
 
       })
-      // let newMeal = meals.doc(`${this.props.mealName}`);
-      // let targetMeal = meals.doc(`${this.state.mealName}`);
       //if there is a name change
-      if(exists && this.props.mealName !== this.state.mealName){
+      if(exists && this.props.mealName !== this.props.passedProps.mealName){
         batch.delete(targetMeal)
-        
+
         batch.set(newMeal, {
           mealName: this.props.mealName,
           savedIngredients: this.props.list,
@@ -418,8 +418,8 @@ class MealEditor extends React.Component {
 
       }
       //if there is no name change
-      if(exists && this.props.mealName === this.state.mealName){
-        batch.update(targetMeal, {
+      if(exists && this.props.mealName === this.props.passedProps.mealName){
+        batch.update(newMeal, {
           mealName: this.props.mealName,
           savedIngredients: this.props.list,
           mealMacros: state.mealMacros,

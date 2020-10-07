@@ -14,7 +14,7 @@ class SavedMeal extends Component {
             <React.Fragment>
                 <div className="viewListItem">
                     <PieChart 
-                    macros={this.props.mealMacros}
+                    macros={this.props.mealMacros ? this.props.mealMacros : {} }
                     height={50}
                     width={50}
                     layout={{
@@ -46,6 +46,7 @@ class SavedMeal extends Component {
 
                     <button
                     className="viewerDeleteButton"
+                    onClick={(e)=>this.props.handleDeleteFromDOM(e)}
                     >
                     DELETE
 

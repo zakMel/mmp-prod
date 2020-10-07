@@ -9,6 +9,9 @@ class MG_Body extends React.Component {
         this.props.renderDOM()
     }
 
+    loadFunc = () => {
+    }
+
     render() {
 
         return (
