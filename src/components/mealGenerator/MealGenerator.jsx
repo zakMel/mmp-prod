@@ -345,6 +345,7 @@ class MealGenerator extends React.Component {
                 currentTabs={this.props.currentTabs}
                 history={this.props.history}
                 handleSearching={this.props.handleSearching}
+                resetCurrentTabs={this.props.resetCurrentTabs}
                 />
               )}
             />

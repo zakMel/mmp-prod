@@ -93,6 +93,7 @@ class Search extends React.Component {
                 lastURL={this.props.history.location.lastURL}
                 passedProps={this.props.history.location.passedProps}
                 handleSearching={this.props.handleSearching}
+                resetCurrentTabs={this.props.resetCurrentTabs}
             />
         );
 
