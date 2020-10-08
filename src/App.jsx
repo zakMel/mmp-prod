@@ -30,9 +30,10 @@ class App extends React.Component {
       day: "",
       meal: "",
     },
-    calendarDate: "date placeholder",
     dateRangeCal: [ new Date(), new Date () ],
     weekDateDB: "",
+    // dateRangeShop : [ new Date(), new Date () ],
+    // shopDateDB: "",
     searching: false,
     checkedSl: [],
     calendarWeek:[
@@ -85,13 +86,16 @@ class App extends React.Component {
   handlingChecked = (e) => {
     let container = e.target.parentElement;
     let description = container.childNodes[1].innerHTML;
-    this.setState( (state) => {
-      let newState = state.checkedSl;
-      newState.push(description)
-      return {
-        checkedSl: newState
-      }
-    })
+    if(!this.state.checkedSl.includes(description)){
+      this.setState( (state) => {
+        let newState = state.checkedSl;
+        newState.push(description)
+        console.log(newState)
+        return {
+          checkedSl: newState
+        }
+      })
+    }
   }
 
   handleSearching = (makeFalse) => {
@@ -136,11 +140,10 @@ class App extends React.Component {
   }
 
   handleQuerySuccess = (response) => {
-    console.log("week exists")
     
     response.forEach(doc => {
       if(doc.data().weekDateDB === this.state.weekDateDB){
-        console.log(doc.data().weekDateDB, doc.data().calendarWeek)
+        // console.log("week exists", doc.data().weekDateDB, doc.data().calendarWeek)
         this.setState(() => {
             return {
               calendarWeek: doc.data().calendarWeek
@@ -158,15 +161,20 @@ class App extends React.Component {
     const users = db.collection("users");
     let userFile = users.doc(`${user.uid}`);
 
-    let weeks = userFile.collection("weeks");
-    let document = weeks.doc(`${this.state.weekDateDB}`);
-    let state = this.state;
-
-    dbServices.set(document, {
-      weekDateDB: state.weekDateDB,
-      dateRangeCal: state.dateRangeCal,
-      calendarWeek: state.calendarWeek,
-    })
+    
+    if(this.state.weekDateDB.length>0){
+      let weeks = userFile.collection("weeks");
+      let document = weeks.doc(`${this.state.weekDateDB}`);
+      let state = this.state;
+      
+      dbServices.set(document, {
+        weekDateDB: state.weekDateDB,
+        dateRangeCal: state.dateRangeCal,
+        calendarWeek: state.calendarWeek,
+      })
+    } else {
+      alert('you need to select a date');
+    }
   }
 
   setWeekDateRange = (newDates) => {
@@ -184,6 +192,22 @@ class App extends React.Component {
             alert("must select a Monday as a start date.")
         }
   }
+
+  // setShoppingDateRange = (newDates) => {
+
+  //   let firstWeekDay = newDates[0].getDay();
+  //       if(firstWeekDay === 1){
+  //           this.setState(() => { 
+  //             return {
+  //               dateRangeShop : newDates,
+  //               shopDateDB: JSON.stringify(newDates),
+  //             }
+            
+  //           }, this.existingWeekCheck)
+  //       } else {
+  //           alert("must select a Monday as a start date.")
+  //       }
+  // }
 
   updateDayMeal = (dayInput, mealInput) => {
     this.setState(()=>{
@@ -340,14 +364,12 @@ class App extends React.Component {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedIn: !!user})
     );
-
   }
 
   componentDidUpdate (prevProps, prevState) {
     if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
       console.log(this.state.selectedCalendarElement)
     }
-
   }
   
   componentWillUnmount() {
@@ -399,7 +421,7 @@ class App extends React.Component {
             setWeekDateRange={this.setWeekDateRange}
             updateDayMeal={this.updateDayMeal}
             week={this.state.calendarWeek}
-            date={this.state.calendarDate}
+            // date={this.state.calendarDate}
             update={this.state.calendarUpdate}
             saveWeekToDB={this.saveWeekToDB}
           />
@@ -411,8 +433,15 @@ class App extends React.Component {
         exact={true}
         render={(props) => (
           <ShoppingList 
+            history={this.props.history}
             checkedSl={this.state.checkedSl}
             handlingChecked={this.handlingChecked}
+            // setShoppingDateRange={this.setShoppingDateRange}
+            // shopDateRange={this.state.dateRangeShop}
+            week={this.state.calendarWeek}
+            weekDateRange={this.state.dateRangeCal}
+            setWeekDateRange={this.setWeekDateRange}
+
           />
         )}
       />
