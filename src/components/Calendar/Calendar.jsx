@@ -2,6 +2,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import CalendarItem from './CalendarItem';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import $ from "jquery"
 import "../../style/calendar.css";
 
 class Calendar extends React.Component {
@@ -48,8 +49,40 @@ class Calendar extends React.Component {
                 dinner={item.Dinner}
                 updateDayMeal={this.props.updateDayMeal}
                 prevPath={this.props.history.location.pathname}
+                handleClearMeal={this.handleClearMeal}
             />
         )
+
+    }
+
+    handleClearMeal = (e) => {
+        let container = e.target.parentElement;
+        let elementText = $(container).children().filter(".mealItem").text();
+        
+        this.setState( (state, props) => {
+          let newRender = [];
+    
+          for ( let u = 0; u < props.week.length;  u++) {
+              //! cycles through each week day
+            let arr = props.week;
+            let day = arr[u]; //! current day
+            //! cycles through each day's meal
+            let newDay = {}
+            for (let meal in day){
+                let description = day[meal].mealName
+                let includes = description ? description.includes(elementText.length > 40 ? elementText.slice(0, (elementText.length - 3)) : elementText) : false;
+                console.log(typeof description, description, includes)
+                // let value = "";
+                if(includes) {
+                    day[meal] = meal;
+                }
+                newDay[meal] = day[meal];
+            }
+            newRender.push(newDay)
+    
+          }
+            
+        }, this.renderDOM)
 
     }
 

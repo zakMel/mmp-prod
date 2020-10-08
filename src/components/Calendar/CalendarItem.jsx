@@ -38,7 +38,7 @@ export default function CalendarItem (props) {
 
                 <button 
                     // type="submit" 
-                    // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
+                    onClick={ (e) => props.handleClearMeal(e) }
                     className="dayClearButton"
                     >Clear
                 </button>
@@ -72,7 +72,7 @@ export default function CalendarItem (props) {
 
                 <button 
                     // type="submit" 
-                    // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
+                    onClick={ (e) => props.handleClearMeal(e) }
                     className="dayClearButton"
                     >Clear
                 </button>
@@ -106,7 +106,7 @@ export default function CalendarItem (props) {
 
                 <button 
                     // type="submit" 
-                    // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
+                    onClick={ (e) => props.handleClearMeal(e) }
                     className="dayClearButton"
                     >Clear
                 </button>
