@@ -67,7 +67,7 @@ export default function ShoppingList (props) {
                     clearIcon={null}
                     className="dateRanger_SL"
                     onChange={props.setWeekDateRange}
-                    value={props.weekDateRange}
+                    value={props.weekDateDB.length > 0 ? props.weekDateRange : null}
                 />  
                 <div id="section-to-print" className="listContainer_SL">
                     <InfiniteScroll

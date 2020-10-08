@@ -416,6 +416,7 @@ class App extends React.Component {
             // date={this.state.calendarDate}
             update={this.state.calendarUpdate}
             saveWeekToDB={this.saveWeekToDB}
+            weekDateDB={this.state.weekDateDB}
           />
         )}
       />
@@ -428,8 +429,7 @@ class App extends React.Component {
             history={this.props.history}
             checkedSl={this.state.checkedSl}
             handlingChecked={this.handlingChecked}
-            // setShoppingDateRange={this.setShoppingDateRange}
-            // shopDateRange={this.state.dateRangeShop}
+            weekDateDB={this.state.weekDateDB}
             week={this.state.calendarWeek}
             weekDateRange={this.state.dateRangeCal}
             setWeekDateRange={this.setWeekDateRange}

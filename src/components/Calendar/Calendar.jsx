@@ -12,6 +12,7 @@ class Calendar extends React.Component {
 
     componentDidMount() {
         this.renderDOM()
+        console.log(this.props.weekDateDB)
     }
 
     loadFunc = () => {
@@ -65,7 +66,7 @@ class Calendar extends React.Component {
                         clearIcon={null}
                         className="dateRanger"
                         onChange={this.props.setWeekDateRange}
-                        value={this.props.weekDateRange}
+                        value={this.props.weekDateDB.length > 0 ? this.props.weekDateRange : null}
                     />
 
                     <button 
@@ -75,8 +76,12 @@ class Calendar extends React.Component {
                     Save Week
                     </button>
 
-                    <div className="weekContainer">
-
+                    {this.props.weekDateDB.length > 0 
+                    ?
+                    <div 
+                    className="weekContainer"
+                    // style={{visibility: "visible"}}
+                    >
                         <InfiniteScroll
                         pageStart={0}
                         loadMore={this.loadFunc}
@@ -91,6 +96,11 @@ class Calendar extends React.Component {
                         </InfiniteScroll>
 
                     </div>
+                    : ""
+                    }
+                  
+                    
+                                        
                 </div>
         
             </React.Fragment>        

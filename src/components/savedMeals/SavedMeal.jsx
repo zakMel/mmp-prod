@@ -14,14 +14,14 @@ class SavedMeal extends Component {
             <React.Fragment>
                 <div className="viewListItem">
                     <PieChart 
-                    macros={this.props.mealMacros ? this.props.mealMacros : {} }
-                    height={50}
-                    width={50}
-                    layout={{
-                        padding: {
-                            bottom: 8,
-                        }
-                    }}
+                        macros={this.props.mealMacros ? this.props.mealMacros : {} }
+                        height={50}
+                        width={50}
+                        layout={{
+                            padding: {
+                                bottom: 8,
+                            }
+                        }}
                     />
 
                     <NavLink 
