@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import PieChart from "../PieChart"
 import $ from 'jquery';
 
 export default function CalendarItem (props) {
@@ -9,9 +10,20 @@ export default function CalendarItem (props) {
 
         <div className="dayContainer">
 
-    <div>{props.day}</div>
+            <div>{props.day}</div>
 
             <div className="mealItemContainer">
+                <PieChart   
+                    // macros={props.breakfast === "Breakfast" ? {protein: 0, fat: 0, carbs: 0} : props.breakfast.mealMacros }
+                    macros={props.breakfast.mealMacros}
+                    height={50}
+                    width={50}
+                    layout={{
+                        padding: {
+                            bottom: 8,
+                        }
+                    }}
+                />
 
                 <NavLink 
                 to={{
@@ -27,13 +39,25 @@ export default function CalendarItem (props) {
                 <button 
                     // type="submit" 
                     // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                    className="dayDeleteButton btn btn-danger"
-                    >Delete
+                    className="dayClearButton"
+                    >Clear
                 </button>
             
             </div>
 
             <div className="mealItemContainer">
+
+                <PieChart   
+                    macros={props.breakfast === "Lunch" ? null : props.lunch.mealMacros }
+                    // macros={null}
+                    height={50}
+                    width={50}
+                    layout={{
+                        padding: {
+                            bottom: 8,
+                        }
+                    }}
+                />
 
                 <NavLink 
                 to={{
@@ -49,13 +73,25 @@ export default function CalendarItem (props) {
                 <button 
                     // type="submit" 
                     // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                    className="dayDeleteButton btn btn-danger"
-                    >Delete
+                    className="dayClearButton"
+                    >Clear
                 </button>
             
             </div>
 
             <div className="mealItemContainer">
+
+                <PieChart   
+                    macros={props.dinner === "Lunch" ? null : props.dinner.mealMacros }
+                    // macros={{protein: 0, fat: 0, carbs: 0}}
+                    height={50}
+                    width={50}
+                    layout={{
+                        padding: {
+                            bottom: 8,
+                        }
+                    }}
+                />
 
                 <NavLink 
                 to={{
@@ -71,8 +107,8 @@ export default function CalendarItem (props) {
                 <button 
                     // type="submit" 
                     // onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                    className="dayDeleteButton btn btn-danger"
-                    >Delete
+                    className="dayClearButton"
+                    >Clear
                 </button>
             
             </div>

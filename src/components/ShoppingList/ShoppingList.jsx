@@ -67,16 +67,24 @@ export default function ShoppingList (props) {
                     clearIcon={null}
                     className="dateRanger_SL"
                     onChange={props.setWeekDateRange}
-                    value={props.weekDateRange}
+                    value={props.weekDateDB.length > 0 ? props.weekDateRange : null}
                 />  
-                <InfiniteScroll
-                    pageStart={0}
-                    loadMore={loadFunc}
-                    hasMore={false}
+                <div id="section-to-print" className="listContainer_SL">
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={loadFunc}
+                        hasMore={false}
+                        >
+                        {list}
+                    </InfiniteScroll>
+                </div>
+
+                <button 
+                    className="printButton"
+                    onClick={()=> { window.print() }}
                     >
-                    {list}
-                    
-                </InfiniteScroll>
+                    Print
+                </button>
 
             </div>
         </React.Fragment>

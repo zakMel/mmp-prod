@@ -9,12 +9,19 @@
     background-color: lavender;
 }
 
+.listContainer_SL {
+    overflow: auto;
+    width: 100vw;
+    height: 385px;
+}
+
 .itemContainer_SL {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:flex-start;
     width: 100vw;
+    margin-bottom: 5px
 }
 
 .title_SL {
@@ -43,4 +50,38 @@
 
 .itemDescr_SL {
     margin-left: 20px;
+}
+
+.printButton {
+    display: block; 
+    position: fixed;
+    bottom: 60px;
+    margin-top: 8px;
+    margin: auto;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
+    text-align: center;
+    color: black;
+    padding: 3px;
+    width: 200px;
+    height: 35px;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+      }
+      
+      #section-to-print, #section-to-print * {
+        visibility: visible;
+      }
+
+      #section-to-print {
+        position: absolute;
+        left: 0;
+        top: 40px;
+      }
+
+
 }

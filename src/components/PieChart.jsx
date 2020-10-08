@@ -9,9 +9,9 @@ export default function PieChart (props) {
 
             <Pie
                 data={{
-                    labels: props.labels,
+                    labels: props.labels ? props.labels : "",
                     datasets: [{
-                        data: [props.macros.protein, props.macros.fat, props.macros.carbs],
+                        data: props.macros ? [props.macros.protein, props.macros.fat, props.macros.carbs] : "",
                         backgroundColor: ['brown', 'red', 'tan'],
                     }],
                 }}

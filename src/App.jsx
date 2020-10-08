@@ -115,6 +115,14 @@ class App extends React.Component {
     }
   }
 
+  resetCurrentTabs = () => {
+    this.setState(() => {
+      return {
+        currentTabs: []
+      }
+    })
+  }
+
   clearIngredients = () => {
     this.setState( () => {
       return {
@@ -192,22 +200,6 @@ class App extends React.Component {
             alert("must select a Monday as a start date.")
         }
   }
-
-  // setShoppingDateRange = (newDates) => {
-
-  //   let firstWeekDay = newDates[0].getDay();
-  //       if(firstWeekDay === 1){
-  //           this.setState(() => { 
-  //             return {
-  //               dateRangeShop : newDates,
-  //               shopDateDB: JSON.stringify(newDates),
-  //             }
-            
-  //           }, this.existingWeekCheck)
-  //       } else {
-  //           alert("must select a Monday as a start date.")
-  //       }
-  // }
 
   updateDayMeal = (dayInput, mealInput) => {
     this.setState(()=>{
@@ -424,6 +416,7 @@ class App extends React.Component {
             // date={this.state.calendarDate}
             update={this.state.calendarUpdate}
             saveWeekToDB={this.saveWeekToDB}
+            weekDateDB={this.state.weekDateDB}
           />
         )}
       />
@@ -436,8 +429,7 @@ class App extends React.Component {
             history={this.props.history}
             checkedSl={this.state.checkedSl}
             handlingChecked={this.handlingChecked}
-            // setShoppingDateRange={this.setShoppingDateRange}
-            // shopDateRange={this.state.dateRangeShop}
+            weekDateDB={this.state.weekDateDB}
             week={this.state.calendarWeek}
             weekDateRange={this.state.dateRangeCal}
             setWeekDateRange={this.setWeekDateRange}
@@ -462,6 +454,7 @@ class App extends React.Component {
             clearIngredients={this.clearIngredients}
             handleSearching={this.handleSearching}
             searching={this.state.searching}
+            resetCurrentTabs={this.resetCurrentTabs}
           />
         )}
       />
@@ -476,6 +469,7 @@ class App extends React.Component {
             currentTabs={this.state.currentTabs}
             history={this.props.history}
             handleSearching={this.handleSearching}
+            resetCurrentTabs={this.resetCurrentTabs}
           />
         )}
       />

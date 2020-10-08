@@ -13,9 +13,11 @@ export default function SearchItem (props) {
         }}
         onClick={() => { 
             props.addIngredient(props.ingredient) 
+            props.resetCurrentTabs()
             if ( props.handleSearching ) {
                props.handleSearching(false)
             }}
+
         }
         >
             <p className="ingredientText">

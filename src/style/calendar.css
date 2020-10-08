@@ -29,23 +29,24 @@
 .mealItemContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    height: 40px;
-    margin-bottom: 5px;
+    justify-content: space-between;
+    align-items: center;
+    width: 370px;
+    height: 42px;
+    text-align: center;
 }
 
 .mealItem {
     display: block;
-    width: 265px;
+    width: 260px;
     height: 40px;
-    margin-bottom: 2.5px;
+    padding:3px;
     font-size: 15px;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
     background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
-    padding: 5.5px
 } 
 
 .dateRanger {
@@ -70,7 +71,15 @@
     padding: 3px;
 }
 
-.calendarPrintButton {
+.dayClearButton {
+    background-image: linear-gradient(#4682b4, white, #4682b4);
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 71px;
+}
+
+/* .calendarPrintButton {
     display: block; 
     margin-top: 8px;
     margin: auto;
@@ -82,4 +91,4 @@
     padding: 3px;
     width: 200px;
     height: 35px;
-}
+} */

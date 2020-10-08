@@ -23,7 +23,7 @@ export default function Item (props) {
             // onChange={(e)=>{props.handlingChecked(e)}}
             // checked={ checkStatus }
             />
-    <p className="itemDescr_SL">{props.desc}</p>
+            <p className="itemDescr_SL">{props.desc}</p>
         </div>
     )
 }
