@@ -88,12 +88,6 @@ class Calendar extends React.Component {
 
                         {this.state.mappedWeek}
 
-                        <button 
-                        className="calendarPrintButton"
-                        // onClick={()=> { this.props.saveWeekToDB() }}
-                        >
-                        Print
-                        </button>
                         </InfiniteScroll>
 
                     </div>
