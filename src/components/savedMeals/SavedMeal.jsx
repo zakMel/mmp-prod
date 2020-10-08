@@ -36,11 +36,13 @@ class SavedMeal extends Component {
                         } else  {
                             this.props.updateList(this.props.updateWeekItem(this.props.calendarUpdate.day, this.props.calendarUpdate.meal, this.props.passedProps))
                         }
+                        
+                        this.props.handleEditablility(false);
                     }}
                     className="savedMeal"
                     >
                         <p className="ingredientText">
-                            { this.props.description} 
+                            {( this.props.description.length < 25 ? this.props.description : `${this.props.description.slice(0, 25)}...`)}
                         </p>
                     </NavLink>
 

@@ -33,7 +33,7 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.breakfast === "Breakfast" ? "Breakfast" : props.breakfast.mealName} 
+                    {props.breakfast === "Breakfast" ? "Breakfast" : ( props.breakfast.mealName.length < 25 ? props.breakfast.mealName : `${props.breakfast.mealName.slice(0, 25)}...`)}
                 </NavLink>
 
                 <button 
@@ -67,7 +67,8 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.lunch === "Lunch" ? "Lunch" : props.lunch.mealName} 
+                    {props.lunch === "Lunch" ? "Lunch" : ( props.lunch.mealName.length < 25 ? props.lunch.mealName : `${props.lunch.mealName.slice(0, 25)}...`)}
+                    
                 </NavLink>
 
                 <button 
@@ -101,7 +102,7 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.dinner === "Dinner" ? "Dinner" : props.dinner.mealName} 
+                    {props.dinner === "Dinner" ? "Dinner" : ( props.dinner.mealName.length < 25 ? props.dinner.mealName : `${props.dinner.mealName.slice(0, 25)}...`)}                 
                 </NavLink>
 
                 <button 

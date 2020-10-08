@@ -266,16 +266,26 @@ class App extends React.Component {
     })
   }
 
-   handleEditablility = () => {
+  handleEditablility = (makeFalse) => {
+    if(makeFalse === false){
+      
+      this.setState(() => {
+        return {
+          editable: false
+        }
+      })
+    } else {
+      this.setState((state) => {
+        let makeEditable = !state.editable;
+  
+        return {
+          editable: makeEditable
+  
+        }
+      })
+      
+    }
     
-    this.setState((state) => {
-      let makeEditable = !state.editable;
-
-      return {
-        editable: makeEditable
-
-      }
-    })
 
   }
 
@@ -484,6 +494,7 @@ class App extends React.Component {
             handleSetName_ME={this.handleSetName_ME}
             calendarUpdate={this.state.calendarUpdate}
             updateWeekItem={this.updateWeekItem}
+            handleEditablility={this.handleEditablility}
           />
         )}
       />
