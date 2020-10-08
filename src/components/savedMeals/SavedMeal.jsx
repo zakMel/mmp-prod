@@ -36,6 +36,8 @@ class SavedMeal extends Component {
                         } else  {
                             this.props.updateList(this.props.updateWeekItem(this.props.calendarUpdate.day, this.props.calendarUpdate.meal, this.props.passedProps))
                         }
+                        
+                        this.props.handleEditablility(false);
                     }}
                     className="savedMeal"
                     >

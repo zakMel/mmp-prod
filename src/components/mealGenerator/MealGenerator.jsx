@@ -61,10 +61,10 @@ class MealGenerator extends React.Component {
     }
 
   }
-
-  renderDOM = async () => {
-    let mappedList = await this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = await this.props.list;
+  
+  renderDOM = () => {
+    let mappedList = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let givenIngredients = this.props.list;
     
     this.setState(() => {
       
@@ -75,7 +75,7 @@ class MealGenerator extends React.Component {
     })
     
   }
-  
+
   renderIngredients = (ingredient) => {
     
     this.addMacros(ingredient)

@@ -78,6 +78,7 @@ class MealViewer extends React.Component {
             updateWeekItem={this.props.updateWeekItem}
             mealMacros={meal.mealMacros}
             handleDeleteFromDOM={this.handleDeleteFromDOM}
+            handleEditablility={this.props.handleEditablility}
             // macros={meal.mealMacros}
             // ingredients={meal.savedIngredients}
           />
