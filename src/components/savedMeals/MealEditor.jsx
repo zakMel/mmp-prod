@@ -28,13 +28,14 @@ class MealEditor extends React.Component {
 
   componentDidMount(){ 
     this.renderDOM() 
+    console.log(this.props.passedProps)
   }
   
   renderDOM = () => {
     // let name = this.props.passedProps === undefined ? this.props.history.location.passedProps.mealName : this.props.passedProps.mealName;
-    let name =this.props.mealName;
-    let mappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
-    let givenIngredients = this.props.list;
+    let name =this.props.passedProps.mealName;
+    let givenIngredients = this.props.passedProps.savedIngredients; 
+    let mappedList  = givenIngredients.map(ingre => this.renderIngredients(ingre)); 
     let macros = this.props.passedProps !== undefined ? this.props.passedProps.mealMacros : this.state.mealMacros
     let passedEditability = this.props.passedEditability;
     
@@ -257,8 +258,8 @@ class MealEditor extends React.Component {
 
     //delete from App.jsx
     let newList = []
-    for ( let i = 0; i < this.props.list.length; i++ ){
-      let arr = this.props.list;
+    for ( let i = 0; i < this.props.passedProps.savedIngredients.length; i++ ){ 
+      let arr = this.props.passedProps.savedIngredients;
       let current = arr[i];
       let ingredent = arr[i].ingre;
       let includes = ingredent.description.includes(description);
@@ -275,7 +276,7 @@ class MealEditor extends React.Component {
   reRenderList = () => {
     
     this.setState(()=>{
-      let reMappedList  = this.props.list.map(ingre => this.renderIngredients(ingre));
+      let reMappedList  = this.props.passedProps.savedIngredients.map(ingre => this.renderIngredients(ingre)); 
 
       return {
         shownIngredients: reMappedList
@@ -381,7 +382,7 @@ class MealEditor extends React.Component {
                   edited = true;
                   newDay[meal] = { //! here is the last error
                     mealName: this.props.mealName,
-                    savedIngredients: this.props.list,
+                    savedIngredients: this.props.passedProps.savedIngredients, 
                     mealMacros: state.mealMacros,
                   }
                    
@@ -411,7 +412,7 @@ class MealEditor extends React.Component {
 
         batch.set(newMeal, {
           mealName: this.props.mealName,
-          savedIngredients: this.props.list,
+          savedIngredients: this.props.passedProps.savedIngredients,
           mealMacros: state.mealMacros,
         })
   
@@ -421,7 +422,7 @@ class MealEditor extends React.Component {
       if(exists && this.props.mealName === this.props.passedProps.mealName){
         batch.update(newMeal, {
           mealName: this.props.mealName,
-          savedIngredients: this.props.list,
+          savedIngredients: this.props.passedProps.savedIngredients, 
           mealMacros: state.mealMacros,
         })
 
@@ -447,7 +448,7 @@ class MealEditor extends React.Component {
 
           <ContentEditable
             // innerRef={this.contentEditable}
-            html={this.props.mealName} // innerHTML of the editable div
+            html={this.props.mealName ? this.props.mealName : this.props.passedProps.mealName} // innerHTML of the editable div
             disabled={this.props.passedEditability? false : true}       // use true to disable editing
             onChange={this.props.handleUpdateName_ME} 
             className="editableName"

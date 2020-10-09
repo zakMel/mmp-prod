@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import PieChart from "../PieChart"
@@ -10,11 +11,10 @@ export default function CalendarItem (props) {
 
         <div className="dayContainer">
 
-            <div>{props.day}</div>
+            <div className="calendarMealDay">{props.day}</div>
 
-            <div className="mealItemContainer">
+            <div className="mealItemContainer" id="Breakfast">
                 <PieChart   
-                    // macros={props.breakfast === "Breakfast" ? {protein: 0, fat: 0, carbs: 0} : props.breakfast.mealMacros }
                     macros={props.breakfast.mealMacros}
                     height={50}
                     width={50}
@@ -27,8 +27,9 @@ export default function CalendarItem (props) {
 
                 <NavLink 
                 to={{
-                    pathname: "/mealViewer",
-                    prevPath: props.prevPath
+                    pathname: typeof props.breakfast === "object" ? "/mealEditor" : "/mealViewer",
+                    prevPath: props.prevPath,
+                    passedProps: props.breakfast,
                 }}
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
@@ -37,7 +38,6 @@ export default function CalendarItem (props) {
                 </NavLink>
 
                 <button 
-                    // type="submit" 
                     onClick={ (e) => props.handleClearMeal(e) }
                     className="dayClearButton"
                     >Clear
@@ -45,11 +45,10 @@ export default function CalendarItem (props) {
             
             </div>
 
-            <div className="mealItemContainer">
+            <div className="mealItemContainer" id="Lunch">
 
                 <PieChart   
                     macros={props.breakfast === "Lunch" ? null : props.lunch.mealMacros }
-                    // macros={null}
                     height={50}
                     width={50}
                     layout={{
@@ -61,8 +60,9 @@ export default function CalendarItem (props) {
 
                 <NavLink 
                 to={{
-                    pathname: "/mealViewer",
-                    prevPath: props.prevPath
+                    pathname: typeof props.lunch === "object" ? "/mealEditor" : "/mealViewer",
+                    prevPath: props.prevPath,
+                    passedProps: props.lunch,
                 }}
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
@@ -80,11 +80,10 @@ export default function CalendarItem (props) {
             
             </div>
 
-            <div className="mealItemContainer">
+            <div className="mealItemContainer" id="Dinner">
 
                 <PieChart   
                     macros={props.dinner === "Lunch" ? null : props.dinner.mealMacros }
-                    // macros={{protein: 0, fat: 0, carbs: 0}}
                     height={50}
                     width={50}
                     layout={{
@@ -96,8 +95,9 @@ export default function CalendarItem (props) {
 
                 <NavLink 
                 to={{
-                    pathname: "/mealViewer",
-                    prevPath: props.prevPath
+                    pathname: typeof props.dinner === "object" ? "/mealEditor" : "/mealViewer",
+                    prevPath: props.prevPath,
+                    passedProps: props.dinner,
                 }}
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        

@@ -32,8 +32,6 @@ class App extends React.Component {
     },
     dateRangeCal: [ new Date(), new Date () ],
     weekDateDB: "",
-    // dateRangeShop : [ new Date(), new Date () ],
-    // shopDateDB: "",
     searching: false,
     checkedSl: [],
     calendarWeek:[
@@ -163,6 +161,15 @@ class App extends React.Component {
 
   }
 
+  updateCalendarWeek = (week) => {
+    this.setState(() => {
+      return {
+        calendarWeek: week
+      }
+    })
+
+  }
+
   saveWeekToDB = () => {
     console.log("clicked save week")
     let user = firebase.auth().currentUser;
@@ -222,20 +229,6 @@ class App extends React.Component {
       return item;
     })
 
-    console.log(updatedWeek)
-
-    // this.setState(() => {
-    //   return {
-    //     calendarWeek : updatedWeek
-    //   }
-    // })
-
-    // for(let i = 0; i < this.state.calendarWeek.length; i++){
-    //   let current = this.state.calendarWeek[i];
-    //   if(current.day === day){
-    //     current.meal = update
-    //   }
-    // }
   }
 
   handleUpdateName_ME = (e) => {
@@ -427,6 +420,7 @@ class App extends React.Component {
             update={this.state.calendarUpdate}
             saveWeekToDB={this.saveWeekToDB}
             weekDateDB={this.state.weekDateDB}
+            updateCalendarWeek={this.updateCalendarWeek}
           />
         )}
       />
