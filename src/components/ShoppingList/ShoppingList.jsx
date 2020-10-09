@@ -7,37 +7,61 @@ import "../../style/shoppingList.css";
 export default function ShoppingList (props) {
 
     let [list, updateList] = useState([])
-    // let [renderedList, setList] = useState([])
 
     useEffect(() => {
-
         renderDOM()
 
     }, [props.week]);
 
-    let getAllIngredients = (week) => {
-    let ingredients = [];
+    // let getAllIngredients = (week) => {
+    // let ingredients = []; // could be an objected instead of an array
     
-    for (let i = 0; i < week.length; i++){
-            let currentDay = week[i];
+    // for (let i = 0; i < week.length; i++){
+    //         let currentDay = week[i];
             
-            for (let meal in currentDay){
-                let currentMeal = currentDay[meal];
-                if(typeof currentMeal === 'object'){
-                    for(let u = 0; u < currentMeal.savedIngredients.length; u++){
-                        // console.log(currentMeal.savedIngredients[u].ingre.description)
-                        ingredients.push(currentMeal.savedIngredients[u].ingre.description)
+    //         for (let meal in currentDay){
+    //             let currentMeal = currentDay[meal];
+    //             if(typeof currentMeal === 'object'){
+    //                 for(let u = 0; u < currentMeal.savedIngredients.length; u++){
+    //                     ingredients.push(currentMeal.savedIngredients[u].ingre.description)
 
-                    }                    
-                }
-            }
-    }  
+    //                 }                    
+    //             }
+    //         }
+    // }  
         
-    ingredients.sort();
-    // console.log(ingredients);
-    // updateList(ingredients)
-    return ingredients;
-    }
+    // ingredients.sort(); //ingre object would mean that it could not be sorted.
+    // return ingredients;
+    // }
+
+    let getAllIngredients = (week) => {
+        let ingredients = {}; // could be an objected instead of an array
+        
+        for (let i = 0; i < week.length; i++){
+                let currentDay = week[i];
+                
+                for (let meal in currentDay){
+                    let currentMeal = currentDay[meal];
+                    if(typeof currentMeal === 'object'){
+                        for(let u = 0; u < currentMeal.savedIngredients.length; u++){
+                            // ingredients.push(currentMeal.savedIngredients[u].ingre.description)
+                            if(Object.keys(ingredients).includes(currentMeal.savedIngredients[u].ingre.description)) {
+                                console.log('dublicate', ingredients[currentMeal.savedIngredients[u].ingre.description])
+                                ingredients[currentMeal.savedIngredients[u].ingre.description]++
+
+                            }else {
+
+                                ingredients[currentMeal.savedIngredients[u].ingre.description] = 1 
+                            }
+    
+                        }                    
+                    }
+                }
+        }  
+        let arr = Object.entries(ingredients)    
+        arr.sort(); //ingre object would mean that it could not be sorted.
+        return arr;
+        }
 
     let renderShoppingList = (ingre) => {
         return (

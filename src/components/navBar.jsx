@@ -9,7 +9,13 @@ export default function UserBar (props) {
     return (
 
         <Navbar expanded={navState} expand="true" bg="dark" variant="dark" className="navBar" >
-            <Navbar.Brand href="/">Macro Meal Planning</Navbar.Brand>
+            {/* <Navbar.Brand href="/">Macro Meal Planning</Navbar.Brand> */}
+            <NavLink 
+                to="/"
+                className="nav-home"
+            >
+            Macro Meal Planning    
+            </NavLink>
             <Navbar.Toggle 
             onClick={() => setExpand(!navState)}
             aria-controls="responsive-navbar-nav" 
