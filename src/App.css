@@ -8,6 +8,17 @@
   /* height: 56px; */
 }
 
+.nav-home {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+
+a.nav-home {
+  text-decoration: none;
+  color:white;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 0;
