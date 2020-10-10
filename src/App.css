@@ -3,15 +3,16 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 5;
-  /* height: 8.45vh; */
-  /* height: 56px; */
+  z-index: 4;
 }
+
+
 
 .nav-home {
   text-decoration: none;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
+  
 }
 
 a.nav-home {
@@ -33,5 +34,26 @@ p {
   color: white;
   height: 50px;
   padding-top: 8px;
+  font-size: 15px;
   z-index: 5;
+}
+
+.footerText {
+  position: fixed;
+  left: 0;
+  padding-top: 15px;
+  padding-left: 5px;
+}
+
+.footLogButton{
+  position: fixed;
+  /* right: 80px; */
+  /* width: 80px; */
+  /* background-color: white; */
+  background-image: linear-gradient(#c0c0c0, snow, #c0c0c0);
+  height: 40px;
+  border-radius: 15px;
+  /* margin-left: 8px; */
+  width: 71px;
+  right: 10px;
 }

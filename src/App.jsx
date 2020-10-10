@@ -189,7 +189,8 @@ class App extends React.Component {
       })
     } else {
       alert('you need to select a date');
-    }
+      };
+    
   }
 
   setWeekDateRange = (newDates) => {
@@ -381,7 +382,7 @@ class App extends React.Component {
   }
 
   render(){
-    if (!this.state.isSignedIn) {
+    if (!this.state.isSignedIn || !firebase.auth().currentUser) {
       return (
         <div>
           <h1>My App</h1>
@@ -397,7 +398,7 @@ class App extends React.Component {
       <NavBar
         handleSearching={this.handleSearching}
       />
-
+  
       <Route
         path="/"
         exact={true}
