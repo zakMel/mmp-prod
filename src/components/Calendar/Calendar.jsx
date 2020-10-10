@@ -124,16 +124,20 @@ class Calendar extends React.Component {
 
                     <button 
                     className="calendarSaveButton"
-                    onClick={()=> { this.props.saveWeekToDB() }}
+                    onClick={()=> { 
+                        if(this.props.weekDateDB.length > 0){
+                            this.props.handleSaving();
+                            this.props.saveWeekToDB();
+                        }
+                    }}
                     >
-                    Save Week
+                    {!this.props.loading ? "Save Week" : "Saving ..."}
                     </button>
 
                     {this.props.weekDateDB.length > 0 
                     ?
                     <div 
                     className="weekContainer"
-                    // style={{visibility: "visible"}}
                     >
                         <InfiniteScroll
                         pageStart={0}

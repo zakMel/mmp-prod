@@ -12,7 +12,7 @@ import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
 import Calendar from './components/Calendar/Calendar';
 import { Route, withRouter } from "react-router-dom";
-import dbServices from './services/dbServices';
+// import dbServices from './services/dbServices';
 import './App.css';
 
 const Big = require('big.js') //probably want to remove the use of this.
@@ -34,6 +34,7 @@ class App extends React.Component {
     weekDateDB: "",
     searching: false,
     checkedSl: [],
+    loading: false,
     calendarWeek:[
         {
           day: "Monday",
@@ -80,6 +81,27 @@ class App extends React.Component {
 
       ],
   };
+
+  handleSaving = () => {
+    this.setState(()=> {
+      return {
+        loading: true
+      }
+    })
+
+  }
+  
+  handleDoneSaving = () => {
+    setTimeout(() => {
+
+      this.setState(()=> {
+        return {
+          loading: false
+        }
+      })
+
+    }, 500)
+  }  
 
   handlingChecked = (e) => {
     let container = e.target.parentElement;
@@ -182,14 +204,26 @@ class App extends React.Component {
       let document = weeks.doc(`${this.state.weekDateDB}`);
       let state = this.state;
       
-      dbServices.set(document, {
+      // dbServices.set(document, {
+      //   weekDateDB: state.weekDateDB,
+      //   dateRangeCal: state.dateRangeCal,
+      //   calendarWeek: state.calendarWeek,
+      // })
+
+      document.set({
         weekDateDB: state.weekDateDB,
         dateRangeCal: state.dateRangeCal,
         calendarWeek: state.calendarWeek,
       })
-    } else {
-      alert('you need to select a date');
-      };
+    .then(this.handleDoneSaving() )
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+
+    } 
     
   }
 
@@ -422,6 +456,8 @@ class App extends React.Component {
             saveWeekToDB={this.saveWeekToDB}
             weekDateDB={this.state.weekDateDB}
             updateCalendarWeek={this.updateCalendarWeek}
+            loading={this.state.loading}
+            handleSaving={this.handleSaving}
           />
         )}
       />
@@ -508,6 +544,9 @@ class App extends React.Component {
             handleEditablility={this.handleEditablility}
             passedEditability={this.state.editable}
             weekDateDB={this.state.weekDateDB}
+            loading={this.state.loading}
+            handleSaving={this.handleSaving}
+            handleDoneSaving={this.handleDoneSaving}
           />
         )}
       />

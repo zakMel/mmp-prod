@@ -323,6 +323,7 @@ class MealEditor extends React.Component {
     prevDoc.get()
     .then(this.checkMealExistance)
     .then(this.handleBatching)
+    .then(this.props.handleDoneSaving())
     .catch(function(error) {
       console.log("Error getting document:", error);
     });
@@ -506,13 +507,14 @@ class MealEditor extends React.Component {
                  onClick={ 
                   () => { 
                     if (this.state.mealName.length > 0) {
+                      this.props.handleSaving();
                       this.sendToDatabase() 
                     }
                   } 
                 } 
                 type="submit" 
                 className="btn btn-primary"
-                >Save Meal
+                >{!this.props.loading ? "Save Meal" : "Saving ..."}
                </button>
               : <button 
                   onClick={ 
