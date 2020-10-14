@@ -23,8 +23,7 @@ class MealGenerator extends React.Component {
         carbs: 0
       },
     }
-  
-  
+
   componentDidMount(){
     let component = this;
 
@@ -63,7 +62,7 @@ class MealGenerator extends React.Component {
   }
   
   renderDOM = () => {
-    let mappedList = this.props.list.map(ingre => this.renderIngredients(ingre));
+    let mappedList = this.props.list? this.props.list.map(ingre => this.renderIngredients(ingre)) : "";
     let givenIngredients = this.props.list;
     
     this.setState(() => {
@@ -129,17 +128,11 @@ class MealGenerator extends React.Component {
     let meals = userFile.collection("meals");
     let document = meals.doc(`${this.state.mealName}`);
     let state = this.state;
-
-    // dbServices.set(document, {
-    //   mealName: state.mealName,
-    //   savedIngredients: state.savedIngredients,
-    //   mealMacros: state.mealMacros,
-    // })
-
+    
     document.set({
-      weekDateDB: state.mealName,
-      dateRangeCal: state.savedIngredients,
-      calendarWeek: state.mealMacros,
+      mealName: state.mealName,
+      savedIngredients: state.savedIngredients,
+      mealMacros: state.mealMacros,
     })
     .then(this.props.handleDoneSaving() )
     .then(function() {

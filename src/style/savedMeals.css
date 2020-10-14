@@ -31,7 +31,6 @@
     align-items: center;
     width: 370px;
     height: 42px;
-    text-align: center;
 }
 
 .editableName {
@@ -43,8 +42,7 @@
     display: block;
     width: 260px;
     height: 40px;
-    padding:3px;
-    font-size: 15px;
+    padding-left: 8px;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
@@ -53,12 +51,34 @@
 
 } 
 
+.ingredientText_short {
+    font-size: .9em;
+    font-weight: 600;
+    display: block;
+    overflow-wrap: break-word;
+    padding: 6px;
+    width: 245px;
+}
+
+.ingredientText_long {
+    display: block;
+    font-size: .8em;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    width: 245px;
+}
+
 .viewerDeleteButton {
     background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
     height: 40px;
     border-radius: 8px;
     margin-left: 8px;
     width: 71px;
+}
+
+.viewerDeleteButton:active, .viewerDeleteButton:focus {
+    outline: unset;
+    border: 1.5px solid black;
 }
 
 .saveEditButtonContainer {

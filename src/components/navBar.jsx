@@ -27,7 +27,8 @@ export default function UserBar (props) {
                         className="nav-link"
                         onClick={() => {
                             setExpand(!navState);
-                            // props.handleSearching(false);
+                            props.handleSearching(false);
+                            props.resetCurrentTabs();
                         }}
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="white" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
