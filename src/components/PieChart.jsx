@@ -12,7 +12,7 @@ export default function PieChart (props) {
                     labels: props.labels ? props.labels : "",
                     datasets: [{
                         data: props.macros ? [props.macros.protein, props.macros.fat, props.macros.carbs] : "",
-                        backgroundColor: ['brown', 'red', 'tan'],
+                        backgroundColor: ['red', '#ffa07a', '#228b22'],
                     }],
                 }}
                 options={{

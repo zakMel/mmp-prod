@@ -103,23 +103,20 @@ class Search extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="ingreContainer">
-                    <div className="ingredientList">
-                        {this.state.mappedIngredients}
-                    </div>
-                    
-                    <Pagination  
-                        currentTabs={this.props.currentTabs}
-                        handleUpdatePage={this.props.handleUpdatePage}
-                        totalPages={this.state.totalPages}
-                        handlePagination={this.handlePagination}
-                    />
-                    
-                    <div id="searchForm">
-                        <input onChange={ this.handleInput } placeholder="Enter Ingredient" type="text" className="text-center form-control searchInput border-primary"></input>
-                        <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton btn btn-primary">Search</button>
-                    </div>
-                </div>    
+
+                <div className="ingredientList">
+                    {this.state.mappedIngredients}
+                </div>
+                
+                <Pagination  
+                    currentTabs={this.props.currentTabs}
+                    handleUpdatePage={this.props.handleUpdatePage}
+                    totalPages={this.state.totalPages}
+                    handlePagination={this.handlePagination}
+                />    
+                
+                <button onClick={ () => {this.getList(this.state.input)} } type="submit" className="searchButton">Search</button>
+                <input onChange={ this.handleInput } placeholder="Enter Ingredient" type="text" className="searchInput_SI"></input>    
                 
             </React.Fragment>
         )

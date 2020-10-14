@@ -3,11 +3,9 @@ import Item from "./SearchPageItem"
 import "../../style/pagination.css";
 
 class Pagination extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
+
+  state = {};
+  
 
   handleShiftRight = () => {
 
@@ -43,15 +41,16 @@ class Pagination extends React.Component {
 
   }
 
-
   render() {
 
     return (
+      <React.Fragment>
+      {this.props.currentTabs.length > 0 
 
-      <div className="arrows react-bootstrap-table-pagination-list col-md-12 col-xs-12 col-sm-12 col-lg-12">
-        <ul className="pagination react-bootstrap-table-page-btns-ul">
+      ?
+      <div className="pagination">
           
-          <button onClick={this.handleShiftLeft} className="btn btn-primary">
+          <button onClick={this.handleShiftLeft} className="leftArrow">
             &lt;
           </button>
      
@@ -65,13 +64,17 @@ class Pagination extends React.Component {
               />
           )}
 
-          <button onClick={this.handleShiftRight} className="btn btn-primary">
+          <button onClick={this.handleShiftRight} className="rightArrow">
             &gt;
           </button>
 
-        </ul>
       </div>
+      
+      :""
 
+      }
+      
+      </React.Fragment>
     )
   }
 

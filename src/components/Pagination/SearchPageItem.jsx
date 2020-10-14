@@ -4,7 +4,7 @@ export default function SearchItem (props) {
 
     return (
       
-        <button onClick={props.handlePagination} className="tab btn btn-outline-dark">
+        <button onClick={props.handlePagination} className="tab">
           {props.listItem}
         </button>
     )  

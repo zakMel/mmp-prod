@@ -4,8 +4,12 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 622px;
-    background-color: lavender; 
+    height: 737px;
+    background-color: #f8f8ff; 
+}
+
+.instrPlaceholder {
+    margin-top: 55px;
 }
 
 .instructions {
@@ -15,57 +19,98 @@
 .listContainer {
     margin-top: 8px;
     width: 100vw;
-    height: 293px;
+    height: 440px;
     overflow: auto;
 }
 
 .itemContainer {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 29px;
-    margin-bottom: 5px;
+    margin-bottom: 5px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 42px;
+    text-align: center;
 }
 
 .itemDescription {
-    width: 262px;
+    /* width: 262px;
     background-color: white;
     border: 1px solid black;
-    border-radius: .5em;
-    padding: 4px;
-    font-size: 12px;
-}
-
-.mealName {
-    margin-top: 60px;
+    border-radius: .5em; */
+    padding: 6px;
+    font-size: 15px;
+    margin-left: 8px;
+    display: block;
+    width: 260px;
+    height: 40px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    text-decoration: none;
 }
 
 .itemGrams {
-    width: 46px;
+    /* width: 46px;
     border: 1px solid black;
     border-radius: .5em;
-    padding: 1%;
     margin-left: 1.5vw;
+    font-size: 12px; */
+    padding: 6px;
+    font-size: 15px;
     text-align: center;
-    font-size: 12px;
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 71px;
 }
 
 .itemDeleteButton {
-    width: 49px;
+    /* width: 49px;
     border: 2px solid black;
     border-radius: .5em;
-    margin-right: 1.5vw;
     padding: 1%;
     text-align: center;
-    font-size: 12px;
+    font-size: 12px; */
+    margin-right: 8px;
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 71px;
+    background-color: #D96459;
 }
 
-.saveButton {
+.saveMealContainer_MG {
     position: fixed; 
-    bottom: 60px;  
+    bottom: 20px;  
 }
 
-.magnifyingGlass {
+.mealNameInput {
+    height: 40px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+
+.saveButton_MG {
+    /* background-image: linear-gradient(#666422, snow, #666422); */
+    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+/* .magnifyingGlass {
     position: fixed;
     bottom: 105px;
     height: 32px;
@@ -73,7 +118,32 @@
     border: 2px solid black;
     border-radius: .5em;
     background-color: lightblue;
+    background-color: #5aaeae;
+} */
+
+.searchButton_MG {
+    /* position: fixed; */
+    /* bottom: 65px; */
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: .5em;
+    margin-top: 14px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    /* background-image: linear-gradient(#1A8693, snow, #1A8693); */
+    background-image: linear-gradient(#4682b4, white, #4682b4);
+    /* background-color: #1A8693; */
+    color: black;
+    font-weight: bold;
+    padding: 3px;
 }
+
+a.searchButton_MG {
+    text-decoration: none;
+    color:black;
+  }
 
 @media only screen and (min-width: 768px) {
 

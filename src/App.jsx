@@ -496,6 +496,9 @@ class App extends React.Component {
             handleSearching={this.handleSearching}
             searching={this.state.searching}
             resetCurrentTabs={this.resetCurrentTabs}
+            loading={this.state.loading}
+            handleSaving={this.handleSaving}
+            handleDoneSaving={this.handleDoneSaving}
           />
         )}
       />
@@ -551,7 +554,7 @@ class App extends React.Component {
         )}
       />
 
-    <Footer />
+    {/* <Footer /> */}
 
     </React.Fragment>
     );

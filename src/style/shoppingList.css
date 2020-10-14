@@ -4,15 +4,15 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 565px;
+    height: 681px;
     margin-top: 55px;
-    background-color: lavender;
+    background-color: #f8f8ff; 
 }
 
 .listContainer_SL {
     overflow: auto;
     width: 100vw;
-    height: 385px;
+    height: 490px;
 }
 
 .itemContainer_SL {
@@ -56,7 +56,7 @@
 .printButton {
     display: block; 
     position: fixed;
-    bottom: 60px;
+    bottom: 20px;
     margin-top: 8px;
     margin: auto;
     border: 1.5px solid black;

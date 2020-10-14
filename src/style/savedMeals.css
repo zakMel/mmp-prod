@@ -1,3 +1,7 @@
+.mealListContainer {
+    margin-top: 10px;
+
+}
 
 .savedContainer {
     display: flex;
@@ -6,7 +10,7 @@
     justify-content: flex-start;
 
     margin-top: 55px;
-    background-color: lavender;
+    background-color: white;
     height: 564px;
 }
 
@@ -15,9 +19,9 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 567px;
+    height: 612px;
     margin-top: 55px;
-    background-color: lavender;
+    background-color: white;
 }
 
 .viewListItem {
@@ -32,6 +36,7 @@
 
 .editableName {
     margin-top: 10px;
+    font-weight: bold;
 }
 
 .savedMeal {
@@ -56,10 +61,39 @@
     width: 71px;
 }
 
-.saveEditButton {
+.saveEditButtonContainer {
     position: fixed;
-    bottom: 60px;
-    
+    bottom: 15px;
+}
+
+.editButton_ME {
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: .5em;
+    margin-top: 8px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-image: linear-gradient(#1a8693, snow, #1a8693);
+    color: black;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.saveButton_ME {
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: .5em;
+    margin-top: 8px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-image: linear-gradient(#567112, snow, #567112);
+    color: black;
+    font-weight: bold;
+    padding: 3px;
 }
 
 .fixedItemContainer {
@@ -106,6 +140,23 @@
     
 }
 
+.searchButton_ME {
+    position: fixed;
+    bottom: 65px;
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: .5em;
+    margin-top: 8px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-image: linear-gradient(#1a8693, snow, #1a8693);
+    color: black;
+    font-weight: bold;
+    padding: 3px;
+}
+
 a:link {
     text-decoration: none;
 }
@@ -114,7 +165,4 @@ a:active {
     color: black;
 }
 
-.mealListContainer {
-    margin-top: 10px;
 
-}

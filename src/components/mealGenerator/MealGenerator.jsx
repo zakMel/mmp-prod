@@ -130,12 +130,28 @@ class MealGenerator extends React.Component {
     let document = meals.doc(`${this.state.mealName}`);
     let state = this.state;
 
-    dbServices.set(document, {
-      mealName: state.mealName,
-      savedIngredients: state.savedIngredients,
-      mealMacros: state.mealMacros,
+    // dbServices.set(document, {
+    //   mealName: state.mealName,
+    //   savedIngredients: state.savedIngredients,
+    //   mealMacros: state.mealMacros,
+    // })
+
+    document.set({
+      weekDateDB: state.mealName,
+      dateRangeCal: state.savedIngredients,
+      calendarWeek: state.mealMacros,
     })
-  } 
+    .then(this.props.handleDoneSaving() )
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+
+  }
+
+  
 
   enterIngreInput = (e, macros) => {
     //   let container = e.target.parentElement;
@@ -331,6 +347,9 @@ class MealGenerator extends React.Component {
               mealName={this.props.mealName}
               handleNameInput_MG={this.props.handleNameInput_MG}
               sendToDatabase={this.sendToDatabase}
+              handleSaving={this.props.handleSaving}
+              loading={this.props.loading}
+
             />
           </div>
           :

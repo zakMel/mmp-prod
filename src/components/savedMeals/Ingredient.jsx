@@ -27,7 +27,7 @@ export default function Ingredient (props) {
                         <button 
                             // type="submit" 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                            className="itemDeleteButton btn btn-danger"
+                            className="itemDeleteButton"
                             >Delete
                         </button>
                  </div>
