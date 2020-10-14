@@ -42,7 +42,7 @@ class SavedMeal extends Component {
                     className="savedMeal"
                     >
                         <p className="ingredientText">
-                            {( this.props.description.length < 25 ? this.props.description : `${this.props.description.slice(0, 25)}...`)}
+                            {(  this.props.description? ( this.props.description.length < 25 ? this.props.description : `${this.props.description.slice(0, 25)}...`)  : "" )}
                         </p>
                     </NavLink>
 

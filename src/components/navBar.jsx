@@ -8,7 +8,7 @@ export default function UserBar (props) {
 
     return (
 
-        <Navbar expanded={navState} expand="true" bg="dark" variant="dark" className="navBar" >
+        <Navbar expanded={navState} expand="true" variant="dark" className="navBar" >
             {/* <Navbar.Brand href="/">Macro Meal Planning</Navbar.Brand> */}
             <NavLink 
                 to="/"
