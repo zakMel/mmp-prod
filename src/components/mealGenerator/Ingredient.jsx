@@ -18,8 +18,8 @@ export default function Ingredient (props) {
             <div 
             className="itemDescription"
             >
-                 { props.description.length > 45 && window.screen.width < 668?
-                    `${props.description.slice(0, 45)}...` : props.description
+                 { props.description.length > 80 && window.screen.width < 668?
+                    `${props.description.slice(0, 80)}...` : props.description
                  } 
             </div>  
             <button 

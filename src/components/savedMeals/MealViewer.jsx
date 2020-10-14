@@ -20,25 +20,13 @@ class MealViewer extends React.Component {
     componentDidMount() {
         this.renderDOM();
     }
-    
-    renderSavedMeals = () => {
-        this.setState((state)=>{
-            let rendered = state.importedMeals.map(this.renderMeals)
-    
-            return{
-                renderedMeals: rendered
-            }
-        })
-    }
 
     renderDOM = () => {
         let user = firebase.auth().currentUser;
         const users = db.collection("users");
         let userFile = users.doc(`${user.uid}`);
         let meals = userFile.collection("meals");
-        // let query = meals.where("userId", "==", user)
-        // console.log(query);
-        // query
+
         meals.get()
         .then(this.handleQuerySuccess)
         .then(this.renderSavedMeals)
@@ -49,20 +37,30 @@ class MealViewer extends React.Component {
   
     }
     
-    handleQuerySuccess = (response) => {
+    handleQuerySuccess = async (response) => {
         let list = []
-        response.forEach(doc => {
+        await response.forEach(doc => {
             list.push(doc.data());
         })
 
         console.log(list);
 
-        this.setState(() => {
+        await this.setState(() => {
             return {
                 importedMeals: list
             }
         })
 
+    }
+
+    renderSavedMeals = () => {
+        this.setState((state)=>{
+            let rendered = state.importedMeals.map(this.renderMeals)
+    
+            return{
+                renderedMeals: rendered
+            }
+        })
     }
 
     renderMeals = (meal) => {
@@ -71,6 +69,7 @@ class MealViewer extends React.Component {
           <SavedMeal
             passedProps={meal}
             description={meal.mealName}
+            nameLength={meal.mealName.length}
             updateList={this.props.updateList}
             handleSetName_ME={this.props.handleSetName_ME}
             prevPath={this.props.history.location.prevPath === "/calendar"? this.props.history.location.prevPath : this.props.history.location.pathname}

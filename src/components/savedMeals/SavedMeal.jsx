@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom'
-import PieChart from "../PieChart"
+import PieChart from "../PieChart";
+import '../../style/savedMeals.css';
 
 class SavedMeal extends Component {
     state = {};
 
     componentDidMount() {
+        console.log(this.props.nameLength)
 
     }
 
@@ -41,8 +43,8 @@ class SavedMeal extends Component {
                     }}
                     className="savedMeal"
                     >
-                        <p className="ingredientText">
-                            {(  this.props.description? ( this.props.description.length < 25 ? this.props.description : `${this.props.description.slice(0, 25)}...`)  : "" )}
+                        <p className={this.props.nameLength < 35 ? "ingredientText_short" : "ingredientText_long"} >
+                            {(this.props.description.length < 80 ? this.props.description : `${this.props.description.slice(0, 80)}...`)}
                         </p>
                     </NavLink>
 
