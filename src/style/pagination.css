@@ -1,9 +1,14 @@
 
-.pagination {
+.paginationMain {
     position: fixed;
     bottom: 70px;
-    width: 199px;
+    width: 100vw;
+}
+
+.pagButtonContainer {
     margin: auto;
+    width: 240px;
+    
 }
 
 .leftArrow {
