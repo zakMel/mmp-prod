@@ -33,7 +33,7 @@ class MealEditor extends React.Component {
   
   renderDOM = () => {
     // let name = this.props.passedProps === undefined ? this.props.history.location.passedProps.mealName : this.props.passedProps.mealName;
-    let name =this.props.passedProps.mealName;
+    let name =this.props.mealName;
     let givenIngredients = this.props.passedProps.savedIngredients; 
     let mappedList  = givenIngredients.map(ingre => this.renderIngredients(ingre)); 
     let macros = this.props.passedProps !== undefined ? this.props.passedProps.mealMacros : this.state.mealMacros
@@ -445,11 +445,11 @@ class MealEditor extends React.Component {
       
       <React.Fragment>
 
-        <div className="updateMealContainer">
+        <div className="mainContainer_ME">
 
           <ContentEditable
             // innerRef={this.contentEditable}
-            html={this.props.mealName ? this.props.mealName : this.props.passedProps.mealName} // innerHTML of the editable div
+            html={this.props.mealName} // innerHTML of the editable div
             disabled={this.props.passedEditability? false : true}       // use true to disable editing
             onChange={this.props.handleUpdateName_ME} 
             className="editableName"
@@ -467,9 +467,9 @@ class MealEditor extends React.Component {
             : ""
           }        
 
-            <div className="updaterListContainer">
+            {/* <div className="updaterListContainer"> */}
               <InfiniteScroll
-                  // className="listContainer"
+                  className="listContainer_ME"
                   pageStart={0}
                   loadMore={this.loadFunc}
                   hasMore={false}
@@ -479,8 +479,11 @@ class MealEditor extends React.Component {
               >
                   {this.state.shownIngredients}
               </InfiniteScroll>
-            </div>
+            {/* </div> */}
 
+
+        {/* </div>                      */}
+        <div className="bottomButtonContainer">
           {this.props.passedEditability
             ?<NavLink 
             to={{
@@ -488,7 +491,7 @@ class MealEditor extends React.Component {
               lastURL: this.props.history.location.pathname,
               passedProps: this.props.passedProps
             }}
-            className="searchButton_ME"
+            className="addIngreButton_ME"
             >
               {/* <svg className="magnifyingGlass" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
                 <g fill="#616161">
@@ -502,7 +505,7 @@ class MealEditor extends React.Component {
             </NavLink>
             : ""
           }
-          <div className="saveEditButtonContainer">
+          {/* <div className="saveEditButtonContainer"> */}
             {this.props.passedEditability
               ? <button 
                  onClick={ 
@@ -527,10 +530,10 @@ class MealEditor extends React.Component {
                 className="editButton_ME"
                 >Edit
                 </button> 
-  }  
-          </div>   
+            }  
+          </div>
 
-        </div>                     
+        </div>
 
       </React.Fragment>
 

@@ -48,8 +48,10 @@ class Pagination extends React.Component {
       {this.props.currentTabs.length > 0 
 
       ?
-      <div className="pagination">
+      <div className="paginationMain">
           
+          <div className="pagButtonContainer">
+
           <button onClick={this.handleShiftLeft} className="leftArrow">
             &lt;
           </button>
@@ -67,6 +69,8 @@ class Pagination extends React.Component {
           <button onClick={this.handleShiftRight} className="rightArrow">
             &gt;
           </button>
+
+        </div>
 
       </div>
       

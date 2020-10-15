@@ -1,46 +1,77 @@
-.mealListContainer {
-    margin-top: 10px;
 
-}
-
-.savedContainer {
+.viewMainContainer {
+    /* background-color: lavender; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 
     margin-top: 55px;
-    background-color: white;
-    height: 564px;
+    background-color: #f8f8ff; 
+    height: 680px;
 }
 
-.updateMealContainer {
-    display: flex;
-    flex-direction: column;
+.viewListContainer {
+    margin-top: 10px;
+}
+
+.mainContainer_ME {
+    display: block;
+    /* flex-direction: column; */
+    /* justify-content: center; */
     align-items: center;
     width: 100vw;
-    height: 612px;
+    height: 680px;
     margin-top: 55px;
-    background-color: white;
+    background-color: #f8f8ff; 
 }
+
+.listContainer_ME {
+    background-color: lavender;
+    margin-top: 10px;
+    height: 380px;
+    overflow: auto;
+}
+
+.ingreMainContainer_ME {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 29px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+}
+
+/* .updaterListContainer {
+    margin-top: 10px;
+    height: 420px;
+    overflow: auto;
+}    */
 
 .viewListItem {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 370px;
+    /* width: 370px; */
+    width: 100vw;
     height: 42px;
 }
 
 .editableName {
     margin-top: 10px;
     font-weight: bold;
+    overflow-wrap: break-word;
+    width: 400px;
+    text-align: center;
+    /* flex: 0 0 inherit; */
+
 }
 
 .savedMeal {
     display: block;
-    width: 260px;
+    width: 280px;
     height: 40px;
     padding-left: 8px;
     border: 1.5px solid black;
@@ -72,6 +103,7 @@
     background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
     height: 40px;
     border-radius: 8px;
+    margin-right: 8px;
     margin-left: 8px;
     width: 71px;
 }
@@ -81,12 +113,38 @@
     border: 1.5px solid black;
 }
 
-.saveEditButtonContainer {
-    position: fixed;
-    bottom: 15px;
+.itemDeleteButton {
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 71px;
 }
 
+.itemDeleteButton:active, .itemDeleteButton:focus {
+    outline: unset;
+    border: 1.5px solid black;
+}
+
+.bottomButtonContainer {
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    height: 85px;
+    width: 100vw;
+
+}
+
+/* .saveEditButtonContainer {
+    position: fixed;
+    bottom: 15px;
+    width: 100vw;
+} */
+
 .editButton_ME {
+    /* display: block;
+    position: fixed;
+    bottom: 20px;
     height: 35px;
     width: 200px;
     text-align: center;
@@ -95,14 +153,25 @@
     margin-top: 8px;
     border: 1.5px solid black;
     border-radius: 5px;
-    background-image: linear-gradient(#1a8693, snow, #1a8693);
     color: black;
     font-weight: bold;
     padding: 3px;
+    margin: auto; */
+    display: block;
+    background-image: linear-gradient(#1a8693, snow, #1a8693);
+    bottom: 20px;
+    /* background-image: linear-gradient(#6b8e23, snow, #6b8e23); */
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin: auto;
 }
 
 .saveButton_ME {
-    height: 35px;
+    /* height: 35px;
     width: 200px;
     text-align: center;
     border: 2px solid black;
@@ -113,68 +182,97 @@
     background-image: linear-gradient(#567112, snow, #567112);
     color: black;
     font-weight: bold;
-    padding: 3px;
+    padding: 3px; */
+
+
+    /* position: fixed;
+    bottom: 5px; */
+    /* position: fixed; */
+    display: block;
+    /* bottom: 20px; */
+    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin: auto;
 }
 
-.fixedItemContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 29px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-}
-
-.fixedItemDescription {
-    width: 90vw;
-    /* height: 5vh; */
-    background-color: white;
-    border: 1px solid black;
-    border-radius: .5em;
-    padding-left: 1vw;
-    padding-top: .5vh;
-    font-size: 12px;
-    
-}
-
-.editItemContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 29px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-}
-
-.editItemDescription {
-    width: 70vw;
-    /* height: 5vh; */
-    background-color: white;
-    border: 1px solid black;
-    border-radius: .5em;
-    padding-left: 1vw;
-    padding-top: .5vh;
-    font-size: 12px;
-    
-}
-
-.searchButton_ME {
-    position: fixed;
-    bottom: 65px;
+.addIngreButton_ME {
+    /* position: fixed; */
+    display: block;
+    margin: auto;
+    /* bottom: 65px; */
     height: 35px;
     width: 200px;
     text-align: center;
     border: 2px solid black;
     border-radius: .5em;
-    margin-top: 8px;
+    /* margin-top: 8px; */
     border: 1.5px solid black;
     border-radius: 5px;
     background-image: linear-gradient(#1a8693, snow, #1a8693);
     color: black;
     font-weight: bold;
     padding: 3px;
+    margin-bottom: 5px;
+}
+
+.editedIngreDescription {
+    /* width: 90vw;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: .5em;
+    padding-left: 1vw;
+    padding-top: .5vh;
+    font-size: 12px; */
+    font-size: .8em;
+    padding-left: 8px;
+    display: block;
+    width: 390px;
+    height: 40px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    text-decoration: none;
+    
+}
+
+/* .editItemContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 29px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+} */
+
+.prevIngreDescription {
+    /* width: 70vw;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: .5em;
+    padding-left: 1vw;
+    padding-top: .5vh;
+    font-size: 12px; */
+    font-size: .8em;
+    padding-left: 8px;
+    margin-left: 8px;
+    display: block;
+    width: 260px;
+    height: 40px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    text-decoration: none;
+    
 }
 
 a:link {

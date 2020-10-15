@@ -23,7 +23,8 @@ export default function PieChart (props) {
                             fontSize: 10
                         }
                     },
-                    layout: props.layout
+                    layout: props.layout,
+                    maintainAspectRatio: false
                 }}
                 height={props.height}
                 width={props.width}

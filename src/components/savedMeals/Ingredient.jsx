@@ -8,7 +8,7 @@ export default function Ingredient (props) {
         
         <div>
             {props.editable
-                ? <div className="editItemContainer">
+                ? <div className="ingreMainContainer_ME">
                         <input 
                             onFocus={ (e) => props.enterIngreInput(e, props.macros) }
                             onBlur={ (e) => props.exitIngreInput(e, props.macros) } 
@@ -18,7 +18,7 @@ export default function Ingredient (props) {
                         >
                         </input>
                         <div 
-                        className="editItemDescription"
+                        className="prevIngreDescription"
                         >
                             { props.description.length > 45 && window.screen.width < 668?
                                 `${props.description.slice(0, 45)}...` : props.description
@@ -32,10 +32,10 @@ export default function Ingredient (props) {
                         </button>
                  </div>
                  
-                : <div className="fixedItemContainer">
+                : <div className="ingreMainContainer_ME">
                 
                     <div 
-                    className="fixedItemDescription"
+                    className="editedIngreDescription"
                     >
                         { props.description.length > 60 && window.screen.width < 668?
                             `${props.description.slice(0, 60)}...` : props.description

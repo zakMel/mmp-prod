@@ -19,6 +19,7 @@ class MealViewer extends React.Component {
 
     componentDidMount() {
         this.renderDOM();
+        console.log(this.state.renderedMeals)
     }
 
     renderDOM = () => {
@@ -102,9 +103,10 @@ class MealViewer extends React.Component {
           for ( let u = 0; u < state.renderedMeals.length;  u++) {
             let arr = state.renderedMeals;
             let current = arr[u];
-            let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
-          
-            if(!includes){
+            // let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
+            let equal = current === container
+            console.log(container, current, equal)
+            if(!equal){
               newRender.push(current)
             }  
     
@@ -116,7 +118,7 @@ class MealViewer extends React.Component {
     
         })
 
-        dbServices.delete(document);
+        // dbServices.delete(document);
 
     }
 
@@ -127,14 +129,14 @@ class MealViewer extends React.Component {
     render () {
 
         return (
-            <div className="savedContainer">
+            <div className="viewMainContainer">
 
                 {this.state.importedMeals.length === 0 
                 ? <div className="instructions">You must make a meal first!</div>
                 : ""
                 }
 
-                <div className="mealListContainer">
+                <div className="viewListContainer">
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.loadFunc}
