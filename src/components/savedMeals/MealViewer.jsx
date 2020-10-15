@@ -4,7 +4,7 @@ import {firestore} from '../../configFirebase';
 import $ from 'jquery'
 import InfiniteScroll from 'react-infinite-scroller';
 import SavedMeal from "./SavedMeal";
-import dbServices from '../../services/dbServices';
+// import dbServices from '../../services/dbServices';
 import "../../style/savedMeals.css";
 const db = firestore;
 
@@ -94,7 +94,7 @@ class MealViewer extends React.Component {
         let meals = userFile.collection("meals");
         let container = e.target.parentElement;
         let description = $(container).children().filter(".savedMeal").text();
-        let document = meals.doc(`${description}`);
+        // let document = meals.doc(`${description}`);
     
         //removes from the dom
         this.setState( (state) => {

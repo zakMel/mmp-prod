@@ -14,7 +14,7 @@ export default function Ingredient (props) {
                             onBlur={ (e) => props.exitIngreInput(e, props.macros) } 
                             placeholder="grams" 
                             type="text" 
-                            className="itemGrams"
+                            className="itemGrams_ME"
                         >
                         </input>
                         <div 
@@ -27,7 +27,7 @@ export default function Ingredient (props) {
                         <button 
                             // type="submit" 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                            className="itemDeleteButton"
+                            className="itemDeleteButton_ME"
                             >Delete
                         </button>
                  </div>

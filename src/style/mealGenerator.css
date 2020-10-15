@@ -90,31 +90,49 @@
     color: black;
 }
 
-.saveMealContainer_MG {
+.saveButtonContainer_MG {
+    width: 100vw;
     position: fixed; 
-    bottom: 20px;  
+    bottom: 20px;
+    display: block;  
 }
 
-.mealNameInput {
+.saveButtonBar_MG {
+    margin: auto;
+    /* display: inline-block; */
+    width: 305px;
+    height: 41px;
+    
+}
+
+.mealNameInput_MG {
     height: 40px;
     text-align: center;
+    /* display: inline-block; */
     border: 2px solid black;
     border-radius: 5px;
+    width: 200px;
     
 }
 
 .saveButton_MG {
     /* background-image: linear-gradient(#666422, snow, #666422); */
+    text-align: none;
     background-image: linear-gradient(#6b8e23, snow, #6b8e23);
     height: 40px;
     width: 100px;
     text-align: center;
     border: 1.5px solid black;
     border-radius: 5px;
-    margin-left: 10px;
+    color: black;
+    float: right;
+    padding: 3px;
+    margin-left: 5px;
 }
 
 .saveButton_MG:active, .saveButton_MG:focus {
+    text-decoration: none;
+    color: black;
     outline: unset;
     border: 1.5px solid black;
 }

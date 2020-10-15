@@ -26,11 +26,15 @@ export default function CalendarItem (props) {
                 />
 
                 <NavLink 
-                to={{
-                    pathname: typeof props.breakfast === "object" ? "/mealEditor" : "/mealViewer",
+                to={typeof props.breakfast === "string" 
+                ? {
+                    // pathname: typeof props.breakfast === "object" ? "/mealEditor" : "/mealViewer",
+                    pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.breakfast,
-                }}
+                }
+                : "/calendar"
+                }
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
@@ -59,11 +63,15 @@ export default function CalendarItem (props) {
                 />
 
                 <NavLink 
-                to={{
-                    pathname: typeof props.lunch === "object" ? "/mealEditor" : "/mealViewer",
+                to={typeof props.lunch === "string" 
+                ? {
+                    // pathname: typeof props.lunch === "object" ? "/mealEditor" : "/mealViewer",
+                    pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.lunch,
-                }}
+                }
+                : "/calendar"
+                }
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
@@ -94,11 +102,15 @@ export default function CalendarItem (props) {
                 />
 
                 <NavLink 
-                to={{
-                    pathname: typeof props.dinner === "object" ? "/mealEditor" : "/mealViewer",
+                to={typeof props.dinner === "string" 
+                ? {
+                    // pathname: typeof props.dinner === "object" ? "/mealEditor" : "/mealViewer",
+                    pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.dinner,
-                }}
+                }
+                : "/calendar"
+                }
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >

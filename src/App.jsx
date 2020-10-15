@@ -3,7 +3,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import {firestore} from './configFirebase';
 import NavBar from './components/NavBar'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
@@ -257,7 +257,7 @@ class App extends React.Component {
   updateWeekItem = (day, meal, update) => {
     console.log(day, meal, update);
 
-    let updatedWeek = this.state.calendarWeek.map((item)=>{
+    this.state.calendarWeek.map((item)=>{
       if(item.day === day) {
         item[`${meal}`] = update
       }

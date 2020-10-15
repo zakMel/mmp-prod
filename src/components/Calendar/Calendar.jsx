@@ -13,7 +13,7 @@ class Calendar extends React.Component {
 
     componentDidMount() {
         this.renderDOM()
-        console.log(this.props.weekDateDB)
+        // console.log(this.props.weekDateDB)
     }
 
     loadFunc = () => {
@@ -60,7 +60,7 @@ class Calendar extends React.Component {
         let meal = $(container).attr("id")
         let parent = $(container).parent().children();
         let weekDay = $(parent).filter(".calendarMealDay").text()
-        let elementText = $(container).children().filter(".mealItem").text();
+        // let elementText = $(container).children().filter(".mealItem").text();
 
         console.log(weekDay, meal);
         let newWeek = []
@@ -69,7 +69,7 @@ class Calendar extends React.Component {
             let item = arr[u]; 
             if(item.day === weekDay){
                 console.log(item);
-                let prevWeek = this.props.week;
+                // let prevWeek = this.props.week;
                 item[meal] = meal
             }
             newWeek.push(item);

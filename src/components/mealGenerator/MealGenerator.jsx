@@ -5,7 +5,7 @@ import { Route, withRouter } from "react-router-dom";
 import $ from "jquery"
 import MgBody from "./MG_Body"
 import Search from '../Search/Search'
-import dbServices from '../../services/dbServices';
+// import dbServices from '../../services/dbServices';
 import Ingredient from './Ingredient';
 import "../../style/mealGenerator.css";
 import "../../App.css";
