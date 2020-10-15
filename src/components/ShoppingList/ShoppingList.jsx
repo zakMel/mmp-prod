@@ -9,7 +9,13 @@ export default function ShoppingList (props) {
     let [list, updateList] = useState([])
 
     useEffect(() => {
-        renderDOM()
+        // renderDOM()
+        (async ()=>{
+            let list = await getAllIngredients(props.week)
+            let mappedList = list.map(ingre => renderShoppingList(ingre))
+            updateList(mappedList)
+
+        })()
 
     }, [props.week]);
 
@@ -71,11 +77,11 @@ export default function ShoppingList (props) {
         )
     }
 
-    let renderDOM = async () => {
-        let list = await getAllIngredients(props.week)
-        let mappedList = list.map(ingre => renderShoppingList(ingre))
-        updateList(mappedList)
-    }
+    // let renderDOM = async () => {
+    //     let list = await getAllIngredients(props.week)
+    //     let mappedList = list.map(ingre => renderShoppingList(ingre))
+    //     updateList(mappedList)
+    // }
 
     let loadFunc = () => {
 

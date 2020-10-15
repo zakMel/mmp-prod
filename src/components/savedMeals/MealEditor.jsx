@@ -467,9 +467,9 @@ class MealEditor extends React.Component {
             : ""
           }        
 
-            {/* <div className="updaterListContainer"> */}
+            <div className="listContainer_ME">
               <InfiniteScroll
-                  className="listContainer_ME"
+                  className="list_ME"
                   pageStart={0}
                   loadMore={this.loadFunc}
                   hasMore={false}
@@ -479,7 +479,7 @@ class MealEditor extends React.Component {
               >
                   {this.state.shownIngredients}
               </InfiniteScroll>
-            {/* </div> */}
+            </div>
 
 
         {/* </div>                      */}

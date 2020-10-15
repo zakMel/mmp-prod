@@ -62,25 +62,30 @@ class MG_Body extends React.Component {
                 </InfiniteScroll>
               </div>
               
-              <div className="saveMealContainer_MG">
-               <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="mealNameInput"></input>
-                <button 
-                  onClick={ 
-                    () => { 
-                      if (this.props.mealName.length > 0) {
-                        this.props.handleSaving();
-                        this.props.sendToDatabase() 
-                        console.log("sent")
-                      }
+              <div className="saveButtonContainer_MG">
+                <div className="saveButtonBar_MG">
+               
+                <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="mealNameInput_MG"></input>
+                  <NavLink 
+                    to="/mealViewer"
+                    onClick={ 
+                      () => { 
+                        if (this.props.mealName.length > 0) {
+                          this.props.handleSaving();
+                          this.props.sendToDatabase() 
+                          console.log("sent")
+                        }
+                      } 
                     } 
-                  } 
-                  type="submit" 
-                  className="saveButton_MG"
-                  >
-                  {!this.props.loading ? "Save Meal" : "Saving ..."}
-                </button>
+                    type="submit" 
+                    className="saveButton_MG"
+                    >
+                    {!this.props.loading ? "Save Meal" : "Saving ..."}
+                  </NavLink>
+
+                </div>
               </div>
-              
+
             </React.Fragment>  
         )
     }

@@ -20,16 +20,23 @@
     /* flex-direction: column; */
     /* justify-content: center; */
     align-items: center;
-    width: 100vw;
+    /* width: 340px; */
     height: 680px;
     margin-top: 55px;
     background-color: #f8f8ff; 
 }
 
 .listContainer_ME {
-    background-color: lavender;
+    display: block;
+    width: 100vw;
+}
+
+.list_ME {
+    /* background-color: lavender; */
+    margin: auto;
     margin-top: 10px;
-    height: 380px;
+    height: 410px;
+    width: 390px;
     overflow: auto;
 }
 
@@ -40,6 +47,7 @@
     height: 29px;
     margin-top: 5px;
     margin-bottom: 15px;
+    /* width: 100vw; */
 
 }
 
@@ -113,7 +121,7 @@
     border: 1.5px solid black;
 }
 
-.itemDeleteButton {
+.itemDeleteButton_ME {
     background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
     height: 40px;
     border-radius: 8px;
@@ -121,9 +129,19 @@
     width: 71px;
 }
 
-.itemDeleteButton:active, .itemDeleteButton:focus {
+.itemDeleteButton_ME:active, .itemDeleteButton_ME:focus {
     outline: unset;
     border: 1.5px solid black;
+}
+
+.itemGrams_ME {
+    padding: 6px;
+    font-size: 15px;
+    text-align: center;
+    height: 40px;
+    border-radius: 8px;
+    /* margin-left: 8px; */
+    width: 71px;
 }
 
 .bottomButtonContainer {
