@@ -86,8 +86,14 @@
     border-radius: 8px;
     margin-left: 8px;
     width: 71px;
-    background-color: #D96459;
+    /* background-color: #D96459; */
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
     color: black;
+}
+
+.itemDeleteButton:active, .itemDeleteButton:focus {
+    outline: unset;
+    border: 1.5px solid black;
 }
 
 .saveButtonContainer_MG {

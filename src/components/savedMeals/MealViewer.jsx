@@ -4,9 +4,9 @@ import {firestore} from '../../configFirebase';
 import $ from 'jquery'
 import InfiniteScroll from 'react-infinite-scroller';
 import SavedMeal from "./SavedMeal";
-// import dbServices from '../../services/dbServices';
 import "../../style/savedMeals.css";
 const db = firestore;
+let key = 10000000;
 
 class MealViewer extends React.Component {
 
@@ -19,7 +19,7 @@ class MealViewer extends React.Component {
 
     componentDidMount() {
         this.renderDOM();
-        console.log(this.state.renderedMeals)
+        // console.log(this.state.renderedMeals)
     }
 
     renderDOM = () => {
@@ -44,7 +44,7 @@ class MealViewer extends React.Component {
             list.push(doc.data());
         })
 
-        console.log(list);
+        // console.log(list);
 
         await this.setState(() => {
             return {
@@ -64,10 +64,17 @@ class MealViewer extends React.Component {
         })
     }
 
+    newKey = () => {
+        key++
+    }
+
     renderMeals = (meal) => {
         
+        this.newKey()
+
         return (
           <SavedMeal
+            key={key}
             passedProps={meal}
             description={meal.mealName}
             nameLength={meal.mealName.length}
@@ -86,15 +93,10 @@ class MealViewer extends React.Component {
         );
           
     };
-    
+
     handleDeleteFromDOM = (e) => {
-        let user = firebase.auth().currentUser;
-        const users = db.collection("users");
-        let userFile = users.doc(`${user.uid}`);
-        let meals = userFile.collection("meals");
         let container = e.target.parentElement;
         let description = $(container).children().filter(".savedMeal").text();
-        // let document = meals.doc(`${description}`);
     
         //removes from the dom
         this.setState( (state) => {
@@ -103,23 +105,19 @@ class MealViewer extends React.Component {
           for ( let u = 0; u < state.renderedMeals.length;  u++) {
             let arr = state.renderedMeals;
             let current = arr[u];
-            // let includes = current.props.description.includes(description.slice(0, (description.length - 3)));
-            let equal = current === container
-            console.log(container, current, equal)
+            let equal = description === current.props.description
             if(!equal){
-              newRender.push(current)
+                newRender.push(current)
             }  
-    
-          }
-    
-          return {
+            
+        }
+        
+        return {
             renderedMeals: newRender
-          }
-    
+        }
+        
         })
-
-        // dbServices.delete(document);
-
+  
     }
 
     loadFunc = () => {

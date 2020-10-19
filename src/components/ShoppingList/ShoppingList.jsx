@@ -3,6 +3,7 @@ import Item from './item';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import InfiniteScroll from 'react-infinite-scroller';
 import "../../style/shoppingList.css";
+let key = 10000000;
 
 export default function ShoppingList (props) {
 
@@ -52,7 +53,7 @@ export default function ShoppingList (props) {
                         for(let u = 0; u < currentMeal.savedIngredients.length; u++){
                             // ingredients.push(currentMeal.savedIngredients[u].ingre.description)
                             if(Object.keys(ingredients).includes(currentMeal.savedIngredients[u].ingre.description)) {
-                                console.log('dublicate', ingredients[currentMeal.savedIngredients[u].ingre.description])
+                                // console.log('dublicate', ingredients[currentMeal.savedIngredients[u].ingre.description])
                                 ingredients[currentMeal.savedIngredients[u].ingre.description]++
 
                             }else {
@@ -64,14 +65,21 @@ export default function ShoppingList (props) {
                     }
                 }
         }  
-        let arr = Object.entries(ingredients)    
-        arr.sort(); //ingre object would mean that it could not be sorted.
-        return arr;
-        }
+    let arr = Object.entries(ingredients)    
+    arr.sort(); //ingre object would mean that it could not be sorted.
+    return arr;
+    }
+
+    let newKey = () => {
+        key++
+    }
 
     let renderShoppingList = (ingre) => {
+        newKey()
+
         return (
             <Item
+                key={key}
                 desc={ingre}
             />
         )

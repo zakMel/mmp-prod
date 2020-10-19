@@ -28,7 +28,6 @@ class MealEditor extends React.Component {
 
   componentDidMount(){ 
     this.renderDOM() 
-    console.log(this.props.passedProps)
   }
   
   renderDOM = () => {

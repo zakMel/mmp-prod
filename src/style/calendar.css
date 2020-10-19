@@ -56,7 +56,12 @@
     border-radius: 5px;
     position: relative;
     z-index: 1;
-    /* color: white; */
+    text-align: center;
+    /* width: 294.3875045776367px; */
+}
+
+.dateRangeCal {
+    /* width: 294.3875045776367px; */
 }
 
 .calendarSaveButton {

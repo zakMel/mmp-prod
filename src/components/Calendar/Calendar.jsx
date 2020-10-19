@@ -4,6 +4,7 @@ import CalendarItem from './CalendarItem';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import $ from "jquery"
 import "../../style/calendar.css";
+let key = 10000000;
 
 class Calendar extends React.Component {
     
@@ -39,9 +40,16 @@ class Calendar extends React.Component {
         }
     }
 
+    newKey = () => {
+        key++
+    }
+
     renderDays = (item) => {
+        this.newKey()
+
         return (
             <CalendarItem 
+                key={key}
                 meal={item}
                 day={item.day}
                 breakfast={item.Breakfast}
@@ -118,6 +126,7 @@ class Calendar extends React.Component {
                         calendarIcon={null}
                         clearIcon={null}
                         className="dateRanger"
+                        calendarClassName="dateRangeCal"
                         onChange={this.props.setWeekDateRange}
                         value={this.props.weekDateDB.length > 0 ? this.props.weekDateRange : null}
                     />

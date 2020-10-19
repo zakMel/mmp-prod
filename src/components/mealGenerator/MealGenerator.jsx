@@ -10,6 +10,7 @@ import Ingredient from './Ingredient';
 import "../../style/mealGenerator.css";
 import "../../App.css";
 const db = firestore;
+let key = 10000000;
 
 class MealGenerator extends React.Component {
     
@@ -62,6 +63,7 @@ class MealGenerator extends React.Component {
   }
   
   renderDOM = () => {
+    
     let mappedList = this.props.list? this.props.list.map(ingre => this.renderIngredients(ingre)) : "";
     let givenIngredients = this.props.list;
     
@@ -75,12 +77,18 @@ class MealGenerator extends React.Component {
     
   }
 
+  newKey = () => {
+    key++
+  }
+
   renderIngredients = (ingredient) => {
     
     this.addMacros(ingredient)
+    this.newKey()
     
     return (
       <Ingredient
+      key={key}
       ingredient={ingredient.ingre}
       description={ingredient.ingre.description}
       nutrients={ingredient.ingre.foodNutrients}
@@ -94,7 +102,7 @@ class MealGenerator extends React.Component {
       
       );
       
-  };
+    };
     
   addMacros = (ingredient) => {
     

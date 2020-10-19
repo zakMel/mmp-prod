@@ -158,25 +158,99 @@ class App extends React.Component {
     const users = db.collection("users");
     let userFile = users.doc(`${user.uid}`);
     let weeks = userFile.collection("weeks");
+    let document = weeks.doc(`${this.state.weekDateDB}`)
     let query = weeks.where("weekDateDB", "==", this.state.weekDateDB)
+
+  document
+  .get()
+  .then(function(doc) {
+    if (doc.exists) {
+      return true;
+    } else {
+      console.log("No such document!");
+      return false;
+    }
+  })
+  .then((response)=>{
+    if(response === true) {
+
+      query.get()
+      .then(this.handleQuerySuccess)
+      .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
+    } else {
+      this.setState(()=>{
+        return {
+          calendarWeek : [
+            {
+              day: "Monday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
+            {
+              day: "Tuesday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
+            {
+              day: "Wednesday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
+            {
+              day: "Thursday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
+            {
+              day: "Friday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },  
+            {
+              day: "Saturday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
+            {
+              day: "Sunday",
+              Breakfast: "Breakfast",
+              Lunch: "Lunch",
+              Dinner: "Dinner",
+            },
     
-    query.get()
-    .then(this.handleQuerySuccess)
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
+          ],
+
+        }
+
+      })
+
+    }
+
+  })
+  .catch(function(error) {
+      console.log("Error getting document:", error);
+  });
   }
 
   handleQuerySuccess = (response) => {
-    
     response.forEach(doc => {
       if(doc.data().weekDateDB === this.state.weekDateDB){
-        // console.log("week exists", doc.data().weekDateDB, doc.data().calendarWeek)
         this.setState(() => {
             return {
               calendarWeek: doc.data().calendarWeek
             }
         })
+      } else {
+        return false;
       }
     })
 
@@ -204,17 +278,17 @@ class App extends React.Component {
       let document = weeks.doc(`${this.state.weekDateDB}`);
       let state = this.state;
       
-      // dbServices.set(document, {
-      //   weekDateDB: state.weekDateDB,
-      //   dateRangeCal: state.dateRangeCal,
-      //   calendarWeek: state.calendarWeek,
-      // })
+    console.log({
+      weekDateDB: state.weekDateDB,
+      dateRangeCal: state.dateRangeCal,
+      calendarWeek: state.calendarWeek,
+    })
 
-      document.set({
-        weekDateDB: state.weekDateDB,
-        dateRangeCal: state.dateRangeCal,
-        calendarWeek: state.calendarWeek,
-      })
+    document.set({
+      weekDateDB: state.weekDateDB,
+      dateRangeCal: state.dateRangeCal,
+      calendarWeek: state.calendarWeek,
+    })
     .then(this.handleDoneSaving() )
     .then(function() {
         console.log("Document successfully written!");
