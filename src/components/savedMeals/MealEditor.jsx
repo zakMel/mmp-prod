@@ -482,7 +482,7 @@ class MealEditor extends React.Component {
 
           {this.props.passedEditability === false 
             ?
-            <div className="editButtonBar">
+            <div className="editButtonBar_ME">
               <button 
               className="editButton_ME"
                   onClick={ 
@@ -490,7 +490,6 @@ class MealEditor extends React.Component {
                       this.props.handleEditablility();
                     }
                   } 
-                type="submit" 
                 >Edit
               </button> 
             </div>

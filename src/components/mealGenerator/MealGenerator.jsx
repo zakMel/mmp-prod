@@ -152,8 +152,6 @@ class MealGenerator extends React.Component {
 
   }
 
-  
-
   enterIngreInput = (e, macros) => {
     //   let container = e.target.parentElement;
     //   let description = container.childNodes[0].innerHTML;

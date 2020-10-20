@@ -22,13 +22,13 @@ export default function Ingredient (props) {
                 </div>
                 
                 :
-                <div className="ingredientEdit_ME">
+                <div className="ingreEditBar_ME">
                         <input 
                             onFocus={ (e) => props.enterIngreInput(e, props.macros) }
                             onBlur={ (e) => props.exitIngreInput(e, props.macros) } 
                             placeholder="grams" 
                             type="text" 
-                            className="itemGrams_ME"
+                            className="IngreEditGrams_ME"
                         >
                         </input>
                         <div 
@@ -41,7 +41,7 @@ export default function Ingredient (props) {
                         <button 
                             // type="submit" 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                            className="itemDeleteButton_ME"
+                            className="ingreDeleteBtn_ME"
                             >Delete
                         </button>
                  </div>

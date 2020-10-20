@@ -506,6 +506,7 @@ class App extends React.Component {
       <NavBar
         handleSearching={this.handleSearching}
         resetCurrentTabs={this.resetCurrentTabs}
+        clearIngredients={this.clearIngredients}
       />
   
       <Route
