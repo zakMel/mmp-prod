@@ -5,41 +5,17 @@
     justify-content: flex-start;
     margin-top: 55px;
     background-color: #f8f8ff; 
-    height: 680px;
+    height: 612px;
 }
 
 .viewListContainer {
-    margin-top: 10px;
-}
-
-.mainContainer_ME {
-    display: block;
-    align-items: center;
-    height: 680px;
-    margin-top: 55px;
-    background-color: #f8f8ff; 
-}
-
-.listContainer_ME {
-    display: block;
-    width: 100vw;
-}
-
-.list_ME {
-    margin: auto;
-    margin-top: 10px;
-    height: 410px;
-    width: 390px;
-    overflow: auto;
-}
-
-.ingreMainContainer_ME {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 29px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    width: 100vw;
+    height: 580px;
+    overflow: auto;
 }
 
 .viewListItem {
@@ -47,8 +23,117 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 370px;
+    height: 40px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.savedMeal {
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    display: block;
+    width: 260px;
+    height: 40px;
+    font-size: .8em;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow: hidden;
+} 
+
+.ingredientText_short {
+    font-weight: 600;
+    display: block;
+    overflow-wrap: break-word;
+    padding: 6px;
+}
+
+.ingredientText_long {
+    display: block;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
+
+
+
+
+
+
+
+
+.mainContainer_ME {
+    display: block;
+    align-items: center;
+    height: 612px;
+    margin-top: 55px;
+    /* background-color: #f8f8ff;  */
+}
+
+.listContainer_ME {
+    background-color: lavender;
+    /* display: block;
+    width: 100vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    height: 200px;
     width: 100vw;
-    height: 42px;
+    overflow: auto;
+
+}
+
+/* .list_ME {
+    margin: auto;
+    margin-top: 10px;
+    height: 410px;
+    width: 390px;
+    overflow: auto;
+} */
+
+.ingredient_ME {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 29px;
+    margin-bottom: 15px; */
+
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    height: 40px;
+    width: 100vw;
+    background-color: lavender; */
+    display: block;
+    width: 340px;
+    height: 40px;
+    /* font-size: 15px; */
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    text-decoration: none;
+    margin-bottom: 5px;
+    font-size: .8em;
+}
+
+.ingredientText_MG {
+    /* font-size: .8em;
+    padding-left: 8px;
+    display: block;
+    width: 390px;
+    height: 40px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    text-decoration: none; */
+
+    margin-left: 4px;
 }
 
 .editableName {
@@ -57,36 +142,6 @@
     overflow-wrap: break-word;
     width: 400px;
     text-align: center;
-}
-
-.savedMeal {
-    display: block;
-    width: 280px;
-    height: 40px;
-    padding-left: 8px;
-    border: 1.5px solid black;
-    border-radius: 8px;
-    color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
-    text-decoration: none;
-
-} 
-
-.ingredientText_short {
-    font-size: .9em;
-    font-weight: 600;
-    display: block;
-    overflow-wrap: break-word;
-    padding: 6px;
-    width: 245px;
-}
-
-.ingredientText_long {
-    display: block;
-    font-size: .8em;
-    font-weight: 600;
-    overflow-wrap: break-word;
-    width: 245px;
 }
 
 .viewerDeleteButton {
@@ -125,7 +180,7 @@
     width: 71px;
 }
 
-.bottomButtonContainer {
+.searchSaveBar_ME {
     display: block;
     position: fixed;
     bottom: 10px;
@@ -134,17 +189,22 @@
 
 }
 
-.editButton_ME {
-    display: block;
-    background-image: linear-gradient(#1a8693, snow, #1a8693);
+.editButtonBar_ME {
+    width: 100vw;
+    position: fixed;
     bottom: 20px;
+}
+
+.editButton_ME {
+    background-image: linear-gradient(#1a8693, snow, #1a8693);
+    display: block;
     height: 40px;
     width: 200px;
     text-align: center;
     border: 1.5px solid black;
     border-radius: 5px;
-    margin-left: 10px;
-    margin: auto;
+    /* margin-left: 10px; */
+    /* margin: auto; */
 }
 
 .saveButton_ME {
@@ -174,19 +234,6 @@
     font-weight: bold;
     padding: 3px;
     margin-bottom: 5px;
-}
-
-.editedIngreDescription {
-    font-size: .8em;
-    padding-left: 8px;
-    display: block;
-    width: 390px;
-    height: 40px;
-    border: 1.5px solid black;
-    border-radius: 8px;
-    color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
-    text-decoration: none;
 }
 
 .prevIngreDescription {

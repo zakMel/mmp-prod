@@ -67,7 +67,7 @@ class MG_Body extends React.Component {
                
                 <input value={this.props.mealName} onChange={ this.props.handleNameInput_MG } placeholder="Input Meal Name" type="text" className="mealNameInput_MG"></input>
                   <NavLink 
-                    to="/mealViewer"
+                    to={this.props.mealName.length > 0 ? "/mealViewer" : "/mealGenerator"}
                     onClick={ 
                       () => { 
                         if (this.props.mealName.length > 0) {

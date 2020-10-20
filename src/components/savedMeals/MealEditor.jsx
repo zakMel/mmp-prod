@@ -85,7 +85,7 @@ class MealEditor extends React.Component {
 
       return (
       <Ingredient
-      editable={this.props.passedEditability}
+      passedEditability={this.props.passedEditability}
       ingredient={ingredient.ingre}
       description={ingredient.ingre.description}
       nutrients={ingredient.ingre.foodNutrients}
@@ -466,47 +466,50 @@ class MealEditor extends React.Component {
             : ""
           }        
 
-            <div className="listContainer_ME">
-              <InfiniteScroll
-                  className="list_ME"
-                  pageStart={0}
-                  loadMore={this.loadFunc}
-                  hasMore={false}
-                  // threshold={280}
-                  // loader={<div className="loader" key={0}>Loading ...</div>}
-                  // useWindow={true}
-              >
-                  {this.state.shownIngredients}
-              </InfiniteScroll>
-            </div>
-
-
-        {/* </div>                      */}
-        <div className="bottomButtonContainer">
-          {this.props.passedEditability
-            ?<NavLink 
-            to={{
-              pathname: "/search",
-              lastURL: this.props.history.location.pathname,
-              passedProps: this.props.passedProps
-            }}
-            className="addIngreButton_ME"
+          <div className="listContainer_ME">
+            <InfiniteScroll
+                // className="list_ME"
+                pageStart={0}
+                loadMore={this.loadFunc}
+                hasMore={false}
+                // threshold={280}
+                // loader={<div className="loader" key={0}>Loading ...</div>}
+                // useWindow={true}
             >
-              {/* <svg className="magnifyingGlass" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="12vh" width="12vw">
-                <g fill="#616161">
-                  <rect x="34.6" y="28.1" transform="matrix(.707 -.707 .707 .707 -15.154 36.586)" width="4" height="17"></rect>
-                  <circle cx="20" cy="20" r="16"></circle>
-                </g>
-                <rect x="36.2" y="32.1" transform="matrix(.707 -.707 .707 .707 -15.839 38.239)" fill="#37474F" width="4" height="12.3"></rect>
-                <circle fill="#64B5F6" cx="20" cy="20" r="13"></circle><path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1 C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"></path>
-              </svg> */}
-              Add Ingredient
-            </NavLink>
-            : ""
-          }
-          {/* <div className="saveEditButtonContainer"> */}
-            {this.props.passedEditability
-              ? <button 
+                {this.state.shownIngredients}
+            </InfiniteScroll>
+          </div>
+
+          {this.props.passedEditability === false 
+            ?
+            <div className="editButtonBar">
+              <button 
+              className="editButton_ME"
+                  onClick={ 
+                    () => {
+                      this.props.handleEditablility();
+                    }
+                  } 
+                type="submit" 
+                >Edit
+              </button> 
+            </div>
+            
+            :
+            <div className="searchSaveBar_ME">
+
+              <NavLink 
+              to={{
+                pathname: "/search",
+                lastURL: this.props.history.location.pathname,
+                passedProps: this.props.passedProps
+              }}
+              className="addIngreButton_ME"
+              >
+                Add Ingredient
+              </NavLink>
+
+              <button 
                  onClick={ 
                   () => { 
                     if (this.state.mealName.length > 0) {
@@ -519,20 +522,10 @@ class MealEditor extends React.Component {
                 className="saveButton_ME"
                 >{!this.props.loading ? "Save Meal" : "Saving ..."}
                </button>
-              : <button 
-                  onClick={ 
-                    () => {
-                      this.props.handleEditablility();
-                    }
-                  } 
-                type="submit" 
-                className="editButton_ME"
-                >Edit
-                </button> 
-            }  
-          </div>
 
-        </div>
+            </div>
+          }  
+          </div>
 
       </React.Fragment>
 

@@ -6,8 +6,23 @@ export default function Ingredient (props) {
     return (
         
         <div>
-            {props.editable
-                ? <div className="ingreMainContainer_ME">
+            {props.passedEditability === false
+                ? 
+                <div className="ingredient_ME">
+                
+                    <div 
+                    className="ingredientText_MG"
+                    >
+                        {/* { props.description.length > 60 && window.screen.width < 668?
+                            `${props.description.slice(0, 60)}...` : props.description
+                        }  */}
+                        {props.description}
+                    </div>  
+        
+                </div>
+                
+                :
+                <div className="ingredientEdit_ME">
                         <input 
                             onFocus={ (e) => props.enterIngreInput(e, props.macros) }
                             onBlur={ (e) => props.exitIngreInput(e, props.macros) } 
@@ -30,18 +45,6 @@ export default function Ingredient (props) {
                             >Delete
                         </button>
                  </div>
-                 
-                : <div className="ingreMainContainer_ME">
-                
-                    <div 
-                    className="editedIngreDescription"
-                    >
-                        { props.description.length > 60 && window.screen.width < 668?
-                            `${props.description.slice(0, 60)}...` : props.description
-                        } 
-                    </div>  
-        
-                </div>
             }
         </div>
     )

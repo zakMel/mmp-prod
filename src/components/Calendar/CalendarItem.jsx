@@ -38,7 +38,7 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.breakfast === "Breakfast" ? "Breakfast" : ( props.breakfast.mealName.length < 25 ? props.breakfast.mealName : `${props.breakfast.mealName.slice(0, 25)}...`)}
+                    {props.breakfast === "Breakfast" ? "Breakfast" : props.breakfast.mealName}
                 </NavLink>
 
                 <button 
@@ -52,7 +52,7 @@ export default function CalendarItem (props) {
             <div className="mealItemContainer" id="Lunch">
 
                 <PieChart   
-                    macros={props.breakfast === "Lunch" ? null : props.lunch.mealMacros }
+                    macros={ props.lunch.mealMacros }
                     height={50}
                     width={50}
                     layout={{
@@ -75,7 +75,7 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.lunch === "Lunch" ? "Lunch" : ( props.lunch.mealName.length < 25 ? props.lunch.mealName : `${props.lunch.mealName.slice(0, 25)}...`)}
+                    {props.lunch === "Lunch" ? "Lunch" : props.lunch.mealName }
                     
                 </NavLink>
 
@@ -91,7 +91,7 @@ export default function CalendarItem (props) {
             <div className="mealItemContainer" id="Dinner">
 
                 <PieChart   
-                    macros={props.dinner === "Lunch" ? null : props.dinner.mealMacros }
+                    macros={props.dinner.mealMacros }
                     height={50}
                     width={50}
                     layout={{
@@ -114,7 +114,7 @@ export default function CalendarItem (props) {
                 onClick={(e)=>{props.updateDayMeal(props.day, $(e.target).html())}}
                 className="mealItem text-center"                        
                 >
-                    {props.dinner === "Dinner" ? "Dinner" : ( props.dinner.mealName.length < 25 ? props.dinner.mealName : `${props.dinner.mealName.slice(0, 25)}...`)}                 
+                    {props.dinner === "Dinner" ? "Dinner" : props.dinner.mealName }                 
                 </NavLink>
 
                 <button 

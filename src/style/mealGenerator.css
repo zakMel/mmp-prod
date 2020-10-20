@@ -3,9 +3,8 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 568px;
-    /* background-color: #f8f8ff;  */
-    background-color: lavender;
+    height: 667px;
+    background-color: #f8f8ff; 
 }
 
 .instrPlaceholder {
@@ -34,28 +33,29 @@
 }
 
 .itemDescription {
-    font-size: .8em;
-    padding-left: 8px;
-    margin-left: 8px;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     display: block;
     width: 260px;
     height: 40px;
+    font-size: .8em;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 8px;
     overflow: hidden;
+
 }
 
 .itemGrams {
-    padding: 6px;
-    font-size: 15px;
+    font-size: .8em;
     text-align: center;
     height: 40px;
     border-radius: 8px;
     margin-left: 8px;
-    width: 71px;
+    width: 50px;
 }
 
 .itemDeleteButton {
@@ -75,6 +75,7 @@
 
 .saveButtonContainer_MG {
     width: 100vw;
+    height: 40px;
     position: fixed; 
     bottom: 20px;
     display: block;  
@@ -92,24 +93,35 @@
     border: 2px solid black;
     border-radius: 5px;
     width: 200px;
-    
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 220px;
+    font-size: .8em;
 }
 
 .saveButton_MG {
-    text-align: none;
     background-image: linear-gradient(#6b8e23, snow, #6b8e23);
     height: 40px;
     width: 100px;
     text-align: center;
     border: 1.5px solid black;
     border-radius: 5px;
+    margin-left: 5px;
     color: black;
     float: right;
-    padding: 3px;
-    margin-left: 5px;
+    padding-top: 7px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-decoration: none;
+    outline: unset;
+    font-size: .8em;
+    font-weight: 500;
 }
 
 .saveButton_MG:active, .saveButton_MG:focus {
+    padding-top: 7px;
     text-decoration: none;
     color: black;
     outline: unset;
@@ -129,8 +141,9 @@
     border-radius: 5px;
     background-image: linear-gradient(#4682b4, snow, #4682b4);
     color: black;
+    font-size: .8em;
     font-weight: 500;
-    padding: 3px;
+    padding-top: 5px;
 }
 
 a.searchButton_MG {
