@@ -6,14 +6,29 @@ export default function Ingredient (props) {
     return (
         
         <div>
-            {props.editable
-                ? <div className="ingreMainContainer_ME">
+            {props.passedEditability === false
+                ? 
+                <div className="ingredient_ME">
+                
+                    <div 
+                    className="ingredientText_MG"
+                    >
+                        {/* { props.description.length > 60 && window.screen.width < 668?
+                            `${props.description.slice(0, 60)}...` : props.description
+                        }  */}
+                        {props.description}
+                    </div>  
+        
+                </div>
+                
+                :
+                <div className="ingreEditBar_ME">
                         <input 
                             onFocus={ (e) => props.enterIngreInput(e, props.macros) }
                             onBlur={ (e) => props.exitIngreInput(e, props.macros) } 
                             placeholder="grams" 
                             type="text" 
-                            className="itemGrams_ME"
+                            className="IngreEditGrams_ME"
                         >
                         </input>
                         <div 
@@ -26,22 +41,10 @@ export default function Ingredient (props) {
                         <button 
                             // type="submit" 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
-                            className="itemDeleteButton_ME"
+                            className="ingreDeleteBtn_ME"
                             >Delete
                         </button>
                  </div>
-                 
-                : <div className="ingreMainContainer_ME">
-                
-                    <div 
-                    className="editedIngreDescription"
-                    >
-                        { props.description.length > 60 && window.screen.width < 668?
-                            `${props.description.slice(0, 60)}...` : props.description
-                        } 
-                    </div>  
-        
-                </div>
             }
         </div>
     )

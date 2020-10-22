@@ -4,16 +4,15 @@
     flex-direction: column;
     align-items: center;
     margin-top: 70px;
-    height: 550px;
+    height: 480px;
     width: 100vw;
 }
 
 .ingredient {
     display: block;
-    width: 365px;
+    width: 340px;
     height: 40px;
-    padding:3px;
-    font-size: 15px;
+    /* font-size: 15px; */
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
@@ -35,7 +34,9 @@
     border-radius: 5px;
     position: fixed;
     bottom: 20px;
-    left: 60px;
+    left: 20px;
+    width: 220px;
+    font-size: .8em;
 }
 
 .searchButton {
@@ -43,12 +44,14 @@
     height: 40px;
     width: 100px;
     text-align: center;
+    font-size: .8em;
+    font-weight: 500;
     border: 1.5px solid black;
     border-radius: 5px;
     margin-left: 10px;
     position: fixed;
     bottom: 20px;
-    right: 60px;
+    right: 20px;
     text-decoration: none;
     outline: unset;
 }
@@ -58,7 +61,7 @@
     border: 1.5px solid black;
 }
 
-@media only screen and (min-width: 400px) {
+/* @media only screen and (min-width: 400px) {
 
     .ingredient {
         height: 45px;
@@ -83,4 +86,4 @@
     #searchForm {
         bottom: 145px;
     }
-}
+} */

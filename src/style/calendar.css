@@ -4,9 +4,10 @@
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
-    height: 685px;
+    height: 100vh;
     margin-top: 55px;
     background-color: #f8f8ff; 
+    overflow: hidden;
 }
 
 .weekContainer {
@@ -15,7 +16,7 @@
     align-items: center;
     margin-top: 10px;
     width: 100vw;
-    height: 540px;
+    height: 470px;
     overflow: auto;
 }
 
@@ -32,21 +33,24 @@
     justify-content: space-between;
     align-items: center;
     width: 370px;
-    height: 42px;
+    height: 40px;
     text-align: center;
+    margin-bottom: 2px;
 }
 
 .mealItem {
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     display: block;
     width: 260px;
     height: 40px;
-    padding:3px;
-    font-size: 15px;
+    font-size: .8em;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow: hidden;
 } 
 
 .dateRanger {
@@ -86,20 +90,7 @@
     background-image: linear-gradient(#4682b4, white, #4682b4);
     height: 40px;
     border-radius: 8px;
+    margin-right: 8px;
     margin-left: 8px;
     width: 71px;
 }
-
-/* .calendarPrintButton {
-    display: block; 
-    margin-top: 8px;
-    margin: auto;
-    border: 1.5px solid black;
-    border-radius: 5px;
-    background-image: linear-gradient(#6b8e23, snow, #6b8e23);
-    text-align: center;
-    color: black;
-    padding: 3px;
-    width: 200px;
-    height: 35px;
-} */

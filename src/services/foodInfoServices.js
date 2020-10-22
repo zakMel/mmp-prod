@@ -1,5 +1,4 @@
 import axios from "axios";
-// const apiKey = 'k1bwOsN1KAIweQ9FQC5WezWjZpX6vNvldgsqlSLD'
 const apiKey = process.env.REACT_APP_FOOD_KEY;
 
 var ingredientServices = {
@@ -11,9 +10,9 @@ ingredientServices.getFoodInfo = (ingredient, pageSize, pageNumber) => {
   const config = {
     method: "GET",
     url: `${ingredientServices.endpoint}&dataType=Foundation, SR Legacy&pageSize=${pageSize}&pageNumber=${pageNumber}&query=${ingredient}`,
-    withCredentials: true,
-    crossdomain: true,
-    headers: { "Content-Type": "application/json" }
+    headers: { 
+      "Content-Type": "application/json"
+    }
   };
 
   return axios(config);

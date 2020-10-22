@@ -39,6 +39,7 @@ export default function UserBar (props) {
                         to="/mealGenerator"
                         className="nav-link"
                         onClick={() => {
+                            props.clearIngredients();
                             setExpand(!navState);
                             props.handleSearching(false);
                             props.resetCurrentTabs();

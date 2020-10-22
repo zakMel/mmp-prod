@@ -110,10 +110,9 @@ class SavedMeal extends Component {
                     }}
                     className="savedMeal"
                     >
-                        <p className={this.props.nameLength < 35 ? "ingredientText_short" : "ingredientText_long"} >
-                            {/* {(this.props.description.length < 80 ? this.props.description : `${this.props.description.slice(0, 80)}...`)} */}
-                            {this.props.description}
-                        </p>
+                      
+                      {this.props.description}
+
                     </NavLink>
 
                     <button
@@ -123,7 +122,7 @@ class SavedMeal extends Component {
                         this.handleBatching(e)
                     }}
                     >
-                    DELETE
+                    Delete
 
                     </button>
 

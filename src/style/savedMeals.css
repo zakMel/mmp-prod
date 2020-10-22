@@ -1,111 +1,52 @@
 
+
 .viewMainContainer {
-    /* background-color: lavender; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-
     margin-top: 55px;
     background-color: #f8f8ff; 
-    height: 680px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .viewListContainer {
-    margin-top: 10px;
-}
-
-.mainContainer_ME {
-    display: block;
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    align-items: center;
-    /* width: 340px; */
-    height: 680px;
-    margin-top: 55px;
-    background-color: #f8f8ff; 
-}
-
-.listContainer_ME {
-    display: block;
-    width: 100vw;
-}
-
-.list_ME {
-    /* background-color: lavender; */
-    margin: auto;
-    margin-top: 10px;
-    height: 410px;
-    width: 390px;
-    overflow: auto;
-}
-
-.ingreMainContainer_ME {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 29px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    /* width: 100vw; */
-
-}
-
-/* .updaterListContainer {
-    margin-top: 10px;
-    height: 420px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    width: 100vw;
+    height: 580px;
     overflow: auto;
-}    */
+}
 
 .viewListItem {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* width: 370px; */
-    width: 100vw;
-    height: 42px;
-}
-
-.editableName {
-    margin-top: 10px;
-    font-weight: bold;
-    overflow-wrap: break-word;
-    width: 400px;
+    width: 370px;
+    height: 40px;
     text-align: center;
-    /* flex: 0 0 inherit; */
-
+    margin-bottom: 2px;
 }
 
 .savedMeal {
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     display: block;
-    width: 280px;
+    width: 260px;
     height: 40px;
-    padding-left: 8px;
+    font-size: .8em;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
-
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow: hidden;
 } 
-
-.ingredientText_short {
-    font-size: .9em;
-    font-weight: 600;
-    display: block;
-    overflow-wrap: break-word;
-    padding: 6px;
-    width: 245px;
-}
-
-.ingredientText_long {
-    display: block;
-    font-size: .8em;
-    font-weight: 600;
-    overflow-wrap: break-word;
-    width: 245px;
-}
 
 .viewerDeleteButton {
     background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
@@ -116,35 +57,75 @@
     width: 71px;
 }
 
-.viewerDeleteButton:active, .viewerDeleteButton:focus {
+/* .viewerDeleteButton:active, .viewerDeleteButton:focus {
     outline: unset;
     border: 1.5px solid black;
-}
+} */
 
-.itemDeleteButton_ME {
-    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
-    height: 40px;
-    border-radius: 8px;
-    margin-left: 8px;
-    width: 71px;
-}
-
-.itemDeleteButton_ME:active, .itemDeleteButton_ME:focus {
-    outline: unset;
-    border: 1.5px solid black;
-}
-
-.itemGrams_ME {
+/* .ingredientText_short {
+    font-weight: 600;
+    display: block;
+    overflow-wrap: break-word;
     padding: 6px;
-    font-size: 15px;
-    text-align: center;
-    height: 40px;
-    border-radius: 8px;
-    /* margin-left: 8px; */
-    width: 71px;
 }
 
-.bottomButtonContainer {
+.ingredientText_long {
+    display: block;
+    font-weight: 600;
+    overflow-wrap: break-word;
+} */
+
+
+
+
+
+
+
+
+.mainContainer_ME {
+    height: 612px;
+    margin-top: 55px;
+    background-color: #f8f8ff; 
+    overflow: hidden;
+}
+
+.listContainer_ME {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 10px;
+    height: 340px;
+    width: 100vw;
+    overflow: auto;
+
+}
+
+.ingredient_ME {
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
+    width: 340px;
+    height: 40px;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 5px;
+    font-size: .8em;
+}
+
+.ingredientText_MG {
+    margin-left: 4px;
+}
+
+.editableName {
+    margin-top: 10px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    width: 400px;
+    text-align: center;
+}
+
+.searchSaveBar_ME {
     display: block;
     position: fixed;
     bottom: 10px;
@@ -153,61 +134,25 @@
 
 }
 
-/* .saveEditButtonContainer {
+.editButtonBar_ME {
     position: fixed;
-    bottom: 15px;
     width: 100vw;
-} */
+    bottom: 20px;
+}
 
 .editButton_ME {
-    /* display: block;
-    position: fixed;
-    bottom: 20px;
-    height: 35px;
-    width: 200px;
-    text-align: center;
-    border: 2px solid black;
-    border-radius: .5em;
-    margin-top: 8px;
-    border: 1.5px solid black;
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    padding: 3px;
-    margin: auto; */
-    display: block;
     background-image: linear-gradient(#1a8693, snow, #1a8693);
-    bottom: 20px;
-    /* background-image: linear-gradient(#6b8e23, snow, #6b8e23); */
+    display: block; 
     height: 40px;
     width: 200px;
+    margin: auto;
     text-align: center;
     border: 1.5px solid black;
     border-radius: 5px;
-    margin-left: 10px;
-    margin: auto;
 }
 
 .saveButton_ME {
-    /* height: 35px;
-    width: 200px;
-    text-align: center;
-    border: 2px solid black;
-    border-radius: .5em;
-    margin-top: 8px;
-    border: 1.5px solid black;
-    border-radius: 5px;
-    background-image: linear-gradient(#567112, snow, #567112);
-    color: black;
-    font-weight: bold;
-    padding: 3px; */
-
-
-    /* position: fixed;
-    bottom: 5px; */
-    /* position: fixed; */
     display: block;
-    /* bottom: 20px; */
     background-image: linear-gradient(#6b8e23, snow, #6b8e23);
     height: 40px;
     width: 200px;
@@ -219,16 +164,13 @@
 }
 
 .addIngreButton_ME {
-    /* position: fixed; */
     display: block;
     margin: auto;
-    /* bottom: 65px; */
     height: 35px;
     width: 200px;
     text-align: center;
     border: 2px solid black;
     border-radius: .5em;
-    /* margin-top: 8px; */
     border: 1.5px solid black;
     border-radius: 5px;
     background-image: linear-gradient(#1a8693, snow, #1a8693);
@@ -238,59 +180,56 @@
     margin-bottom: 5px;
 }
 
-.editedIngreDescription {
-    /* width: 90vw;
-    height: 40px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: .5em;
-    padding-left: 1vw;
-    padding-top: .5vh;
-    font-size: 12px; */
-    font-size: .8em;
-    padding-left: 8px;
-    display: block;
-    width: 390px;
-    height: 40px;
-    border: 1.5px solid black;
-    border-radius: 8px;
-    color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
-    text-decoration: none;
-    
-}
-
-/* .editItemContainer {
+.ingreEditBar_ME {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 29px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    align-items: center;
+    width: 100vw;
+    height: 42px;
+    margin-bottom: 5px;
+}
 
-} */
+
+.IngreEditGrams_ME {
+    font-size: .8em;
+    text-align: center;
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 50px;
+}
 
 .prevIngreDescription {
-    /* width: 70vw;
-    height: 40px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: .5em;
-    padding-left: 1vw;
-    padding-top: .5vh;
-    font-size: 12px; */
-    font-size: .8em;
-    padding-left: 8px;
-    margin-left: 8px;
+    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     display: block;
     width: 260px;
     height: 40px;
+    font-size: .8em;
     border: 1.5px solid black;
     border-radius: 8px;
     color: black;
-    background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 8px;
+    overflow: hidden;
     
+}
+
+.ingreDeleteBtn_ME {
+    margin-right: 8px;
+    height: 40px;
+    border-radius: 8px;
+    margin-left: 8px;
+    width: 71px;
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    color: black;
+}
+
+.ingreDeleteBtn:active, .ingreDeleteBtn:focus {
+    outline: unset;
+    border: 1.5px solid black;
 }
 
 a:link {
