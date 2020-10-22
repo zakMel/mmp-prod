@@ -4,9 +4,10 @@
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
-    height: 612px;
+    height: 100vh;
     margin-top: 55px;
     background-color: #f8f8ff; 
+    overflow: hidden;
 }
 
 .weekContainer {
@@ -86,11 +87,10 @@
 }
 
 .dayClearButton {
-    margin-right: 8px;
+    background-image: linear-gradient(#4682b4, white, #4682b4);
     height: 40px;
     border-radius: 8px;
+    margin-right: 8px;
     margin-left: 8px;
     width: 71px;
-    background-image: linear-gradient(#4682b4, white, #4682b4);
-    color: black;
 }

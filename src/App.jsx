@@ -11,6 +11,7 @@ import Search from './components/Search/Search'
 import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
 import Calendar from './components/Calendar/Calendar';
+// import Conditional from './components/Conditional';
 import { Route, withRouter } from "react-router-dom";
 // import dbServices from './services/dbServices';
 import './App.css';
@@ -35,6 +36,7 @@ class App extends React.Component {
     searching: false,
     checkedSl: [],
     loading: false,
+    installButton: true,
     calendarWeek:[
         {
           day: "Monday",
@@ -81,6 +83,62 @@ class App extends React.Component {
 
       ],
   };
+deferredPrompt;
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+        (user) => this.setState({isSignedIn: !!user})
+    );
+    // this.handleDownload();
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
+      console.log(this.state.selectedCalendarElement)
+    }
+  }
+  
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
+  
+  // installPrompt = null;
+  
+  // handleDownload = () => {
+  //   console.log("Listening for Install prompt");
+  //   window.addEventListener('beforeinstallprompt', e => {
+  //     // For older browsers
+  //     e.preventDefault();
+  //     console.log("Install Prompt fired");
+  //     this.installPrompt = e;
+  //     // See if the app is already installed, in that case, do nothing
+  //     if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
+  //       return false;
+  //     }
+  //     // Set the state variable to make button visible
+  //     this.setState({
+  //       installButton:true
+  //     })
+  //   })
+
+  // }
+
+  // installApp = async () => {
+  //   if(!this.installPrompt) return false;
+  //   this.installPrompt.prompt();
+  //   let outcome = await this.installPrompt.userChoice;
+  //   if(outcome.outcome=='accepted'){
+  //     console.log("App Installed")
+  //   }
+  //   else{
+  //     console.log("App not installed");
+  //   }
+  //   // Remove the event reference
+  //   this.installPrompt=null;
+  //   // Hide the button
+  //   this.setState({
+  //     installButton:false
+  //   })
+  // }
 
   handleSaving = () => {
     this.setState(()=> {
@@ -464,22 +522,6 @@ class App extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
-    );
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
-      console.log(this.state.selectedCalendarElement)
-    }
-  }
-  
-  componentWillUnmount() {
-    this.unregisterAuthObserver();
-  }
-
   handleUpdatePage = (newTabs) => {
         this.setState(() => {
             return {
@@ -509,6 +551,13 @@ class App extends React.Component {
         clearIngredients={this.clearIngredients}
       />
   
+      {/* <Conditional 
+        condition={this.state.installButton}
+        style={styles.installBtn}
+        installApp={this.installApp}
+        visible={this.installButton}
+      /> */}
+      
       <Route
         path="/"
         exact={true}

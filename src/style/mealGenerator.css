@@ -3,8 +3,10 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 667px;
+    /* height: 667px; */
+    height: 100vh;
     background-color: #f8f8ff; 
+    overflow: hidden;
 }
 
 .instrPlaceholder {
@@ -110,7 +112,7 @@
     margin-left: 5px;
     color: black;
     float: right;
-    padding-top: 7px;
+    padding-top: 5px;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -121,8 +123,7 @@
 }
 
 .saveButton_MG:active, .saveButton_MG:focus {
-    margin-top: 14px;
-    padding-top: 7px;
+    padding-top: 5px;
     text-decoration: none;
     color: black;
     outline: unset;

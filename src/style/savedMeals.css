@@ -7,7 +7,9 @@
     justify-content: flex-start;
     margin-top: 55px;
     background-color: #f8f8ff; 
-    height: 612px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .viewListContainer {
@@ -46,7 +48,21 @@
     overflow: hidden;
 } 
 
-.ingredientText_short {
+.viewerDeleteButton {
+    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 8px;
+    margin-left: 8px;
+    width: 71px;
+}
+
+/* .viewerDeleteButton:active, .viewerDeleteButton:focus {
+    outline: unset;
+    border: 1.5px solid black;
+} */
+
+/* .ingredientText_short {
     font-weight: 600;
     display: block;
     overflow-wrap: break-word;
@@ -57,7 +73,7 @@
     display: block;
     font-weight: 600;
     overflow-wrap: break-word;
-}
+} */
 
 
 
@@ -107,20 +123,6 @@
     overflow-wrap: break-word;
     width: 400px;
     text-align: center;
-}
-
-.viewerDeleteButton {
-    background-image: linear-gradient(rgb(178 34 34), white, rgb(178 34 34));
-    height: 40px;
-    border-radius: 8px;
-    margin-right: 8px;
-    margin-left: 8px;
-    width: 71px;
-}
-
-.viewerDeleteButton:active, .viewerDeleteButton:focus {
-    outline: unset;
-    border: 1.5px solid black;
 }
 
 .searchSaveBar_ME {

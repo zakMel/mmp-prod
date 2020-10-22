@@ -4,9 +4,10 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 681px;
+    height: 667px;
     margin-top: 55px;
     background-color: #f8f8ff; 
+    overflow: hidden;
 }
 
 .listContainer_SL {
