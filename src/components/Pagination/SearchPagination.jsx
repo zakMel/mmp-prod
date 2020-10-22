@@ -12,9 +12,7 @@ class Pagination extends React.Component {
     let rightOne = this.props.currentTabs[this.props.currentTabs.length - 1] + 1
 
     let newTabs = this.props.currentTabs.slice()
-
-    // console.log(this.props.currentTabs[this.props.currentTabs.length - 1] + 1)
-
+    
     if (rightOne <= this.props.totalPages) {
 
       newTabs.push(rightOne)

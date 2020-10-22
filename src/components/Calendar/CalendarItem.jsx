@@ -28,7 +28,6 @@ export default function CalendarItem (props) {
                 <NavLink 
                 to={typeof props.breakfast === "string" 
                 ? {
-                    // pathname: typeof props.breakfast === "object" ? "/mealEditor" : "/mealViewer",
                     pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.breakfast,
@@ -42,9 +41,12 @@ export default function CalendarItem (props) {
                 </NavLink>
 
                 <button 
-                    onClick={ (e) => props.handleClearMeal(e) }
-                    className="dayClearButton"
-                    >Clear
+                className="dayClearButton"
+                onClick={(e) => {
+                    props.handleClearMeal(e)
+                }}
+                >
+                Clear
                 </button>
             
             </div>
@@ -65,7 +67,6 @@ export default function CalendarItem (props) {
                 <NavLink 
                 to={typeof props.lunch === "string" 
                 ? {
-                    // pathname: typeof props.lunch === "object" ? "/mealEditor" : "/mealViewer",
                     pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.lunch,
@@ -80,7 +81,6 @@ export default function CalendarItem (props) {
                 </NavLink>
 
                 <button 
-                    // type="submit" 
                     onClick={ (e) => props.handleClearMeal(e) }
                     className="dayClearButton"
                     >Clear
@@ -104,7 +104,6 @@ export default function CalendarItem (props) {
                 <NavLink 
                 to={typeof props.dinner === "string" 
                 ? {
-                    // pathname: typeof props.dinner === "object" ? "/mealEditor" : "/mealViewer",
                     pathname: "/mealViewer",
                     prevPath: props.prevPath,
                     passedProps: props.dinner,
@@ -118,10 +117,10 @@ export default function CalendarItem (props) {
                 </NavLink>
 
                 <button 
-                    // type="submit" 
-                    onClick={ (e) => props.handleClearMeal(e) }
-                    className="dayClearButton"
-                    >Clear
+                onClick={ (e) => props.handleClearMeal(e) }
+                className="dayClearButton"
+                >
+                Clear
                 </button>
             
             </div>

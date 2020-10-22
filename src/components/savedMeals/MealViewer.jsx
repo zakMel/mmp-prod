@@ -19,7 +19,6 @@ class MealViewer extends React.Component {
 
     componentDidMount() {
         this.renderDOM();
-        // console.log(this.state.renderedMeals)
     }
 
     renderDOM = () => {
@@ -43,8 +42,6 @@ class MealViewer extends React.Component {
         await response.forEach(doc => {
             list.push(doc.data());
         })
-
-        // console.log(list);
 
         await this.setState(() => {
             return {
@@ -86,8 +83,6 @@ class MealViewer extends React.Component {
             mealMacros={meal.mealMacros}
             handleDeleteFromDOM={this.handleDeleteFromDOM}
             handleEditablility={this.props.handleEditablility}
-            // macros={meal.mealMacros}
-            // ingredients={meal.savedIngredients}
           />
           
         );

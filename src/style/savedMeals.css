@@ -55,26 +55,8 @@
     margin-right: 8px;
     margin-left: 8px;
     width: 71px;
+    text-align: center;
 }
-
-/* .viewerDeleteButton:active, .viewerDeleteButton:focus {
-    outline: unset;
-    border: 1.5px solid black;
-} */
-
-/* .ingredientText_short {
-    font-weight: 600;
-    display: block;
-    overflow-wrap: break-word;
-    padding: 6px;
-}
-
-.ingredientText_long {
-    display: block;
-    font-weight: 600;
-    overflow-wrap: break-word;
-} */
-
 
 
 
@@ -83,7 +65,8 @@
 
 
 .mainContainer_ME {
-    height: 612px;
+    height: 100vh;
+    width: 100vw;
     margin-top: 55px;
     background-color: #f8f8ff; 
     overflow: hidden;
@@ -93,12 +76,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
     margin-top: 10px;
-    height: 340px;
+    height: 320px;
     width: 100vw;
     overflow: auto;
-
 }
 
 .ingredient_ME {
@@ -118,11 +99,11 @@
 }
 
 .editableName {
-    margin-top: 10px;
     font-weight: bold;
     overflow-wrap: break-word;
-    width: 400px;
+    width: 100vw;
     text-align: center;
+    margin: auto;
 }
 
 .searchSaveBar_ME {

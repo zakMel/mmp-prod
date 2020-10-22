@@ -13,10 +13,7 @@ export default function Ingredient (props) {
                     <div 
                     className="ingredientText_MG"
                     >
-                        {/* { props.description.length > 60 && window.screen.width < 668?
-                            `${props.description.slice(0, 60)}...` : props.description
-                        }  */}
-                        {props.description}
+                    {props.description}
                     </div>  
         
                 </div>
@@ -39,7 +36,6 @@ export default function Ingredient (props) {
                             } 
                         </div>  
                         <button 
-                            // type="submit" 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
                             className="ingreDeleteBtn_ME"
                             >Delete

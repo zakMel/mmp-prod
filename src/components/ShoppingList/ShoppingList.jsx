@@ -10,7 +10,6 @@ export default function ShoppingList (props) {
     let [list, updateList] = useState([])
 
     useEffect(() => {
-        // renderDOM()
         (async ()=>{
             let list = await getAllIngredients(props.week)
             let mappedList = list.map(ingre => renderShoppingList(ingre))
@@ -20,29 +19,8 @@ export default function ShoppingList (props) {
 
     }, [props.week]);
 
-    // let getAllIngredients = (week) => {
-    // let ingredients = []; // could be an objected instead of an array
-    
-    // for (let i = 0; i < week.length; i++){
-    //         let currentDay = week[i];
-            
-    //         for (let meal in currentDay){
-    //             let currentMeal = currentDay[meal];
-    //             if(typeof currentMeal === 'object'){
-    //                 for(let u = 0; u < currentMeal.savedIngredients.length; u++){
-    //                     ingredients.push(currentMeal.savedIngredients[u].ingre.description)
-
-    //                 }                    
-    //             }
-    //         }
-    // }  
-        
-    // ingredients.sort(); //ingre object would mean that it could not be sorted.
-    // return ingredients;
-    // }
-
     let getAllIngredients = (week) => {
-        let ingredients = {}; // could be an objected instead of an array
+        let ingredients = {}; 
         
         for (let i = 0; i < week.length; i++){
                 let currentDay = week[i];
@@ -51,9 +29,7 @@ export default function ShoppingList (props) {
                     let currentMeal = currentDay[meal];
                     if(typeof currentMeal === 'object'){
                         for(let u = 0; u < currentMeal.savedIngredients.length; u++){
-                            // ingredients.push(currentMeal.savedIngredients[u].ingre.description)
                             if(Object.keys(ingredients).includes(currentMeal.savedIngredients[u].ingre.description)) {
-                                // console.log('dublicate', ingredients[currentMeal.savedIngredients[u].ingre.description])
                                 ingredients[currentMeal.savedIngredients[u].ingre.description]++
 
                             }else {
@@ -66,7 +42,7 @@ export default function ShoppingList (props) {
                 }
         }  
     let arr = Object.entries(ingredients)    
-    arr.sort(); //ingre object would mean that it could not be sorted.
+    arr.sort(); 
     return arr;
     }
 
@@ -84,12 +60,6 @@ export default function ShoppingList (props) {
             />
         )
     }
-
-    // let renderDOM = async () => {
-    //     let list = await getAllIngredients(props.week)
-    //     let mappedList = list.map(ingre => renderShoppingList(ingre))
-    //     updateList(mappedList)
-    // }
 
     let loadFunc = () => {
 
