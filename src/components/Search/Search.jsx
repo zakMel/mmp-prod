@@ -33,7 +33,6 @@ class Search extends React.Component {
     }
 
     handleListSuccess = (response) => {
-        // console.log(response);
 
         let tabs = []
         for (let i = 1; i < response.data.totalPages; i++) {
@@ -59,8 +58,6 @@ class Search extends React.Component {
         let index = $(target).html()
         let ingredient = this.state.input
 
-        // console.log(target, index, ingredient)
-
         services
         .getFoodInfo(ingredient, 11, index)
         .then(this.handlePageSuccess)
@@ -69,7 +66,6 @@ class Search extends React.Component {
     }
 
     handlePageSuccess = (response) => {
-        // console.log(response);
         
         this.setState(()=>{
 

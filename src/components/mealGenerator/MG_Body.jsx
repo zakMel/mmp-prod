@@ -73,7 +73,6 @@ class MG_Body extends React.Component {
                         if (this.props.mealName.length > 0) {
                           this.props.handleSaving();
                           this.props.sendToDatabase() 
-                          console.log("sent")
                         }
                       } 
                     } 

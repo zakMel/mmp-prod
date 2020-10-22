@@ -31,7 +31,6 @@ class MealEditor extends React.Component {
   }
   
   renderDOM = () => {
-    // let name = this.props.passedProps === undefined ? this.props.history.location.passedProps.mealName : this.props.passedProps.mealName;
     let name =this.props.mealName;
     let givenIngredients = this.props.passedProps.savedIngredients; 
     let mappedList  = givenIngredients.map(ingre => this.renderIngredients(ingre)); 
@@ -247,8 +246,6 @@ class MealEditor extends React.Component {
 
     this.setState( () => {
 
-      console.log(newRender);
-
       return {
         shownIngredients: newRender
       }
@@ -368,7 +365,6 @@ class MealEditor extends React.Component {
           // adding uneffected props to newDoc
           newDoc.dateRangeCal = doc.data().dateRangeCal;
           newDoc.weekDateDB = doc.data().weekDateDB;
-          console.log(doc.data().weekDateDB);
 
           if(calendarWeek){
             let newWeek = []
@@ -396,7 +392,6 @@ class MealEditor extends React.Component {
             })
             newDoc.calendarWeek = newWeek;
           }
-          console.log(edited, newDoc, typeof newDoc.weekDateDB.slice(2, newDoc.weekDateDB.length -2));
           
           if(edited){
             let refDoc = weeks.doc(newDoc.weekDateDB);

@@ -2,7 +2,6 @@ import React from 'react'
 import "../../style/mealGenerator.css"
 
 export default function Ingredient (props) {
-    // console.log(window.screen.width)
 
     return (
 
@@ -23,7 +22,6 @@ export default function Ingredient (props) {
                  } 
             </div>  
             <button 
-                // type="submit" 
                 onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }
                 className="itemDeleteButton"
                 >Delete

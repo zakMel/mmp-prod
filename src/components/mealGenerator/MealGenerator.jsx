@@ -5,7 +5,6 @@ import { Route, withRouter } from "react-router-dom";
 import $ from "jquery"
 import MgBody from "./MG_Body"
 import Search from '../Search/Search'
-// import dbServices from '../../services/dbServices';
 import Ingredient from './Ingredient';
 import "../../style/mealGenerator.css";
 import "../../App.css";
@@ -153,8 +152,7 @@ class MealGenerator extends React.Component {
   }
 
   enterIngreInput = (e, macros) => {
-    //   let container = e.target.parentElement;
-    //   let description = container.childNodes[0].innerHTML;
+
     let grams = e.target.value;
 
     if(grams === "") {
@@ -333,8 +331,6 @@ class MealGenerator extends React.Component {
       
       <React.Fragment>
 
-        {/* <div className="mealGeneratorContainer"> */}
-
           { this.props.searching === false 
           ?
           <div className="mealGeneratorContainer">
@@ -371,9 +367,6 @@ class MealGenerator extends React.Component {
           </div>
           }
           
-
-        {/* </div>                      */}
-
       </React.Fragment>
 
     )

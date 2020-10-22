@@ -10,10 +10,6 @@ const db = firestore;
 class SavedMeal extends Component {
     state = {};
 
-    componentDidMount() {
-        // console.log(this.props.nameLength)
-
-    }
 
     handleBatching = async e => {
         let user = firebase.auth().currentUser;
@@ -35,7 +31,6 @@ class SavedMeal extends Component {
               newDoc.dateRangeCal = doc.data().dateRangeCal;
               newDoc.weekDateDB = doc.data().weekDateDB;
     
-            //   if(calendarWeek){
                 let newWeek = []
                 calendarWeek.forEach(day => {
                   // looks at each day of the week
@@ -56,14 +51,11 @@ class SavedMeal extends Component {
     
                 })
                 newDoc.calendarWeek = newWeek;
-            //   }
               
               
               if(edited){
                 let refDoc = weeks.doc(newDoc.weekDateDB);
-                batch.update(refDoc, newDoc)
-                console.log(newDoc)
-    
+                batch.update(refDoc, newDoc)    
               }
             })
     

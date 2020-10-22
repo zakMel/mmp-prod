@@ -3,7 +3,6 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import {firestore} from './configFirebase';
 import NavBar from './components/NavBar'
-// import Footer from './components/Footer'
 import Landing from './components/Landing';
 import ShoppingList from './components/ShoppingList/ShoppingList';
 import MealGenerator from './components/mealGenerator/MealGenerator';
@@ -11,12 +10,10 @@ import Search from './components/Search/Search'
 import MealViewer from './components/savedMeals/MealViewer';
 import MealEditor from './components/savedMeals/MealEditor';
 import Calendar from './components/Calendar/Calendar';
-// import Conditional from './components/Conditional';
 import { Route, withRouter } from "react-router-dom";
-// import dbServices from './services/dbServices';
 import './App.css';
 
-const Big = require('big.js') //probably want to remove the use of this.
+const Big = require('big.js') //todo probably want to remove the use of this.
 const db = firestore;
 
 class App extends React.Component {
@@ -88,57 +85,11 @@ deferredPrompt;
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedIn: !!user})
     );
-    // this.handleDownload();
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if(this.state.selectedCalendarElement !== prevState.selectedCalendarElement){
-      console.log(this.state.selectedCalendarElement)
-    }
   }
   
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
-  
-  // installPrompt = null;
-  
-  // handleDownload = () => {
-  //   console.log("Listening for Install prompt");
-  //   window.addEventListener('beforeinstallprompt', e => {
-  //     // For older browsers
-  //     e.preventDefault();
-  //     console.log("Install Prompt fired");
-  //     this.installPrompt = e;
-  //     // See if the app is already installed, in that case, do nothing
-  //     if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
-  //       return false;
-  //     }
-  //     // Set the state variable to make button visible
-  //     this.setState({
-  //       installButton:true
-  //     })
-  //   })
-
-  // }
-
-  // installApp = async () => {
-  //   if(!this.installPrompt) return false;
-  //   this.installPrompt.prompt();
-  //   let outcome = await this.installPrompt.userChoice;
-  //   if(outcome.outcome=='accepted'){
-  //     console.log("App Installed")
-  //   }
-  //   else{
-  //     console.log("App not installed");
-  //   }
-  //   // Remove the event reference
-  //   this.installPrompt=null;
-  //   // Hide the button
-  //   this.setState({
-  //     installButton:false
-  //   })
-  // }
 
   handleSaving = () => {
     this.setState(()=> {
@@ -168,7 +119,6 @@ deferredPrompt;
       this.setState( (state) => {
         let newState = state.checkedSl;
         newState.push(description)
-        console.log(newState)
         return {
           checkedSl: newState
         }
@@ -325,7 +275,6 @@ deferredPrompt;
   }
 
   saveWeekToDB = () => {
-    console.log("clicked save week")
     let user = firebase.auth().currentUser;
     const users = db.collection("users");
     let userFile = users.doc(`${user.uid}`);
@@ -336,11 +285,6 @@ deferredPrompt;
       let document = weeks.doc(`${this.state.weekDateDB}`);
       let state = this.state;
       
-    console.log({
-      weekDateDB: state.weekDateDB,
-      dateRangeCal: state.dateRangeCal,
-      calendarWeek: state.calendarWeek,
-    })
 
     document.set({
       weekDateDB: state.weekDateDB,
@@ -387,7 +331,6 @@ deferredPrompt;
   }
 
   updateWeekItem = (day, meal, update) => {
-    console.log(day, meal, update);
 
     this.state.calendarWeek.map((item)=>{
       if(item.day === day) {
@@ -550,13 +493,6 @@ deferredPrompt;
         resetCurrentTabs={this.resetCurrentTabs}
         clearIngredients={this.clearIngredients}
       />
-  
-      {/* <Conditional 
-        condition={this.state.installButton}
-        style={styles.installBtn}
-        installApp={this.installApp}
-        visible={this.installButton}
-      /> */}
       
       <Route
         path="/"
@@ -576,7 +512,6 @@ deferredPrompt;
             setWeekDateRange={this.setWeekDateRange}
             updateDayMeal={this.updateDayMeal}
             week={this.state.calendarWeek}
-            // date={this.state.calendarDate}
             update={this.state.calendarUpdate}
             saveWeekToDB={this.saveWeekToDB}
             weekDateDB={this.state.weekDateDB}
@@ -606,7 +541,6 @@ deferredPrompt;
 
       <Route
         path="/mealGenerator"
-        // exact={true}
         render={(props) => (
           <MealGenerator 
             list={this.state.ingredients}
@@ -678,8 +612,6 @@ deferredPrompt;
           />
         )}
       />
-
-    {/* <Footer /> */}
 
     </React.Fragment>
     );
