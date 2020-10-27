@@ -19,7 +19,8 @@
 .listContainer {
     margin-top: 8px;
     width: 100vw;
-    height: 440px;
+    /* height: 440px; */
+    height: 65vh;
     overflow: auto;
 }
 
@@ -36,7 +37,8 @@
 .itemDescription {
     background-image: linear-gradient(rgb(191 191 191), snow, rgb(191 191 191));
     display: block;
-    width: 260px;
+    /* width: 260px; */
+    width: 80vw;
     height: 40px;
     font-size: .8em;
     border: 1.5px solid black;
@@ -97,14 +99,17 @@
     position: fixed;
     bottom: 20px;
     left: 20px;
-    width: 220px;
+    /* width: 220px; */
+    width: 65vw;
     font-size: .8em;
 }
 
 .saveButton_MG {
     background-image: linear-gradient(#6b8e23, snow, #6b8e23);
     height: 40px;
-    width: 100px;
+    /* width: 100px; */
+    width: 22vw;
+    min-width: 40px;
     text-align: center;
     border: 1.5px solid black;
     border-radius: 5px;

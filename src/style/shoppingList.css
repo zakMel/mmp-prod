@@ -4,7 +4,8 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 667px;
+    /* height: 667px; */
+    height: 100vh;
     margin-top: 55px;
     background-color: #f8f8ff; 
     overflow: hidden;
@@ -13,7 +14,8 @@
 .listContainer_SL {
     overflow: auto;
     width: 100vw;
-    height: 490px;
+    /* height: 490px; */
+    height: 70vh;
 }
 
 .itemContainer_SL {

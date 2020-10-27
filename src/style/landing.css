@@ -6,11 +6,11 @@
     width: 100vw;
     height: 100vh;
     text-align: center;
-    background-color: lavender;
+    background-color: #f8f8ff; 
     overflow: hidden;
 }
 
 .logo {
-    width: 300px;
+    width: calc(150% / 2);
     z-index: 1;
 }
