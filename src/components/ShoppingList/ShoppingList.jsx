@@ -69,7 +69,7 @@ export default function ShoppingList (props) {
         <React.Fragment>
 
             <div className="shoppingListContainer">
-                <h2 className="title_SL" >shoppingList</h2>  
+                <h2 className="title_SL" >Shopping List</h2>  
                 <DateRangePicker 
                     calendarIcon={null}
                     clearIcon={null}

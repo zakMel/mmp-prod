@@ -8,6 +8,7 @@
 .pagButtonContainer {
     margin: auto;
     width: 240px;
+    /* width: calc(100% /2); */
     
 }
 

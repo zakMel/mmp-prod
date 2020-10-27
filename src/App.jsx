@@ -80,7 +80,7 @@ class App extends React.Component {
 
       ],
   };
-deferredPrompt;
+// deferredPrompt;
   componentDidMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedIn: !!user})

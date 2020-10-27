@@ -1,9 +1,19 @@
 html, body {
-  position: fixed;
+  /* position: fixed;
+  overflow: hidden;
+  padding: 0;
+  margin: 0; */
+
+
+  all: unset;
+  display: block;
   overflow: hidden;
   padding: 0;
   margin: 0;
+  height: 100vh;
+  width: 100vw;
 }
+
 
 p {
   margin-top: 0;
@@ -28,38 +38,4 @@ p {
 a.nav-home {
   text-decoration: none;
   color:white;
-}
-
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  background-color: #282c34;
-  width: 100vw;
-  text-align: center;
-  color: white;
-  height: 50px;
-  padding-top: 8px;
-  font-size: 15px;
-  z-index: 5;
-}
-
-.footerText {
-  position: fixed;
-  left: 0;
-  padding-top: 15px;
-  padding-left: 5px;
-}
-
-.footLogButton{
-  position: fixed;
-  /* right: 80px; */
-  /* width: 80px; */
-  /* background-color: white; */
-  background-image: linear-gradient(#c0c0c0, snow, #c0c0c0);
-  height: 40px;
-  border-radius: 15px;
-  /* margin-left: 8px; */
-  width: 71px;
-  right: 10px;
 }
