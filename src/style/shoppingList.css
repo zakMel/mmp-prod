@@ -72,6 +72,10 @@
     height: 35px;
 }
 
+input#checkbox.itemCheck_SL {
+    min-width: 30px
+}
+
 @media print {
     body * {
         visibility: hidden;
