@@ -13,7 +13,7 @@ export default function Item (props) {
             <p 
             className="itemDescr_SL"
             >
-                {props.desc[0].length < 40 ? `(x${props.desc[1]}) - ${props.desc[0]}` : `(x${props.desc[1]}) - ${props.desc[0].slice(0, 40)}...`}</p>
+                {`(x${props.desc[1]}) - ${props.desc[0]}`}</p>
         </div>
     )
 }

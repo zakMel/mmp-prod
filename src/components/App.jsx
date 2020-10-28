@@ -1,17 +1,18 @@
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
-import {firestore} from './configFirebase';
-import NavBar from './components/NavBar'
-import Landing from './components/Landing';
-import ShoppingList from './components/ShoppingList/ShoppingList';
-import MealGenerator from './components/mealGenerator/MealGenerator';
-import Search from './components/Search/Search'
-import MealViewer from './components/savedMeals/MealViewer';
-import MealEditor from './components/savedMeals/MealEditor';
-import Calendar from './components/Calendar/Calendar';
+import {firestore} from '../configFirebase'
+import NavBar from './NavBar'
+import Landing from './Landing';
+import ShoppingList from './ShoppingList/ShoppingList';
+import MealGenerator from './mealGenerator/MealGenerator';
+import Search from './Search/Search'
+import MealViewer from './savedMeals/MealViewer';
+import MealEditor from './savedMeals/MealEditor';
+import Calendar from './Calendar/Calendar';
+import LoginUI from './LoginUI';
 import { Route, withRouter } from "react-router-dom";
-import './App.css';
+import '../App.css'
 
 const Big = require('big.js') //todo probably want to remove the use of this.
 const db = firestore;
@@ -34,6 +35,7 @@ class App extends React.Component {
     checkedSl: [],
     loading: false,
     installButton: true,
+    isLoading: true,
     calendarWeek:[
         {
           day: "Monday",
@@ -80,15 +82,19 @@ class App extends React.Component {
 
       ],
   };
-// deferredPrompt;
+
+
   componentDidMount() {
-    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
-    );
+    // this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+    //     (user) => this.setState({isSignedIn: !!user})
+    // );
+    // this.props.handleLoading();
+    console.log('loading')
+
   }
   
   componentWillUnmount() {
-    this.unregisterAuthObserver();
+    // this.unregisterAuthObserver();
   }
 
   handleSaving = () => {
@@ -392,20 +398,20 @@ class App extends React.Component {
 
   }
 
-  // Configure FirebaseUI.
-  uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google and Facebook as auth providers.
-    signInOptions: [
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: () => false
-    }
-  };
+  // // Configure FirebaseUI.
+  // uiConfig = {
+  //   // Popup signin flow rather than redirect flow.
+  //   signInFlow: 'popup',
+  //   // We will display Google and Facebook as auth providers.
+  //   signInOptions: [
+  //     firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  //   ],
+  //   callbacks: {
+  //     // Avoid redirects after sign-in.
+  //     signInSuccessWithAuthResult: () => false
+  //   }
+  // };
 
   getMacros = (ingredient) => {
     let nutrients = ingredient.foodNutrients;
@@ -475,15 +481,13 @@ class App extends React.Component {
   }
 
   render(){
-    if (!this.state.isSignedIn || !firebase.auth().currentUser) {
+
+
+    if (!this.props.isSignedIn || !firebase.auth().currentUser) {
       return (
-        <div>
-          <h1>My App</h1>
-          <p>Please sign-in:</p>
-          <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
-        </div>
+        <LoginUI />
       );
-    }
+    } 
     
     return (
     <React.Fragment>
@@ -501,6 +505,14 @@ class App extends React.Component {
           <Landing />
         )}
       />
+
+      {/* <Route  
+        path="/login"
+        exact={true}
+        render={(props) => (
+          <LoginUI />
+        )}
+      /> */}
 
       <Route
         path="/calendar"
@@ -615,9 +627,8 @@ class App extends React.Component {
 
     </React.Fragment>
     );
-
-  }  
-
+  
+  }
 
 }
 

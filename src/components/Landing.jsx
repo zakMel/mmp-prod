@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../pics/arm.png';
+import logo from '../pics/splash.png';
 import "../style/landing.css";
 
 class Landing extends React.Component {

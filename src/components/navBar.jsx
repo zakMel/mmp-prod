@@ -21,22 +21,23 @@ export default function UserBar (props) {
 
     return (
 
-        <Navbar expanded={navState} expand="true" variant="dark" className="navBar" >
+        <Navbar expanded={navState} expand="true" className="navBar" >
             <NavLink 
                 to="/"
                 className="nav-home"
             >
-            Macro Meal Planning    
+            Macro Meal Planner  
             </NavLink>
             <Navbar.Toggle 
             onClick={() => setExpand(!navState)}
-            aria-controls="responsive-navbar-nav" 
+            aria-controls="responsive-navbar-nav"
+            className="bg-light"
             />
-            <Navbar.Collapse id="responsive-navbar-nav" >
-                <Nav className="mr-auto" >
+            <Navbar.Collapse >
+                <Nav>
                     <NavLink 
                         to="/mealGenerator"
-                        className="nav-link"
+                        className="nav-link text-white"
                         onClick={() => {
                             props.clearIngredients();
                             setExpand(!navState);
@@ -51,7 +52,7 @@ export default function UserBar (props) {
                     </NavLink>
                     <NavLink 
                         to="/calendar"
-                        className="nav-link"
+                        className="nav-link  text-white"
                         onClick={() => setExpand(!navState)}
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="1em" width="1em">
@@ -84,7 +85,7 @@ export default function UserBar (props) {
                     </NavLink>
                     <NavLink 
                         to="/mealViewer"
-                        className="nav-link"
+                        className="nav-link  text-white"
                         onClick={() => setExpand(!navState)}
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="1em" width="1em">
@@ -95,7 +96,7 @@ export default function UserBar (props) {
                     </NavLink>
                     <NavLink 
                         to="/shoppingList"
-                        className="nav-link"
+                        className="nav-link  text-white"
                         onClick={() => setExpand(!navState)}
                     >
                             <svg className="mr-3 mb-1" stroke="currentColor" fill="white" strokeWidth="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +106,7 @@ export default function UserBar (props) {
                     </NavLink>
                     <NavLink 
                         to="/"
-                        className="nav-link"
+                        className="nav-link  text-white"
                         onClick={() => {
                             setExpand(!navState);
                             logout();
