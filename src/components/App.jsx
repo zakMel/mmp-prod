@@ -85,16 +85,11 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    // this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-    //     (user) => this.setState({isSignedIn: !!user})
-    // );
-    // this.props.handleLoading();
     console.log('loading')
-
   }
   
   componentWillUnmount() {
-    // this.unregisterAuthObserver();
+    this.unregisterAuthObserver();
   }
 
   handleSaving = () => {
