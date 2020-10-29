@@ -19,7 +19,10 @@ class MG_Body extends React.Component {
   
               { this.props.shownIngredients.length > 0 
               ? <div className="instrPlaceholder"></div>
-              : <h5 className="instructions">To start search an ingredient!</h5>
+              : <div className="instructions">
+                  <p className="firstParagraph">To start, search for an ingredient! All ingredients are given a default weight of one gram until later updated.</p> 
+                  <p>Food should be weighed and grams entered the first time a meal is made in order to determine the meal's macro distribution.</p>
+                </div>
               }
               
               {this.props.shownIngredients.length > 0 ? 

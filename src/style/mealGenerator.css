@@ -13,7 +13,14 @@
 }
 
 .instructions {
-    margin-top: 60px;
+    margin-top: 80px;
+    width: 90vw;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.firstParagraph {
+    margin-bottom: 30px;
 }
 
 .listContainer {
