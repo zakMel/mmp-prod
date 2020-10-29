@@ -23,7 +23,7 @@ class MealEditor extends React.Component {
       fat: 0,
       carbs: 0
     },
-    editable: false
+    // editable: false
   }
 
   componentDidMount(){ 
@@ -48,7 +48,7 @@ class MealEditor extends React.Component {
           fat: macros.fat,
           carbs: macros.carbs,
         },
-        editable: passedEditability,
+        // editable: passedEditability,
       }
     })
     
@@ -201,9 +201,8 @@ class MealEditor extends React.Component {
   handleDeleteFromDOM = (e, macros) => {
     
     let container = e.target.parentElement;
-    let grams = $(container).children().filter(".itemGrams")[0].value;
-    let desRef = $(container).children().filter("div.editItemDescription")[0].innerText;
-    let description = desRef.slice(0, desRef.length-3);
+    let grams = $(container).children().filter("input.IngreEditGrams_ME")[0].value;
+    let desRef = $(container).children().filter("div.prevIngreDescription")[0].innerText;
 
     //removes macros
     if(grams !== ""){
@@ -236,9 +235,9 @@ class MealEditor extends React.Component {
     for ( let u = 0; u < this.state.shownIngredients.length;  u++) {
       let arr = this.state.shownIngredients;
       let current = arr[u];
-      let includes = current.props.description.includes(description);
+      let found = current.props.description === desRef;
     
-      if(!includes){
+      if(!found){
         newRender.push(current)
       }  
 
@@ -258,9 +257,9 @@ class MealEditor extends React.Component {
       let arr = this.props.passedProps.savedIngredients;
       let current = arr[i];
       let ingredent = arr[i].ingre;
-      let includes = ingredent.description.includes(description);
+      let found = ingredent.description === desRef;
 
-      if(!includes){
+      if(!found){
         newList.push(current);
       }
     }
@@ -357,7 +356,7 @@ class MealEditor extends React.Component {
     if(exists){
       var batch = db.batch()
       let newDoc = {};
-      let edited = false;
+      let weekEdited = false;
       await weeks.get()  
       .then((week) => {
         week.forEach(doc => {
@@ -365,7 +364,6 @@ class MealEditor extends React.Component {
           // adding uneffected props to newDoc
           newDoc.dateRangeCal = doc.data().dateRangeCal;
           newDoc.weekDateDB = doc.data().weekDateDB;
-
           if(calendarWeek){
             let newWeek = []
             calendarWeek.forEach(day => {
@@ -375,25 +373,26 @@ class MealEditor extends React.Component {
                 // looks at meals of each day
                 if(day[meal].mealName === this.state.mealName){
                   // if the meal is the target meal then
-                  edited = true;
+                  weekEdited = true;
                   newDay[meal] = { //! here is the last error
                     mealName: this.props.mealName,
                     savedIngredients: this.props.passedProps.savedIngredients, 
                     mealMacros: state.mealMacros,
                   }
-                   
-
+                  
+                  
                 } else {                  
                   newDay[meal] = day[meal];
                 }  
               }
               newWeek.push(newDay);
-
+              
             })
             newDoc.calendarWeek = newWeek;
           }
+          console.log(weekEdited)
           
-          if(edited){
+          if(weekEdited){
             let refDoc = weeks.doc(newDoc.weekDateDB);
             batch.update(refDoc, newDoc)
 
@@ -422,6 +421,13 @@ class MealEditor extends React.Component {
         })
 
       }
+
+      //if a week is not edited, updates meal 
+      batch.update(newMeal, {
+        mealName: this.props.mealName,
+        savedIngredients: this.props.list,
+        mealMacros: state.mealMacros,
+      })
 
       batch.commit()
     }

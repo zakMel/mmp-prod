@@ -11,11 +11,13 @@
     overflow: hidden;
 }
 
-.listContainer_SL {
+#section-to-print.listContainer_SL > div {
     overflow: auto;
     width: 100vw;
     /* height: 490px; */
-    height: 70vh;
+    height: 60vh;
+    margin-right: 5vw;
+    margin-left: 5vw;
 }
 
 .itemContainer_SL {
