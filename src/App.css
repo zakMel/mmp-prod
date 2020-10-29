@@ -13,6 +13,32 @@ p {
   margin-bottom: 0;
 }
 
+.loginUiContainer {
+  position: fixed;
+  top: 65vh;
+  left: 20vw;
+  right: 20vw;
+  z-index: 4;
+}  
+.uiLogo {
+  position: fixed;
+  top: 12vh;
+  left: 20vw;
+  right: 20vw;
+  z-index: 1;
+  width: 60vw;
+  height: 50vh;
+  
+}
+
+form div {
+  height: 40px;
+}
+
+#firebaseui_container > div > form > div.firebaseui-card-header {
+  display: none;
+}
+
 .navBar {
   position: fixed;
   top: 0;
