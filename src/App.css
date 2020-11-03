@@ -1,4 +1,14 @@
-html, body {
+/* html, body {
+  all: unset;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+} */
+
+html, body, #root {
   all: unset;
   display: block;
   overflow: hidden;
@@ -8,7 +18,9 @@ html, body {
   width: 100vw;
 }
 
-input, select { font-size: 100%; }
+input, select { 
+  font-size: 100%; 
+}
 
 p {
   margin-top: 0;
@@ -87,4 +99,27 @@ nav a.nav-link:active {
   margin: auto;
   width: calc(150% / 2);
   z-index: 1;
+}
+
+.toast_container {
+  margin-top: 56px;
+  
+}
+
+.toast_block {
+  background-color: lavender;
+  position: fixed;
+  left: 10vw;
+  top: 15vh;
+  text-align: center;
+  z-index: 4;
+  width: 40vw;
+
+}
+
+.toast_button {
+  text-align: center;
+  width: 15vw;
+  height: 3vh;
+  margin: 1vw;
 }

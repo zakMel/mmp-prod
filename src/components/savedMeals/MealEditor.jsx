@@ -23,7 +23,6 @@ class MealEditor extends React.Component {
       fat: 0,
       carbs: 0
     },
-    // editable: false
   }
 
   componentDidMount(){ 
@@ -334,7 +333,7 @@ class MealEditor extends React.Component {
         let state = this.state;
 
         dbServices.set(document, {
-            mealName: this.props.mealName,
+            mealName: this.props.cleanName,
             savedIngredients: state.savedIngredients,
             mealMacros: state.mealMacros,
           })
@@ -349,7 +348,7 @@ class MealEditor extends React.Component {
     const userFile = db.collection("users").doc(`${user.uid}`);
     let meals = userFile.collection("meals");
     let weeks = userFile.collection("weeks");
-    let newMeal = meals.doc(`${this.props.mealName}`);
+    let newMeal = meals.doc(`${this.props.cleanName}`);
     let targetMeal = meals.doc(`${this.props.passedProps.mealName}`);
     let state = this.state;
 
@@ -374,8 +373,8 @@ class MealEditor extends React.Component {
                 if(day[meal].mealName === this.state.mealName){
                   // if the meal is the target meal then
                   weekEdited = true;
-                  newDay[meal] = { //! here is the last error
-                    mealName: this.props.mealName,
+                  newDay[meal] = { 
+                    mealName: this.props.cleanName,
                     savedIngredients: this.props.passedProps.savedIngredients, 
                     mealMacros: state.mealMacros,
                   }
@@ -390,7 +389,6 @@ class MealEditor extends React.Component {
             })
             newDoc.calendarWeek = newWeek;
           }
-          console.log(weekEdited)
           
           if(weekEdited){
             let refDoc = weeks.doc(newDoc.weekDateDB);
@@ -401,30 +399,32 @@ class MealEditor extends React.Component {
 
       })
       //if there is a name change
-      if(exists && this.props.mealName !== this.props.passedProps.mealName){
+      if(exists && this.props.cleanName !== this.props.passedProps.mealName){
         batch.delete(targetMeal)
 
         batch.set(newMeal, {
-          mealName: this.props.mealName,
+          mealName: this.props.cleanName,
           savedIngredients: this.props.passedProps.savedIngredients,
           mealMacros: state.mealMacros,
         })
   
-
+        console.log('name change');
       }
       //if there is no name change
-      if(exists && this.props.mealName === this.props.passedProps.mealName){
+      if(exists && this.props.cleanName === this.props.passedProps.mealName){
         batch.update(newMeal, {
-          mealName: this.props.mealName,
+          mealName: this.props.cleanName,
           savedIngredients: this.props.passedProps.savedIngredients, 
           mealMacros: state.mealMacros,
         })
+
+        console.log('name not changed');
 
       }
 
       //if a week is not edited, updates meal 
       batch.update(newMeal, {
-        mealName: this.props.mealName,
+        mealName: this.props.cleanName,
         savedIngredients: this.props.list,
         mealMacros: state.mealMacros,
       })
