@@ -80,7 +80,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
-    height: 320px;
+    height: 55vh;
     width: 100vw;
     overflow: auto;
 }

@@ -11,6 +11,7 @@ import MealViewer from './savedMeals/MealViewer';
 import MealEditor from './savedMeals/MealEditor';
 import Calendar from './Calendar/Calendar';
 import LoginUI from './LoginUI';
+import Toast from './Toast'; //! remove this
 import { Route, withRouter } from "react-router-dom";
 import '../App.css'
 
@@ -36,6 +37,7 @@ class App extends React.Component {
     loading: false,
     installButton: true,
     isLoading: true,
+    cleanName: "",
     calendarWeek:[
         {
           day: "Monday",
@@ -343,28 +345,36 @@ class App extends React.Component {
   }
 
   handleUpdateName_ME = (e) => {
+    let name = e.target.value;
+    let regex = /&nbsp;/gi;
+    let fixedName = name.replaceAll(regex, "")
+
     this.setState(() => {
       return {
-        mealName: e.target.value
+        mealName: e.target.value,
+        cleanName: fixedName
       }
     })
 
   }
 
   handleNameInput_MG = (e) => {
-    const target = e.target;
-    const value = target.value;
+    let name = e.target.value;
+    let regex = /&nbsp;/gi;
+    let fixedName = name.replaceAll(regex, "")
     
     this.setState({
-      mealName: value
+      mealName: e.target.value,
+      cleanName: fixedName
     });
   }  
 
   handleSetName_ME = (name) => {
+    let cleanName = name.trim();
 
     this.setState(() => {
       return {
-        mealName: name
+        mealName: cleanName
       }
 
     })
@@ -392,21 +402,6 @@ class App extends React.Component {
     
 
   }
-
-  // // Configure FirebaseUI.
-  // uiConfig = {
-  //   // Popup signin flow rather than redirect flow.
-  //   signInFlow: 'popup',
-  //   // We will display Google and Facebook as auth providers.
-  //   signInOptions: [
-  //     firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-  //   ],
-  //   callbacks: {
-  //     // Avoid redirects after sign-in.
-  //     signInSuccessWithAuthResult: () => false
-  //   }
-  // };
 
   getMacros = (ingredient) => {
     let nutrients = ingredient.foodNutrients;
@@ -501,13 +496,13 @@ class App extends React.Component {
         )}
       />
 
-      {/* <Route  
-        path="/login"
-        exact={true}
+      <Route  
+        path="/toast"
+        // exact={true}
         render={(props) => (
-          <LoginUI />
+          <Toast />
         )}
-      /> */}
+      />
 
       <Route
         path="/calendar"
@@ -616,6 +611,7 @@ class App extends React.Component {
             loading={this.state.loading}
             handleSaving={this.handleSaving}
             handleDoneSaving={this.handleDoneSaving}
+            cleanName={this.state.cleanName}
           />
         )}
       />
