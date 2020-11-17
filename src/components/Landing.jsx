@@ -12,7 +12,7 @@ class Landing extends React.Component {
     return (
     <React.Fragment>
       <div className="landingContainer">
-
+          <p>i am altering the repo</p>
           <img src={logo} alt='logo' className="logo" />
        
       </div>
