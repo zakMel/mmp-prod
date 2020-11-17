@@ -1,8 +1,8 @@
-import React from "react"
-import $ from "jquery"
-import services from '../../services/foodInfoServices'
-import Pagination from '../Pagination/SearchPagination'
-import SearchItem from './SearchItem'
+import React from "react";
+import $ from "jquery";
+import services from '../../services/foodInfoServices';
+import Pagination from '../Pagination/SearchPagination';
+import SearchItem from './SearchItem';
 import "../../style/search.css";
 import "../../style/pagination.css";
 
