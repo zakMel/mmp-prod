@@ -515,12 +515,11 @@ class MealEditor extends React.Component {
                 Add Ingredient
               </NavLink>
 
-              <NavLink 
-                to="/mealViewer"
+              <button 
                 onClick={ 
                   () => { 
                     if (this.state.mealName.length > 0) {
-                      this.props.handleSaving();
+                      // this.props.handleSaving();
                       this.sendToDatabase() 
                     }
                   } 
@@ -528,7 +527,7 @@ class MealEditor extends React.Component {
                 type="submit" 
                 className="saveButton_ME"
                 >{!this.props.loading ? "Save Meal" : "Saving ..."}
-               </NavLink>
+               </button>
 
             </div>
           }  
