@@ -320,9 +320,7 @@ class MealGenerator extends React.Component {
 
   }
   
-  loadFunc = () =>{
-    //todo add code for db purposes
-    
+  loadFunc = () =>{    
   }
     
   render() {

@@ -47,7 +47,7 @@ class MealEditor extends React.Component {
           fat: macros.fat,
           carbs: macros.carbs,
         },
-        // editable: passedEditability,
+        editable: passedEditability,
       }
     })
     
@@ -202,7 +202,7 @@ class MealEditor extends React.Component {
     let container = e.target.parentElement;
     let grams = $(container).children().filter("input.IngreEditGrams_ME")[0].value;
     let desRef = $(container).children().filter("div.prevIngreDescription")[0].innerText;
-
+    console.log(grams, desRef);
     //removes macros
     if(grams !== ""){
       this.setState( (state) => {
@@ -228,7 +228,7 @@ class MealEditor extends React.Component {
 
     }
 
-    //removes from the dom
+    //removes from the mealEditor.jsx 
     let newRender = [];
 
     for ( let u = 0; u < this.state.shownIngredients.length;  u++) {
@@ -241,6 +241,8 @@ class MealEditor extends React.Component {
       }  
 
     }
+
+    console.log(newRender);
 
     this.setState( () => {
 
@@ -325,37 +327,41 @@ class MealEditor extends React.Component {
   }
 
   checkMealExistance = (doc) => {
-      if(!doc.exists){
-        let user = firebase.auth().currentUser;
-        const userFile = db.collection("users").doc(`${user.uid}`);
-        let meals = userFile.collection("meals");
-        let document = meals.doc(`${this.props.mealName}`);
-        let state = this.state;
 
-        dbServices.set(document, {
-            mealName: this.props.cleanName,
-            savedIngredients: state.savedIngredients,
-            mealMacros: state.mealMacros,
-          })
-        
-      } else {
-        return true;
-      } 
+    if(!doc.exists){
+      let user = firebase.auth().currentUser;
+      const userFile = db.collection("users").doc(`${user.uid}`);
+      let meals = userFile.collection("meals");
+      let document = meals.doc(`${this.props.mealName}`);
+      let state = this.state;
+      
+      dbServices.set(document, {
+        mealName: this.props.cleanName,
+        savedIngredients: state.savedIngredients,
+        mealMacros: state.mealMacros,
+      })
+      
+    } else {
+      return true;
+    } 
   }
-
+  
   handleBatching = async exists => {
     let user = firebase.auth().currentUser;
     const userFile = db.collection("users").doc(`${user.uid}`);
     let meals = userFile.collection("meals");
     let weeks = userFile.collection("weeks");
-    let newMeal = meals.doc(`${this.props.cleanName}`);
+    let newMeal = this.props.cleanName.length > 0 ? meals.doc(`${this.props.cleanName}`) : meals.doc(`${this.props.mealName}`);
+    console.log(newMeal);
     let targetMeal = meals.doc(`${this.props.passedProps.mealName}`);
     let state = this.state;
-
+    var batch = db.batch()
+    
     if(exists){
-      var batch = db.batch()
       let newDoc = {};
       let weekEdited = false;
+
+      //updates weeks with changes to a meal.
       await weeks.get()  
       .then((week) => {
         week.forEach(doc => {
@@ -385,7 +391,6 @@ class MealEditor extends React.Component {
                 }  
               }
               newWeek.push(newDay);
-              
             })
             newDoc.calendarWeek = newWeek;
           }
@@ -398,40 +403,47 @@ class MealEditor extends React.Component {
         })
 
       })
+      .catch(function(error) {
+        console.log("Error getting week:", error);
+      });
+  
       //if there is a name change
-      if(exists && this.props.cleanName !== this.props.passedProps.mealName){
+      if(this.props.cleanName !== this.props.passedProps.mealName){
         batch.delete(targetMeal)
 
         batch.set(newMeal, {
+          // mealName: this.props.cleanName.length > 0 ? this.props.cleanName : this.props.mealName,
           mealName: this.props.cleanName,
-          savedIngredients: this.props.passedProps.savedIngredients,
+          savedIngredients: this.props.list,
           mealMacros: state.mealMacros,
         })
   
-        console.log('name change');
+        console.log('name change - meal updated');
       }
+
       //if there is no name change
-      if(exists && this.props.cleanName === this.props.passedProps.mealName){
         batch.update(newMeal, {
-          mealName: this.props.cleanName,
-          savedIngredients: this.props.passedProps.savedIngredients, 
+          mealName: this.props.mealName,
+          savedIngredients: this.props.list,
           mealMacros: state.mealMacros,
         })
 
-        console.log('name not changed');
+        console.log('no name change - meal updated');
 
-      }
+      
 
+      //! I think this might be unnessary becuase of no name change
       //if a week is not edited, updates meal 
-      batch.update(newMeal, {
-        mealName: this.props.cleanName,
-        savedIngredients: this.props.list,
-        mealMacros: state.mealMacros,
-      })
+      // batch.update(newMeal, {
+      //   mealName: this.props.cleanName,
+      //   savedIngredients: this.props.list,
+      //   mealMacros: state.mealMacros,
+      // })
 
       batch.commit()
     }
-
+    
+    
   }
   
   loadFunc = () =>{
@@ -448,12 +460,10 @@ class MealEditor extends React.Component {
         <div className="mainContainer_ME">
 
           <ContentEditable
-            // innerRef={this.contentEditable}
-            html={this.props.mealName} // innerHTML of the editable div
-            disabled={this.props.passedEditability? false : true}       // use true to disable editing
+            html={this.props.mealName} 
+            disabled={this.props.passedEditability? false : true} 
             onChange={this.props.handleUpdateName_ME} 
             className="editableName"
-            // tagName='article' // Use a custom HTML tag (uses a div by default)
           />
           
           {this.state.shownIngredients.length > 0 ? 
@@ -469,13 +479,9 @@ class MealEditor extends React.Component {
 
           <div className="listContainer_ME">
             <InfiniteScroll
-                // className="list_ME"
                 pageStart={0}
                 loadMore={this.loadFunc}
                 hasMore={false}
-                // threshold={280}
-                // loader={<div className="loader" key={0}>Loading ...</div>}
-                // useWindow={true}
             >
                 {this.state.shownIngredients}
             </InfiniteScroll>
@@ -509,8 +515,9 @@ class MealEditor extends React.Component {
                 Add Ingredient
               </NavLink>
 
-              <button 
-                 onClick={ 
+              <NavLink 
+                to="/mealViewer"
+                onClick={ 
                   () => { 
                     if (this.state.mealName.length > 0) {
                       this.props.handleSaving();
@@ -521,7 +528,7 @@ class MealEditor extends React.Component {
                 type="submit" 
                 className="saveButton_ME"
                 >{!this.props.loading ? "Save Meal" : "Saving ..."}
-               </button>
+               </NavLink>
 
             </div>
           }  

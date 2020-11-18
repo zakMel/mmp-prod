@@ -31,9 +31,7 @@ export default function Ingredient (props) {
                         <div 
                         className="prevIngreDescription"
                         >
-                            { props.description.length > 45 && window.screen.width < 668?
-                                `${props.description.slice(0, 45)}...` : props.description
-                            } 
+                            { props.description } 
                         </div>  
                         <button 
                             onClick={ (e) => props.handleDeleteFromDOM(e, props.macros) }

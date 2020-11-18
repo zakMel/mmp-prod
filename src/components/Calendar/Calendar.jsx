@@ -121,9 +121,6 @@ class Calendar extends React.Component {
                         pageStart={0}
                         loadMore={this.loadFunc}
                         hasMore={false}
-                        // threshold={280}
-                        // loader={<div className="loader" key={0}>Loading ...</div>}
-                        // useWindow={true}
                         >
 
                         {this.state.mappedWeek}
