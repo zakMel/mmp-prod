@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "macromealplanner-1d75a"
+    "default": "macromealplanner-1d75a",
+    "dev": "mmp-dev-eb484"
   }
 }
