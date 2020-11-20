@@ -90,9 +90,9 @@ class App extends React.Component {
     console.log('loading')
   }
   
-  componentWillUnmount() {
-    this.unregisterAuthObserver();
-  }
+  // componentWillUnmount() {
+  //   this.unregisterAuthObserver();
+  // }
 
   handleSaving = () => {
     this.setState(()=> {

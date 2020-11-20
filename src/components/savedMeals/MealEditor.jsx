@@ -2,11 +2,11 @@ import React from "react";
 import firebase from 'firebase';
 import {firestore} from '../../configFirebase';
 import { NavLink } from "react-router-dom";
-import $ from "jquery"
+import $ from "jquery";
 import InfiniteScroll from 'react-infinite-scroller';
-import dbServices from '../../services/dbServices';
-import PieChart from '../PieChart';
 import ContentEditable from 'react-contenteditable'
+import PieChart from '../PieChart';
+import dbServices from '../../services/dbServices';
 import Ingredient from './Ingredient'
 import "../../App.css";
 import "../../style/savedMeals.css";
@@ -32,6 +32,7 @@ class MealEditor extends React.Component {
   renderDOM = () => {
     let name =this.props.mealName;
     let givenIngredients = this.props.passedProps.savedIngredients; 
+    // given ingredients passed during navigation to mealEditor
     let mappedList  = givenIngredients.map(ingre => this.renderIngredients(ingre)); 
     let macros = this.props.passedProps !== undefined ? this.props.passedProps.mealMacros : this.state.mealMacros
     let passedEditability = this.props.passedEditability;
@@ -53,6 +54,7 @@ class MealEditor extends React.Component {
     
   }
 
+  //takes given ingredients and populates state with the macro object used 
   addMacros = (ingredient) => {
     
     this.setState((state) => {
@@ -77,6 +79,7 @@ class MealEditor extends React.Component {
     
   }
 
+  //takes meal information and processes it into DOM elements
   renderIngredients = (ingredient) => {
 
       this.addMacros(ingredient)
@@ -269,6 +272,7 @@ class MealEditor extends React.Component {
 
   }
   
+  //invoked if a meal is altered in accordance with componentDidUpdate
   reRenderList = () => {
     
     this.setState(()=>{
@@ -314,6 +318,7 @@ class MealEditor extends React.Component {
     let user = firebase.auth().currentUser;
     const userFile = db.collection("users").doc(`${user.uid}`);
     let meals = userFile.collection("meals");
+    //doc ref for data in firestore
     let prevDoc = meals.doc(`${this.state.mealName}`);
 
     prevDoc.get()
@@ -334,7 +339,7 @@ class MealEditor extends React.Component {
       let meals = userFile.collection("meals");
       let document = meals.doc(`${this.props.mealName}`);
       let state = this.state;
-      
+      //if object doesn't exist it creates a new one in DB.
       dbServices.set(document, {
         mealName: this.props.cleanName,
         savedIngredients: state.savedIngredients,
@@ -429,16 +434,6 @@ class MealEditor extends React.Component {
         })
 
         console.log('no name change - meal updated');
-
-      
-
-      //! I think this might be unnessary becuase of no name change
-      //if a week is not edited, updates meal 
-      // batch.update(newMeal, {
-      //   mealName: this.props.cleanName,
-      //   savedIngredients: this.props.list,
-      //   mealMacros: state.mealMacros,
-      // })
 
       batch.commit()
     }
