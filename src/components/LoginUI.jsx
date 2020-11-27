@@ -1,8 +1,8 @@
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
-import NavBar from "./NavBar";
-import uiLogo from '../pics/arm.png';
+// import NavBar from "./NavBar";
+// import uiLogo from '../pics/arm.png';
 import "../App.css"
 
 export default function LoginUI (props) {
@@ -25,11 +25,15 @@ export default function LoginUI (props) {
 
     return (
         <React.Fragment>
-            <NavBar />
-            <img src={uiLogo} alt='logo' className="uiLogo" />
-            <div className="loginUiContainer">
-                <p className="text-center">Please sign-in:</p>
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
+            <div className="login_Container">
+                {/* <NavBar /> */}
+                {/* <img src={uiLogo} alt='logo' className="uiLogo" /> */}
+                <p className="login_title">Shop By Macro</p>
+                <div className="loginUiComponent">
+                    <p className="text-center">Please sign-in:</p>
+                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
+                </div>
+
             </div>
         </React.Fragment>
     )

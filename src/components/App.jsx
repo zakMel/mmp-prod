@@ -11,9 +11,11 @@ import MealViewer from './savedMeals/MealViewer';
 import MealEditor from './savedMeals/MealEditor';
 import Calendar from './Calendar/Calendar';
 import LoginUI from './LoginUI';
+import uiLogo from "../pics/arm.png";
 import Toast from './Toast'; //! remove this
 import { Route, withRouter } from "react-router-dom";
 import '../App.css'
+import { Navbar } from 'react-bootstrap';
 
 const Big = require('big.js') //todo probably want to remove the use of this.
 const db = firestore;
@@ -475,7 +477,11 @@ class App extends React.Component {
 
     if (!this.props.isSignedIn || !firebase.auth().currentUser) {
       return (
-        <LoginUI />
+        <React.Fragment>
+          <Navbar />
+          <img src={uiLogo} alt='logo' className="uiLogo" />
+          <LoginUI />
+        </React.Fragment>
       );
     } 
     

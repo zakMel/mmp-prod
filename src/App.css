@@ -20,8 +20,50 @@ ul {
   padding: 0;
 }
 
-#firebaseui_container {
-  margin-top: calc(100% /2);
+.uiLogo {
+  position: fixed;
+  top: 2vh;
+  left: 5vw;
+  right: 20vw;
+  z-index: 1;
+  width: 90vw;
+  height: 90vh;
+  opacity: 0.70;
+}
+
+.login_title {
+  
+  /* position: fixed;
+  top: 40vh; */
+  /* left: 32.5vw; */
+  /* left: 50vw; */
+  text-align: center;
+  font-size: 3vw;
+  margin-bottom: 5vh;
+}
+
+#firebaseui_container > div > form > div.firebaseui-card-header {
+  display: none;
+}
+
+p.text-center {
+  opacity: inherit;
+}
+
+.login_Container {
+  box-shadow: 10px 10px 8px #888888;;
+  position: fixed;
+  border: 1px solid black;
+  top: 45vh;
+  left: 12vw;
+  right: 20vw;
+  z-index: 1;
+  height: 47vh;
+  width: 75vw;
+  /* this was key for getting the whole component tansparent - bg color & opacity */
+  background-color: white;
+  opacity: 0.65;
+
 }
 
 a, a.active, a:active, a:focus {
@@ -68,24 +110,10 @@ p {
   z-index: 4;
 }  
 
-.uiLogo {
-  position: fixed;
-  top: 12vh;
-  left: 20vw;
-  right: 20vw;
-  z-index: 1;
-  width: 60vw;
-  height: 50vh;
-  
-}
-
 form div {
   height: 40px;
 }
 
-#firebaseui_container > div > form > div.firebaseui-card-header {
-  display: none;
-}
 
 .navBar {
   position: fixed;
